@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+    <groupId>com.atanor</groupId>
+    <artifactId>vwallserver</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  
+  <artifactId>vw-admin</artifactId>
+  <name>vw-admin</name>
+
+  <dependencies>
+    <!-- Project submodules dependencies -->
+    <dependency>
+      <groupId>com.atanor</groupId>
+      <artifactId>vw-common</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.atanor</groupId>
+      <artifactId>vw-server</artifactId>
+      <version>${project.version}</version>
+    </dependency>	  
+  </dependencies>
+  
+  <properties>
+    <gwtDestinationWarFolder>${basedir}/../vw-launch/src/main/webapp</gwtDestinationWarFolder>
+  </properties>
+	
+   <build>
+    <!-- Generate compiled stuff in the folder used for developing mode -->
+    <!--<outputDirectory>${gwtDestinationWarFolder}/WEB-INF/classes</outputDirectory>-->
+
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>gwt-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>          
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+	  <logLevel>INFO</logLevel>
+          <style>${gwtCompilerOutputStyle}</style>
+	  <webappDirectory>${gwtDestinationWarFolder}</webappDirectory>
+          <draftCompile>${gwtDraftCompile}</draftCompile>
+          <strict>true</strict>
+          <compileReport>${gwtCompileReport}</compileReport>
+          <enableAssertions>${gwtEnableAssertions}</enableAssertions>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+  
+</project>

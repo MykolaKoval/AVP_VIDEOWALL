@@ -1,0 +1,57 @@
+package com.atanor.vwserver.domain.converter;
+
+import javax.inject.Inject;
+
+import junit.framework.Assert;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import com.atanor.vwserver.domain.entity.PanelLayout;
+import com.atanor.vwserver.injector.AppConverterModule;
+import com.atanor.vwserver.common.rpc.dto.PanelLayoutDto;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
+public class PanelLayoutConverterTest {
+
+	@Inject
+	PanelLayoutConverter converter;
+
+	@Before
+	public void setUp() throws Exception {
+		Injector injector = Guice.createInjector(new AppConverterModule());
+		injector.injectMembers(this);
+	}
+
+	@Test
+	public void tesToDto() {
+		PanelLayoutDto result = converter.toDto(PanelLayout.ONExTHREE);
+
+		Assert.assertNotNull(result);
+		Assert.assertEquals(PanelLayout.ONExTHREE.getDescription(), result.getName());
+		Assert.assertEquals(PanelLayout.ONExTHREE.getRowPanelQuantity(), result.getRowPanelQuantity());
+		Assert.assertEquals(PanelLayout.ONExTHREE.getColumnPanelQuantity(), result.getColumnPanelQuantity());
+	}
+
+	@Test
+	public void testToEntity() {
+		PanelLayoutDto source = new PanelLayoutDto();
+		source.setName(PanelLayout.ONExTHREE.getDescription());
+		source.setRowPanelQuantity(PanelLayout.ONExTHREE.getRowPanelQuantity());
+		source.setColumnPanelQuantity(PanelLayout.ONExTHREE.getColumnPanelQuantity());
+		
+		PanelLayout result = converter.toEntity(source);
+
+		Assert.assertNotNull(result);
+		Assert.assertEquals(PanelLayout.ONExTHREE.getDescription(), result.getDescription());
+		Assert.assertEquals(PanelLayout.ONExTHREE.getRowPanelQuantity(), result.getRowPanelQuantity());
+		Assert.assertEquals(PanelLayout.ONExTHREE.getColumnPanelQuantity(), result.getColumnPanelQuantity());
+	}
+	
+	@Test(expected = NullPointerException.class)
+	public void testToEntityNull() {
+		converter.toDto(null);
+	}
+
+}

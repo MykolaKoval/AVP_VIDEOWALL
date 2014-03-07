@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.atanor</groupId>
+  <artifactId>vwallserver</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>vwallserver</name>
+  <packaging>pom</packaging>
+  
+  <properties>
+    <gwtVersion>2.5.1</gwtVersion>
+	
+    <!-- Used for speed up the GWT compiler for developers -->
+    <!-- Allow optimization for production mode (set to false) -->
+    <gwtDraftCompile>true</gwtDraftCompile>
+	
+    <!-- OBFUSCATED, PRETTY, or DETAILED -->
+    <gwtCompilerOutputStyle>OBFUSCATED</gwtCompilerOutputStyle>
+    <gwtEnableAssertions>false</gwtEnableAssertions>
+    <gwtCompileReport>false</gwtCompileReport>
+		
+    <smartgwt.version>4.0</smartgwt.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+    <slf4j.impl.version>1.7.5</slf4j.impl.version>
+    <slf4j.version>1.7.5</slf4j.version>
+    <logback.version>1.0.13</logback.version>
+	
+    <output.unit>${basedir}/vw-launch</output.unit>
+    <war.target>${output.unit}/src/main/webapp</war.target>
+    <output.dir>${war.target}/WEB-INF/classes</output.dir>
+  </properties>
+  
+  <repositories>
+    <repository>
+      <id>smartclient</id>
+      <url>http://smartclient.com/maven2</url>
+    </repository>
+  </repositories>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>${output.dir}</directory>
+            </fileset>
+            <fileset>
+	      <directory>${war.target}</directory> 
+	        <includes>
+                  <include>VwAdmin/**</include>
+                </includes>
+            </fileset>			
+            <fileset>
+              <directory>${war.target}/WEB-INF/lib</directory>
+              <includes>
+                <include>*.jar</include>
+              </includes>
+            </fileset>
+            <fileset>
+              <directory>${war.target}/WEB-INF/deploy</directory>
+            </fileset>
+	    <fileset>
+              <directory>${output.unit}/src/main</directory>
+              <includes>
+                <directory>gwt-unitCache/**</directory>
+              </includes>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>		
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>gwt-maven-plugin</artifactId>
+          <version>2.5.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>2.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+       
+  <dependencyManagement>
+    <dependencies>
+      <!-- GWT -->
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt-servlet</artifactId>
+        <version>${gwtVersion}</version>
+        <scope>runtime</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt-user</artifactId>
+        <version>${gwtVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>1.0.0.GA</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>1.0.0.GA</version>
+        <classifier>sources</classifier>
+        <scope>provided</scope>
+      </dependency>
+	  
+     <!-- DB -->
+     <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>5.1.25</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-entitymanager</artifactId>
+        <version>4.2.1.Final</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate.javax.persistence</groupId>
+        <artifactId>hibernate-jpa-2.0-api</artifactId>
+        <version>1.0.1.Final</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hsqldb</groupId>
+        <artifactId>hsqldb</artifactId>
+        <version>2.2.8</version>
+      </dependency>
+	  
+      <!-- DI -->
+      <dependency>
+        <groupId>com.google.inject</groupId>
+	<artifactId>guice</artifactId>
+	<version>3.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.inject.extensions</groupId>
+	<artifactId>guice-servlet</artifactId>
+	<version>3.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.inject.extensions</groupId>
+	<artifactId>guice-persist</artifactId>
+	<version>3.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.gwt.inject</groupId>
+        <artifactId>gin</artifactId>
+        <version>2.1.1</version>
+      </dependency>
+	  
+      <!-- Logging -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+	  
+      <!-- Third-party -->
+      <dependency>
+        <groupId>com.smartgwt</groupId>
+        <artifactId>smartgwt</artifactId>
+        <version>${smartgwt.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>15.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava-gwt</artifactId>
+        <version>15.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.mina</groupId>
+        <artifactId>mina-core</artifactId>
+        <version>2.0.7</version>
+      </dependency>
+	 
+      <!-- Tests -->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.7</version>
+        <scope>test</scope>
+      </dependency>
+	  
+    </dependencies>
+	
+  </dependencyManagement>
+  
+  <modules>
+    <module>vw-common</module>
+    <module>vw-server</module>
+    <module>vw-admin</module>
+    <module>vw-launch</module>
+  </modules>
+  
+</project>
