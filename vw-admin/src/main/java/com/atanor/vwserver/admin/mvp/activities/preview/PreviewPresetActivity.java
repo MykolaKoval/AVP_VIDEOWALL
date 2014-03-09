@@ -1,17 +1,17 @@
-package com.atanor.vwserver.admin.mvp.activities.navigate;
+package com.atanor.vwserver.admin.mvp.activities.preview;
 
 import com.atanor.vwserver.admin.Client;
-import com.atanor.vwserver.admin.mvp.views.NavigatePresetView;
+import com.atanor.vwserver.admin.mvp.views.PreviewView;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
-public class PresetSelectedActivity extends AbstractActivity {
+public class PreviewPresetActivity extends AbstractActivity {
 
 	private final Long presetId;
-	private final NavigatePresetView view;
+	private final PreviewView view;
 
-	public PresetSelectedActivity(final Long presetId) {
+	public PreviewPresetActivity(final Long presetId) {
 		this.presetId = presetId;
 		this.view = Client.getNavigatePresetView();
 	}

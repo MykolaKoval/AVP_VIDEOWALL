@@ -1,21 +1,38 @@
 package com.atanor.vwserver.admin.ui.layout;
 
 import com.atanor.vwserver.admin.ui.DisplayPanel;
+import com.atanor.vwserver.admin.ui.Utils;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 
 public class MainPaneLayout extends DockLayoutPanel {
 
+	private final DisplayPanel headerDisplay;
 	private final DisplayPanel navigateDisplay;
+	private final DisplayPanel previewDisplay;
 	private final DisplayPanel editDisplay;
 
 	public MainPaneLayout() {
-		super(Unit.PCT);
+		super(Unit.PX);
+
+		// ============ Header ============
+		{
+			headerDisplay = new DisplayPanel();
+			//headerDisplay.setStyleName("header");
+			addNorth(headerDisplay, Utils.HEADER_DISPLAY_HEIGHT);
+		}
 
 		// ============ Navigation ============
 		{
 			navigateDisplay = new DisplayPanel();
-			addWest(navigateDisplay, 15);
+			addWest(navigateDisplay, Utils.NAVIGATION_DISPLAY_WIDTH);
+		}
+
+		// ============ Preview ============
+		{
+			previewDisplay = new DisplayPanel();
+			previewDisplay.setStyleName("previewer");
+			addWest(previewDisplay, Utils.PREVIEW_DISPLAY_WIDTH);
 		}
 
 		// ============ Editor ============
@@ -31,6 +48,14 @@ public class MainPaneLayout extends DockLayoutPanel {
 
 	public DisplayPanel getEditDisplay() {
 		return editDisplay;
+	}
+
+	public DisplayPanel getHeaderDisplay() {
+		return headerDisplay;
+	}
+
+	public DisplayPanel getPreviewDisplay() {
+		return previewDisplay;
 	}
 
 	@Override

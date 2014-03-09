@@ -1,8 +1,9 @@
 package com.atanor.vwserver.admin.injector;
 
 import com.atanor.vwserver.common.rpc.services.ConfigServiceAsync;
-import com.atanor.vwserver.admin.mvp.views.EditPresetView;
-import com.atanor.vwserver.admin.mvp.views.NavigatePresetView;
+import com.atanor.vwserver.admin.mvp.views.EditView;
+import com.atanor.vwserver.admin.mvp.views.HeaderView;
+import com.atanor.vwserver.admin.mvp.views.PreviewView;
 import com.atanor.vwserver.admin.ui.MainPane;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
@@ -16,9 +17,11 @@ public interface ClientInjector extends Ginjector {
 
 	PlaceController getPlaceController();
 
-	NavigatePresetView getNavigatePresetView();
+	HeaderView getHeaderPresetView();
+	
+	PreviewView getNavigatePresetView();
 
-	EditPresetView getEditPresetView();
+	EditView getEditPresetView();
 	
 	ConfigServiceAsync getConfigService();
 	

@@ -2,21 +2,21 @@ package com.atanor.vwserver.admin.mvp.activities.edit;
 
 import com.atanor.vwserver.common.rpc.dto.PresetDto;
 import com.atanor.vwserver.admin.Client;
-import com.atanor.vwserver.admin.mvp.places.PresetSelectedPlace;
+import com.atanor.vwserver.admin.mvp.places.PresetPlace;
 import com.atanor.vwserver.admin.mvp.presenters.EditPresetPresenter;
-import com.atanor.vwserver.admin.mvp.views.EditPresetView;
+import com.atanor.vwserver.admin.mvp.views.EditView;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.smartgwt.client.util.SC;
 
-public class PresetSelectedActivity extends AbstractActivity implements EditPresetPresenter {
+public class EditPresetActivity extends AbstractActivity implements EditPresetPresenter {
 
 	private final Long presetId;
-	private final EditPresetView view;
+	private final EditView view;
 	
-	public PresetSelectedActivity(final Long presetId) {
+	public EditPresetActivity(final Long presetId) {
 		this.presetId = presetId;
 		this.view = Client.getEditPresetView();
 	}
@@ -42,7 +42,7 @@ public class PresetSelectedActivity extends AbstractActivity implements EditPres
 			public void onSuccess(PresetDto preset) {
 				Client.getEditPresetView().setPresetConfiguration(preset);
 				Client.getNavigatePresetView().setPresetConfiguration(preset);
-				Client.goTo(new PresetSelectedPlace(preset.getId()));
+				Client.goTo(new PresetPlace(preset.getId()));
 			}});
 		
 	}

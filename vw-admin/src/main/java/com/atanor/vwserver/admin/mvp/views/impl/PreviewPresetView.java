@@ -5,9 +5,10 @@ import java.util.List;
 import com.atanor.vwserver.common.rpc.dto.HardwareDto;
 import com.atanor.vwserver.common.rpc.dto.PresetDto;
 import com.atanor.vwserver.admin.Client;
-import com.atanor.vwserver.admin.mvp.places.PresetSelectedPlace;
-import com.atanor.vwserver.admin.mvp.views.NavigatePresetView;
+import com.atanor.vwserver.admin.mvp.places.PresetPlace;
+import com.atanor.vwserver.admin.mvp.views.PreviewView;
 import com.atanor.vwserver.admin.ui.PresetLabel;
+import com.atanor.vwserver.admin.ui.Utils;
 import com.atanor.vwserver.admin.ui.builder.UiBuilder;
 import com.atanor.vwserver.admin.ui.builder.post.NavigatePresetPostBuilder;
 import com.atanor.vwserver.admin.ui.builder.post.NavigateWindowPostBuilder;
@@ -21,7 +22,7 @@ import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
 
-public class NavigatePresetViewImpl extends VLayout implements NavigatePresetView, ClickHandler {
+public class PreviewPresetView extends VLayout implements PreviewView, ClickHandler {
 
 	private final List<PresetLabel> layouts = Lists.newArrayList();
 
@@ -29,9 +30,9 @@ public class NavigatePresetViewImpl extends VLayout implements NavigatePresetVie
 	private Long presetWidth;
 	private Long presetHeight;
 
-	public NavigatePresetViewImpl() {
+	public PreviewPresetView() {
+		setWidth(Utils.PREVIEW_DISPLAY_WIDTH);
 		setHeight100();
-		setWidth("15%");
 		setOverflow(Overflow.HIDDEN);
 		setShowResizeBar(true);
 		setMembersMargin(40);
@@ -84,7 +85,7 @@ public class NavigatePresetViewImpl extends VLayout implements NavigatePresetVie
 		PresetLabel preset = (PresetLabel) event.getSource();
 
 		if (!preset.isSelected()) {
-			Client.goTo(new PresetSelectedPlace(preset.getDto().getId()));
+			Client.goTo(new PresetPlace(preset.getDto().getId()));
 		}
 	}
 
@@ -101,7 +102,7 @@ public class NavigatePresetViewImpl extends VLayout implements NavigatePresetVie
 	}
 
 	@Override
-	public void cleanState() {
+	public void clean() {
 		resetPresetLayouts();
 	}
 

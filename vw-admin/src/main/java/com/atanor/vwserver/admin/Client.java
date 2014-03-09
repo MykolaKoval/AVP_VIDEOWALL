@@ -2,8 +2,9 @@ package com.atanor.vwserver.admin;
 
 import com.atanor.vwserver.common.rpc.services.ConfigServiceAsync;
 import com.atanor.vwserver.admin.injector.ClientInjector;
-import com.atanor.vwserver.admin.mvp.views.EditPresetView;
-import com.atanor.vwserver.admin.mvp.views.NavigatePresetView;
+import com.atanor.vwserver.admin.mvp.views.EditView;
+import com.atanor.vwserver.admin.mvp.views.HeaderView;
+import com.atanor.vwserver.admin.mvp.views.PreviewView;
 import com.atanor.vwserver.admin.ui.DisplayPanel;
 import com.atanor.vwserver.admin.ui.MainPane;
 import com.google.gwt.core.client.GWT;
@@ -27,11 +28,15 @@ public class Client {
 		return injector.getEventBus();
 	}
 
-	public static NavigatePresetView getNavigatePresetView() {
+	public static HeaderView getHeaderPresetView() {
+		return injector.getHeaderPresetView();
+	}
+	
+	public static PreviewView getNavigatePresetView() {
 		return injector.getNavigatePresetView();
 	}
 
-	public static EditPresetView getEditPresetView() {
+	public static EditView getEditPresetView() {
 		return injector.getEditPresetView();
 	}
 
@@ -43,8 +48,8 @@ public class Client {
 		return injector.getMainPane();
 	}
 	
-	public static DisplayPanel getNavigateDisplay(){
-		return injector.getMainPane().asWidget().getNavigateDisplay();
+	public static DisplayPanel getPreviewDisplay(){
+		return injector.getMainPane().asWidget().getPreviewDisplay();
 	}
 	
 	public static DisplayPanel getEditDisplay(){

@@ -14,9 +14,9 @@ import com.atanor.vwserver.admin.Client;
 import com.atanor.vwserver.admin.mvp.events.ActivateGridEvent;
 import com.atanor.vwserver.admin.mvp.events.CleanGridActivationEvent;
 import com.atanor.vwserver.admin.mvp.events.CleanWindowSelectionEvent;
-import com.atanor.vwserver.admin.mvp.places.NoPresetSelectedPlace;
+import com.atanor.vwserver.admin.mvp.places.DefaultPresetPlace;
 import com.atanor.vwserver.admin.mvp.presenters.EditPresetPresenter;
-import com.atanor.vwserver.admin.mvp.views.EditPresetView;
+import com.atanor.vwserver.admin.mvp.views.EditView;
 import com.atanor.vwserver.admin.ui.GridLabel;
 import com.atanor.vwserver.admin.ui.PresetLabel;
 import com.atanor.vwserver.admin.ui.WindowLabel;
@@ -53,7 +53,7 @@ import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
 
-public class EditPresetViewImpl extends VLayout implements EditPresetView {
+public class EditPresetView extends VLayout implements EditView {
 
 	private static final int HEADER_SIZE = 60;
 
@@ -81,7 +81,7 @@ public class EditPresetViewImpl extends VLayout implements EditPresetView {
 
 	private PresetLabel currentPreset;
 
-	public EditPresetViewImpl() {
+	public EditPresetView() {
 		setHeight100();
 		setWidth("85%");
 		setOverflow(Overflow.HIDDEN);
@@ -124,7 +124,7 @@ public class EditPresetViewImpl extends VLayout implements EditPresetView {
 
 		cancelButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				Client.goTo(new NoPresetSelectedPlace());
+				Client.goTo(new DefaultPresetPlace());
 			}
 		});
 
@@ -400,7 +400,7 @@ public class EditPresetViewImpl extends VLayout implements EditPresetView {
 
 	@Override
 	public void setPreset(final Long presetId) {
-		cleanState();
+		clean();
 		if (layouts.containsKey(presetId)) {
 			cancelButton.enable();
 
@@ -554,7 +554,7 @@ public class EditPresetViewImpl extends VLayout implements EditPresetView {
 	}
 
 	@Override
-	public void cleanState() {
+	public void clean() {
 		cleanPresetLayouts();
 		cleanHeaderWidgets();
 	}

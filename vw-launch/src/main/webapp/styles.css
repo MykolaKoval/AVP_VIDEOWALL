@@ -27,3 +27,15 @@ h1 {
 .serverResponseLabelError {
   color: red;
 }
+
+.header {
+  background-color: yellow;
+}
+
+.navigator {
+  background-color: grey;
+}
+
+.previewer {
+  background-color: red;
+}
