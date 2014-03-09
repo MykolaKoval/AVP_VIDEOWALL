@@ -4,13 +4,19 @@ import com.atanor.vwserver.admin.mvp.AppPlaceController;
 import com.atanor.vwserver.admin.mvp.AppPlacesHistoryMapper;
 import com.atanor.vwserver.admin.mvp.EditMapper;
 import com.atanor.vwserver.admin.mvp.HeaderMapper;
+import com.atanor.vwserver.admin.mvp.NavigateMapper;
 import com.atanor.vwserver.admin.mvp.PreviewMapper;
 import com.atanor.vwserver.admin.mvp.activity.edit.DefaultEditPresetActivity;
 import com.atanor.vwserver.admin.mvp.activity.edit.EditPresetActivity;
 import com.atanor.vwserver.admin.mvp.activity.header.DefaultHeaderDisplayActivity;
 import com.atanor.vwserver.admin.mvp.activity.header.DefaultHeaderLayoutActivity;
 import com.atanor.vwserver.admin.mvp.activity.header.DefaultHeaderPresetActivity;
+import com.atanor.vwserver.admin.mvp.activity.header.HeaderDisplayActivity;
+import com.atanor.vwserver.admin.mvp.activity.header.HeaderLayoutActivity;
 import com.atanor.vwserver.admin.mvp.activity.header.HeaderPresetActivity;
+import com.atanor.vwserver.admin.mvp.activity.navigate.DisplayControlActivity;
+import com.atanor.vwserver.admin.mvp.activity.navigate.LayoutControlActivity;
+import com.atanor.vwserver.admin.mvp.activity.navigate.PresetControlActivity;
 import com.atanor.vwserver.admin.mvp.activity.preview.DefaultPreviewPresetActivity;
 import com.atanor.vwserver.admin.mvp.activity.preview.PreviewPresetActivity;
 import com.atanor.vwserver.admin.mvp.place.DefaultPresetPlace;
@@ -34,14 +40,21 @@ public class MvpModule extends AbstractGinModule {
 		bind(PlaceController.class).to(AppPlaceController.class).in(Singleton.class);
 
 		bind(HeaderMapper.class);
+		bind(NavigateMapper.class);
 		bind(PreviewMapper.class);
 		bind(EditMapper.class);
 
 		bind(DefaultHeaderDisplayActivity.class);
 		bind(DefaultHeaderLayoutActivity.class);
 		bind(DefaultHeaderPresetActivity.class);
+		bind(HeaderDisplayActivity.class);
+		bind(HeaderLayoutActivity.class);
 		bind(HeaderPresetActivity.class);
 
+		bind(DisplayControlActivity.class);
+		bind(LayoutControlActivity.class);
+		bind(PresetControlActivity.class);
+		
 		bind(DefaultEditPresetActivity.class);
 		bind(EditPresetActivity.class);
 

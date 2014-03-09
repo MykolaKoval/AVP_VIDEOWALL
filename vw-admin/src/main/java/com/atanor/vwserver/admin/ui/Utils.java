@@ -1,10 +1,17 @@
 package com.atanor.vwserver.admin.ui;
 
-public interface Utils {
+public abstract class Utils {
 
-	Integer HEADER_DISPLAY_HEIGHT = 60;
-	Integer NAVIGATION_DISPLAY_WIDTH = 60;
-	Integer PREVIEW_DISPLAY_WIDTH = 200;
-	
-	Integer NAVIGATE_ICON_SIZE = 45;
+	public static Integer HEADER_DISPLAY_HEIGHT = 60;
+	public static Integer NAVIGATION_DISPLAY_WIDTH = 60;
+	public static Integer PREVIEW_DISPLAY_WIDTH = 200;
+	public static Integer NAVIGATE_ICON_SIZE = 45;
+
+	public static String toToken(final Long id) {
+		return id == null ? "" : String.valueOf(id);
+	}
+
+	public static Long fromToken(String token) {
+		return token == null || token.isEmpty() ? null : Long.parseLong(token);
+	}
 }

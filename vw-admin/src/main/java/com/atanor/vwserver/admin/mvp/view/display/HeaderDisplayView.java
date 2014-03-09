@@ -1,4 +1,4 @@
-package com.atanor.vwserver.admin.mvp.view.impl;
+package com.atanor.vwserver.admin.mvp.view.display;
 
 import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.Utils;
@@ -6,14 +6,14 @@ import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.LayoutSpacer;
 
-public class HeaderPresetView extends HLayout implements HeaderView {
+public class HeaderDisplayView extends HLayout implements HeaderView {
 
-	public HeaderPresetView(){
+	public HeaderDisplayView(){
 		setHeight(Utils.HEADER_DISPLAY_HEIGHT);
 		setWidth100();
-		setBackgroundColor("yellow");
+		setBackgroundColor("green");
 		
-		final Label label = new Label("PRESETS");
+		final Label label = new Label("Displays");
 		addMembers(label, new LayoutSpacer());
 	}
 

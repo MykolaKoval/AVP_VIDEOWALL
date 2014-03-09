@@ -1,12 +1,8 @@
 package com.atanor.vwserver.admin;
 
-import com.atanor.vwserver.common.rpc.services.ConfigServiceAsync;
 import com.atanor.vwserver.admin.injector.ClientInjector;
-import com.atanor.vwserver.admin.mvp.view.EditView;
-import com.atanor.vwserver.admin.mvp.view.HeaderView;
-import com.atanor.vwserver.admin.mvp.view.PreviewView;
-import com.atanor.vwserver.admin.ui.DisplayPanel;
 import com.atanor.vwserver.admin.ui.MainPane;
+import com.atanor.vwserver.common.rpc.services.ConfigServiceAsync;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
@@ -21,10 +17,10 @@ public class Client {
 		injector.getPlaceController().goTo(place);
 	}
 
-	public static PlaceHistoryHandler getHistoryHandler(){
+	public static PlaceHistoryHandler getHistoryHandler() {
 		return injector.getHistoryHandler();
 	};
-	
+
 	public static PlaceController getPlaceController() {
 		return injector.getPlaceController();
 	}
@@ -33,31 +29,12 @@ public class Client {
 		return injector.getEventBus();
 	}
 
-	public static HeaderView getHeaderPresetView() {
-		return injector.getHeaderPresetView();
-	}
-	
-	public static PreviewView getNavigatePresetView() {
-		return injector.getNavigatePresetView();
-	}
-
-	public static EditView getEditPresetView() {
-		return injector.getEditPresetView();
-	}
-
 	public static ConfigServiceAsync getConfigService() {
 		return injector.getConfigService();
 	}
 
-	public static MainPane getMainPane(){
+	public static MainPane getMainPane() {
 		return injector.getMainPane();
 	}
-	
-	public static DisplayPanel getPreviewDisplay(){
-		return injector.getMainPane().asWidget().getPreviewDisplay();
-	}
-	
-	public static DisplayPanel getEditDisplay(){
-		return injector.getMainPane().asWidget().getEditDisplay();
-	}
+
 }

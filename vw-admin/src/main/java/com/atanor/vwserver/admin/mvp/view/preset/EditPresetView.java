@@ -1,4 +1,4 @@
-package com.atanor.vwserver.admin.mvp.view.impl;
+package com.atanor.vwserver.admin.mvp.view.preset;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -83,7 +83,7 @@ public class EditPresetView extends VLayout implements EditView {
 
 	public EditPresetView() {
 		setHeight100();
-		setWidth("85%");
+		setWidth100();
 		setOverflow(Overflow.HIDDEN);
 		setShowResizeBar(true);
 

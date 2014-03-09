@@ -1,4 +1,4 @@
-package com.atanor.vwserver.admin.mvp.view.impl;
+package com.atanor.vwserver.admin.mvp.view.preset;
 
 import java.util.List;
 
