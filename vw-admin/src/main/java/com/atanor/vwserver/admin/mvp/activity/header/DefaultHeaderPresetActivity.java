@@ -1,17 +1,24 @@
 package com.atanor.vwserver.admin.mvp.activity.header;
 
-import com.atanor.vwserver.admin.Client;
-import com.atanor.vwserver.admin.mvp.view.HeaderView;
+import javax.inject.Inject;
+
+import com.atanor.vwserver.admin.mvp.place.DefaultPresetPlace;
+import com.atanor.vwserver.admin.mvp.view.impl.HeaderPresetView;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class DefaultHeaderPresetActivity extends AbstractActivity {
 
-	private final HeaderView view;
+	private final HeaderPresetView view;
 
-	public DefaultHeaderPresetActivity() {
-		view = Client.getHeaderPresetView();
+	@Inject
+	public DefaultHeaderPresetActivity(final HeaderPresetView view) {
+		this.view = view;
+	}
+
+	public DefaultHeaderPresetActivity withPlace(DefaultPresetPlace place) {
+		return this;
 	}
 
 	@Override

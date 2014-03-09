@@ -1,8 +1,8 @@
 package com.atanor.vwserver.admin.mvp.activity.header;
 
-import com.atanor.vwserver.admin.Client;
-import com.atanor.vwserver.admin.mvp.view.HeaderView;
-import com.atanor.vwserver.admin.mvp.view.PreviewView;
+import javax.inject.Inject;
+
+import com.atanor.vwserver.admin.mvp.place.PresetPlace;
 import com.atanor.vwserver.admin.mvp.view.impl.HeaderPresetView;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
@@ -10,18 +10,23 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class HeaderPresetActivity extends AbstractActivity {
 
-	private final Long presetId;
-	private final HeaderView view;
+	private Long presetId;
+	private final HeaderPresetView view;
 
-	public HeaderPresetActivity(final Long presetId) {
-		this.presetId = presetId;
-		this.view = new HeaderPresetView();
+	@Inject
+	public HeaderPresetActivity(final HeaderPresetView view) {
+		this.view = view;
+	}
+
+	public HeaderPresetActivity withPlace(final PresetPlace place) {
+		this.presetId = place.getPresetId();
+		return this;
 	}
 
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		panel.setWidget(view);
-		//view.setPreset(presetId);
+		// view.setPreset(presetId);
 	}
 
 }

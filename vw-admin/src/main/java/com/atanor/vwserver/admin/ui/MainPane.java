@@ -12,13 +12,15 @@ import com.google.gwt.user.client.ui.IsWidget;
 public class MainPane extends RootPane<MainPaneLayout> implements IsWidget {
 
 	@Inject
-	public MainPane(final NavigateView navigateView) {
+	public MainPane(final NavigateView navigateView, final HeaderMapper headerMapper,
+			final PreviewMapper previewMapper, final EditMapper editMapper) {
+		
 		super(new MainPaneLayout());
 		asWidget().getNavigateDisplay().setWidget(navigateView);
-		
-		bind(new HeaderMapper(), asWidget().getHeaderDisplay());
-		bind(new PreviewMapper(), asWidget().getPreviewDisplay());
-		bind(new EditMapper(), asWidget().getEditDisplay());
+
+		bind(headerMapper, asWidget().getHeaderDisplay());
+		bind(previewMapper, asWidget().getPreviewDisplay());
+		bind(editMapper, asWidget().getEditDisplay());
 	}
 
 }

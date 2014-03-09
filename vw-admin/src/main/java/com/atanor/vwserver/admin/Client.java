@@ -10,6 +10,7 @@ import com.atanor.vwserver.admin.ui.MainPane;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.web.bindery.event.shared.EventBus;
 
 public class Client {
@@ -20,6 +21,10 @@ public class Client {
 		injector.getPlaceController().goTo(place);
 	}
 
+	public static PlaceHistoryHandler getHistoryHandler(){
+		return injector.getHistoryHandler();
+	};
+	
 	public static PlaceController getPlaceController() {
 		return injector.getPlaceController();
 	}

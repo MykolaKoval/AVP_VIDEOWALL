@@ -1,5 +1,8 @@
 package com.atanor.vwserver.admin.mvp;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 import com.atanor.vwserver.admin.mvp.activity.header.DefaultHeaderPresetActivity;
 import com.atanor.vwserver.admin.mvp.activity.header.HeaderPresetActivity;
 import com.atanor.vwserver.admin.mvp.place.DefaultPresetPlace;
@@ -10,16 +13,18 @@ import com.google.gwt.place.shared.Place;
 
 public class HeaderMapper implements ActivityMapper {
 
-	public HeaderMapper() {
-	}
-
+	@Inject
+	private Provider<HeaderPresetActivity> presetProvider;
+	@Inject
+	private Provider<DefaultHeaderPresetActivity> defaultPresetProvider;
+	
 	@Override
 	public Activity getActivity(Place place) {
 
 		if (place instanceof PresetPlace) {
-			return new HeaderPresetActivity(((PresetPlace) place).getPresetId());
+			return presetProvider.get().withPlace((PresetPlace) place);
 		} else if (place instanceof DefaultPresetPlace) {
-			return new DefaultHeaderPresetActivity();
+			return defaultPresetProvider.get().withPlace((DefaultPresetPlace) place);
 		}
 
 		return null;

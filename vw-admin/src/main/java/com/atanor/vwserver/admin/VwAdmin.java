@@ -1,12 +1,8 @@
 package com.atanor.vwserver.admin;
 
 import com.atanor.vwserver.common.rpc.dto.HardwareDto;
-import com.atanor.vwserver.admin.mvp.AppPlacesHistoryMapper;
-import com.atanor.vwserver.admin.mvp.place.DefaultPresetPlace;
 import com.google.common.base.Preconditions;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -17,22 +13,16 @@ import com.smartgwt.client.util.SC;
  */
 public class VwAdmin implements EntryPoint {
 
-	private static PlaceHistoryHandler historyHandler;
-
 	/**
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
 
-		// Start PlaceHistoryHandler with our PlaceHistoryMapper
-		AppPlacesHistoryMapper historyMapper = GWT.create(AppPlacesHistoryMapper.class);
-		historyHandler = new PlaceHistoryHandler(historyMapper);
-		historyHandler.register(Client.getPlaceController(), Client.getEventBus(), new DefaultPresetPlace());
-
 		RootPanel.get().add(RootLayoutPanel.get());
 		RootLayoutPanel.get().add(Client.getMainPane().asWidget());
 
-		initConfiguration();
+		//initConfiguration();
+		Client.getHistoryHandler().handleCurrentHistory();
 	}
 
 	private static void initConfiguration() {
@@ -50,7 +40,7 @@ public class VwAdmin implements EntryPoint {
 //				Client.getEditPresetView().setConfiguration(config);
 
 				// Goes to the place represented on URL else default place
-				historyHandler.handleCurrentHistory();
+				Client.getHistoryHandler().handleCurrentHistory();
 			}
 
 			@Override
@@ -60,4 +50,5 @@ public class VwAdmin implements EntryPoint {
 			}
 		});
 	}
+	
 }

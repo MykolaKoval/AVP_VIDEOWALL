@@ -8,6 +8,7 @@ import com.atanor.vwserver.admin.ui.MainPane;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.web.bindery.event.shared.EventBus;
 
 @GinModules(ClientModule.class)
@@ -17,6 +18,8 @@ public interface ClientInjector extends Ginjector {
 
 	PlaceController getPlaceController();
 
+	PlaceHistoryHandler getHistoryHandler();
+	
 	HeaderView getHeaderPresetView();
 	
 	PreviewView getNavigatePresetView();

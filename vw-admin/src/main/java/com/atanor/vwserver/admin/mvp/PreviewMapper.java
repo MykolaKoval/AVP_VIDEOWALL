@@ -1,5 +1,8 @@
 package com.atanor.vwserver.admin.mvp;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 import com.atanor.vwserver.admin.mvp.activity.preview.DefaultPreviewPresetActivity;
 import com.atanor.vwserver.admin.mvp.activity.preview.PreviewPresetActivity;
 import com.atanor.vwserver.admin.mvp.place.DefaultPresetPlace;
@@ -10,16 +13,18 @@ import com.google.gwt.place.shared.Place;
 
 public class PreviewMapper implements ActivityMapper {
 
-	public PreviewMapper() {
-	}
+	@Inject
+	private Provider<PreviewPresetActivity> presetProvider;
+	@Inject
+	private Provider<DefaultPreviewPresetActivity> defaultPresetProvider;
 
 	@Override
 	public Activity getActivity(Place place) {
 
 		if (place instanceof PresetPlace) {
-			return new PreviewPresetActivity(((PresetPlace) place).getPresetId());
+			return presetProvider.get().withPlace((PresetPlace) place);
 		} else if (place instanceof DefaultPresetPlace) {
-			return new DefaultPreviewPresetActivity();
+			return defaultPresetProvider.get().withPlace((DefaultPresetPlace) place);
 		}
 
 		return null;
