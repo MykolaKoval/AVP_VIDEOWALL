@@ -2,8 +2,8 @@ package com.atanor.vwserver.admin.ui;
 
 import com.atanor.vwserver.common.rpc.dto.WindowDto;
 import com.atanor.vwserver.admin.Client;
-import com.atanor.vwserver.admin.mvp.events.CleanWindowSelectionEvent;
-import com.atanor.vwserver.admin.mvp.events.CleanWindowSelectionHandler;
+import com.atanor.vwserver.admin.mvp.event.CleanWindowSelectionEvent;
+import com.atanor.vwserver.admin.mvp.event.CleanWindowSelectionHandler;
 import com.atanor.vwserver.admin.ui.style.EditWindowStyleApplier;
 import com.google.common.primitives.Ints;
 import com.smartgwt.client.widgets.Label;

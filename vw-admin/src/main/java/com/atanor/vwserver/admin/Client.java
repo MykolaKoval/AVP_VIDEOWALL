@@ -2,9 +2,9 @@ package com.atanor.vwserver.admin;
 
 import com.atanor.vwserver.common.rpc.services.ConfigServiceAsync;
 import com.atanor.vwserver.admin.injector.ClientInjector;
-import com.atanor.vwserver.admin.mvp.views.EditView;
-import com.atanor.vwserver.admin.mvp.views.HeaderView;
-import com.atanor.vwserver.admin.mvp.views.PreviewView;
+import com.atanor.vwserver.admin.mvp.view.EditView;
+import com.atanor.vwserver.admin.mvp.view.HeaderView;
+import com.atanor.vwserver.admin.mvp.view.PreviewView;
 import com.atanor.vwserver.admin.ui.DisplayPanel;
 import com.atanor.vwserver.admin.ui.MainPane;
 import com.google.gwt.core.client.GWT;

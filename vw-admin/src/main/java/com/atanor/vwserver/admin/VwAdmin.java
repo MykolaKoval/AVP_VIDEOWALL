@@ -2,7 +2,7 @@ package com.atanor.vwserver.admin;
 
 import com.atanor.vwserver.common.rpc.dto.HardwareDto;
 import com.atanor.vwserver.admin.mvp.AppPlacesHistoryMapper;
-import com.atanor.vwserver.admin.mvp.places.DefaultPresetPlace;
+import com.atanor.vwserver.admin.mvp.place.DefaultPresetPlace;
 import com.google.common.base.Preconditions;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;

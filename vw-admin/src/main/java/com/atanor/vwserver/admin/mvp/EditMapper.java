@@ -1,9 +1,9 @@
 package com.atanor.vwserver.admin.mvp;
 
-import com.atanor.vwserver.admin.mvp.activities.edit.DefaultEditPresetActivity;
-import com.atanor.vwserver.admin.mvp.activities.edit.EditPresetActivity;
-import com.atanor.vwserver.admin.mvp.places.DefaultPresetPlace;
-import com.atanor.vwserver.admin.mvp.places.PresetPlace;
+import com.atanor.vwserver.admin.mvp.activity.edit.DefaultEditPresetActivity;
+import com.atanor.vwserver.admin.mvp.activity.edit.EditPresetActivity;
+import com.atanor.vwserver.admin.mvp.place.DefaultPresetPlace;
+import com.atanor.vwserver.admin.mvp.place.PresetPlace;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;

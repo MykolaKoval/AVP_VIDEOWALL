@@ -1,9 +1,9 @@
 package com.atanor.vwserver.admin.ui;
 
-import com.atanor.vwserver.admin.mvp.events.ActivateGridEvent;
-import com.atanor.vwserver.admin.mvp.events.ActivateGridHandler;
-import com.atanor.vwserver.admin.mvp.events.CleanGridActivationEvent;
-import com.atanor.vwserver.admin.mvp.events.CleanGridActivationHandler;
+import com.atanor.vwserver.admin.mvp.event.ActivateGridEvent;
+import com.atanor.vwserver.admin.mvp.event.ActivateGridHandler;
+import com.atanor.vwserver.admin.mvp.event.CleanGridActivationEvent;
+import com.atanor.vwserver.admin.mvp.event.CleanGridActivationHandler;
 import com.smartgwt.client.widgets.Label;
 
 public class GridLabel extends Label implements ActivateGridHandler, CleanGridActivationHandler {

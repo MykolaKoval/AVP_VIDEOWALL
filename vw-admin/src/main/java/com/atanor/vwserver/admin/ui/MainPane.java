@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import com.atanor.vwserver.admin.mvp.EditMapper;
 import com.atanor.vwserver.admin.mvp.HeaderMapper;
 import com.atanor.vwserver.admin.mvp.PreviewMapper;
-import com.atanor.vwserver.admin.mvp.views.NavigateView;
+import com.atanor.vwserver.admin.mvp.view.NavigateView;
 import com.atanor.vwserver.admin.ui.layout.MainPaneLayout;
 import com.google.gwt.user.client.ui.IsWidget;
 

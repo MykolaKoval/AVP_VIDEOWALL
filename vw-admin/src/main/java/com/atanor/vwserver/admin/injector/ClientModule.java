@@ -1,14 +1,14 @@
 package com.atanor.vwserver.admin.injector;
 
 import com.atanor.vwserver.admin.mvp.AppPlaceController;
-import com.atanor.vwserver.admin.mvp.views.EditView;
-import com.atanor.vwserver.admin.mvp.views.HeaderView;
-import com.atanor.vwserver.admin.mvp.views.NavigateView;
-import com.atanor.vwserver.admin.mvp.views.PreviewView;
-import com.atanor.vwserver.admin.mvp.views.impl.DefaultNavigateView;
-import com.atanor.vwserver.admin.mvp.views.impl.EditPresetView;
-import com.atanor.vwserver.admin.mvp.views.impl.HeaderPresetView;
-import com.atanor.vwserver.admin.mvp.views.impl.PreviewPresetView;
+import com.atanor.vwserver.admin.mvp.view.EditView;
+import com.atanor.vwserver.admin.mvp.view.HeaderView;
+import com.atanor.vwserver.admin.mvp.view.NavigateView;
+import com.atanor.vwserver.admin.mvp.view.PreviewView;
+import com.atanor.vwserver.admin.mvp.view.impl.DefaultNavigateView;
+import com.atanor.vwserver.admin.mvp.view.impl.EditPresetView;
+import com.atanor.vwserver.admin.mvp.view.impl.HeaderPresetView;
+import com.atanor.vwserver.admin.mvp.view.impl.PreviewPresetView;
 import com.atanor.vwserver.admin.ui.MainPane;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.place.shared.PlaceController;
