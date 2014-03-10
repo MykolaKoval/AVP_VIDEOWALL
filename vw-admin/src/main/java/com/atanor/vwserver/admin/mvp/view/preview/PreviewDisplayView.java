@@ -1,15 +1,15 @@
-package com.atanor.vwserver.admin.mvp.view.layout;
+package com.atanor.vwserver.admin.mvp.view.preview;
 
 import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.Utils;
 import com.smartgwt.client.widgets.layout.HLayout;
 
-public class PreviewLayoutView extends HLayout implements HeaderView {
+public class PreviewDisplayView extends HLayout implements HeaderView {
 
-	public PreviewLayoutView() {
+	public PreviewDisplayView() {
 		setWidth(Utils.PREVIEW_DISPLAY_WIDTH);
 		setHeight100();
-		setBackgroundColor("orange");
+		setBackgroundColor("blue");
 	}
 
 	@Override

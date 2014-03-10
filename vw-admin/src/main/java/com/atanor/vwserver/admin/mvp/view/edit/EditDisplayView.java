@@ -1,4 +1,4 @@
-package com.atanor.vwserver.admin.mvp.view.display;
+package com.atanor.vwserver.admin.mvp.view.edit;
 
 import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.smartgwt.client.widgets.layout.HLayout;

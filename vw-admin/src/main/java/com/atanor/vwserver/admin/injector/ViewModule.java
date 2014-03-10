@@ -1,16 +1,16 @@
 package com.atanor.vwserver.admin.injector;
 
 import com.atanor.vwserver.admin.mvp.view.NavigateView;
-import com.atanor.vwserver.admin.mvp.view.display.EditDisplayView;
-import com.atanor.vwserver.admin.mvp.view.display.HeaderDisplayView;
-import com.atanor.vwserver.admin.mvp.view.display.PreviewDisplayView;
-import com.atanor.vwserver.admin.mvp.view.layout.EditLayoutView;
-import com.atanor.vwserver.admin.mvp.view.layout.HeaderLayoutView;
-import com.atanor.vwserver.admin.mvp.view.layout.PreviewLayoutView;
+import com.atanor.vwserver.admin.mvp.view.edit.EditDisplayView;
+import com.atanor.vwserver.admin.mvp.view.edit.EditLayoutView;
+import com.atanor.vwserver.admin.mvp.view.edit.EditPresetView;
+import com.atanor.vwserver.admin.mvp.view.header.HeaderDisplayView;
+import com.atanor.vwserver.admin.mvp.view.header.HeaderLayoutView;
+import com.atanor.vwserver.admin.mvp.view.header.HeaderPresetView;
 import com.atanor.vwserver.admin.mvp.view.navigate.DefaultNavigateView;
-import com.atanor.vwserver.admin.mvp.view.preset.EditPresetView;
-import com.atanor.vwserver.admin.mvp.view.preset.HeaderPresetView;
-import com.atanor.vwserver.admin.mvp.view.preset.PreviewPresetView;
+import com.atanor.vwserver.admin.mvp.view.preview.PreviewDisplayView;
+import com.atanor.vwserver.admin.mvp.view.preview.PreviewLayoutView;
+import com.atanor.vwserver.admin.mvp.view.preview.PreviewPresetView;
 import com.atanor.vwserver.admin.ui.MainPane;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;

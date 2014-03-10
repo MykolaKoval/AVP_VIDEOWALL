@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import com.atanor.vwserver.admin.mvp.place.LayoutPlace;
 import com.atanor.vwserver.admin.mvp.place.PresetPlace;
-import com.atanor.vwserver.admin.mvp.view.layout.HeaderLayoutView;
+import com.atanor.vwserver.admin.mvp.view.header.HeaderLayoutView;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;

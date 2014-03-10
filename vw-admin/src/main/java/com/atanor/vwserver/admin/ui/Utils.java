@@ -5,6 +5,7 @@ public abstract class Utils {
 	public static Integer HEADER_DISPLAY_HEIGHT = 60;
 	public static Integer NAVIGATION_DISPLAY_WIDTH = 60;
 	public static Integer PREVIEW_DISPLAY_WIDTH = 200;
+	public static Integer NAVIGATION_PREVIEW_FULL_WIDTH = NAVIGATION_DISPLAY_WIDTH + PREVIEW_DISPLAY_WIDTH ;
 	public static Integer NAVIGATE_ICON_SIZE = 45;
 
 	public static String toToken(final Long id) {

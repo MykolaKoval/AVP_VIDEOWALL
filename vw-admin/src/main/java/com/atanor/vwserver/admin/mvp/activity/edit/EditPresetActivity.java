@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import com.atanor.vwserver.admin.Client;
 import com.atanor.vwserver.admin.mvp.place.PresetPlace;
 import com.atanor.vwserver.admin.mvp.presenter.EditPresetPresenter;
-import com.atanor.vwserver.admin.mvp.view.preset.EditPresetView;
+import com.atanor.vwserver.admin.mvp.view.edit.EditPresetView;
 import com.atanor.vwserver.common.rpc.dto.PresetDto;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;

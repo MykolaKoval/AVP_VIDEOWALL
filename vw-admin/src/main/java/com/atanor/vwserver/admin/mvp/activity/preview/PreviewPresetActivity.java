@@ -3,7 +3,7 @@ package com.atanor.vwserver.admin.mvp.activity.preview;
 import javax.inject.Inject;
 
 import com.atanor.vwserver.admin.mvp.place.PresetPlace;
-import com.atanor.vwserver.admin.mvp.view.preset.PreviewPresetView;
+import com.atanor.vwserver.admin.mvp.view.preview.PreviewPresetView;
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;

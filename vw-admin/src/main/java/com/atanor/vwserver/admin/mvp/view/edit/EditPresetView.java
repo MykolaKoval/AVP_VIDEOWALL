@@ -1,4 +1,4 @@
-package com.atanor.vwserver.admin.mvp.view.preset;
+package com.atanor.vwserver.admin.mvp.view.edit;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -19,6 +19,7 @@ import com.atanor.vwserver.admin.mvp.presenter.EditPresetPresenter;
 import com.atanor.vwserver.admin.mvp.view.EditView;
 import com.atanor.vwserver.admin.ui.GridLabel;
 import com.atanor.vwserver.admin.ui.PresetLabel;
+import com.atanor.vwserver.admin.ui.Utils;
 import com.atanor.vwserver.admin.ui.WindowLabel;
 import com.atanor.vwserver.admin.ui.builder.UiBuilder;
 import com.atanor.vwserver.admin.ui.builder.post.EditPresetPostBuilder;
@@ -27,6 +28,7 @@ import com.atanor.vwserver.admin.ui.style.PanelsDisplayStyleApplier;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Ints;
+import com.google.gwt.user.client.Window;
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.types.VerticalAlignment;
@@ -83,7 +85,7 @@ public class EditPresetView extends VLayout implements EditView {
 
 	public EditPresetView() {
 		setHeight100();
-		setWidth100();
+		setWidth(Window.getClientWidth() - Utils.NAVIGATION_PREVIEW_FULL_WIDTH);
 		setOverflow(Overflow.HIDDEN);
 		setShowResizeBar(true);
 

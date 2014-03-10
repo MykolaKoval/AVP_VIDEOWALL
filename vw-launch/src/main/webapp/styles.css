@@ -39,3 +39,8 @@ h1 {
 .previewer {
   background-color: red;
 }
+
+.controlLabel {
+  font-size: 40px;
+  font-family: arial, verdana, sans-serif;
+}
