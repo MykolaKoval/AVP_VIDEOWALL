@@ -1,23 +1,26 @@
 package com.atanor.vwserver.admin.mvp.view.header;
 
 import com.atanor.vwserver.admin.mvp.view.HeaderView;
-import com.smartgwt.client.widgets.IButton;
-import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public class HeaderDisplayView extends AbstractHeaderView implements HeaderView {
 
 	public HeaderDisplayView() {
 		super("Displays");
-		setBackgroundColor("green");
 
-		final HLayout layout = createLayout();
-		final IButton newDisplay = new IButton("New");
-		final IButton editDisplay = new IButton("Edit");
-		final IButton cancelDisplay = new IButton("Cancel");
-		final IButton saveDisplay = new IButton("Save");
-		
-		layout.addMembers(newDisplay, editDisplay, cancelDisplay, saveDisplay);
-		addMember(layout);
+		final ToolStripButton newDisplay = createButton("New");
+		addButton(newDisplay);
+
+		final ToolStripButton editDisplay = createButton("Edit");
+		addButton(editDisplay);
+
+		final ToolStripButton cancelDisplay = createButton("Cancel");
+		addButton(cancelDisplay);
+
+		final ToolStripButton saveDisplay = createButton("Save");
+		addButton(saveDisplay);
+
+		addSeparator();
 	}
 
 	@Override

@@ -85,7 +85,7 @@ public class EditPresetView extends VLayout implements EditView {
 
 	public EditPresetView() {
 		setHeight100();
-		setWidth(Window.getClientWidth() - Utils.NAVIGATION_PREVIEW_FULL_WIDTH);
+		setWidth(Window.getClientWidth() - Utils.PREVIEW_DISPLAY_WIDTH);
 		setOverflow(Overflow.HIDDEN);
 		setShowResizeBar(true);
 

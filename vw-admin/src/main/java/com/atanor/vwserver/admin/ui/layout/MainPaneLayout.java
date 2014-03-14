@@ -15,17 +15,17 @@ public class MainPaneLayout extends DockLayoutPanel {
 	public MainPaneLayout() {
 		super(Unit.PX);
 
-		// ============ Header ============
-		{
-			headerDisplay = new DisplayPanel();
-			//headerDisplay.setStyleName("header");
-			addNorth(headerDisplay, Utils.HEADER_DISPLAY_HEIGHT);
-		}
-
 		// ============ Navigation ============
 		{
 			navigateDisplay = new DisplayPanel();
-			addWest(navigateDisplay, Utils.NAVIGATION_DISPLAY_WIDTH);
+			addNorth(navigateDisplay, Utils.NAVIGATION_DISPLAY_HEIGHT);
+		}
+
+		// ============ Header ============
+		{
+			headerDisplay = new DisplayPanel();
+			// headerDisplay.setStyleName("header");
+			addNorth(headerDisplay, Utils.HEADER_DISPLAY_HEIGHT);
 		}
 
 		// ============ Preview ============
