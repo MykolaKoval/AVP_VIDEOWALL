@@ -1,7 +1,5 @@
 package com.atanor.vwserver.domain.converter;
 
-import javax.inject.Inject;
-
 import org.apache.commons.lang3.Validate;
 
 import com.atanor.vwserver.common.rpc.dto.DisplayDto;
@@ -9,17 +7,16 @@ import com.atanor.vwserver.domain.entity.Display;
 
 public class DisplayConverter extends AbstractConverter<DisplayDto, Display> {
 
-	@Inject
-	private PanelLayoutConverter layoutConverter;
-
 	@Override
 	public DisplayDto toDto(final Display entity) {
 		Validate.notNull(entity, "entity param can not be null");
 
 		final DisplayDto dto = new DisplayDto(entity.getId());
-		dto.setWidth(entity.getWidth());
-		dto.setHigh(entity.getHigh());
-		dto.setLayout(layoutConverter.toDto(entity.getLayout()));
+		dto.setName(entity.getName());
+		dto.setSegmentHeight(entity.getSegmentHeight());
+		dto.setSegmentWidth(entity.getSegmentWidth());
+		dto.setSegmentNumHeight(entity.getSegmentNumHeight());
+		dto.setSegmentNumWidth(entity.getSegmentNumWidth());
 
 		return dto;
 	}
@@ -29,10 +26,13 @@ public class DisplayConverter extends AbstractConverter<DisplayDto, Display> {
 		Validate.notNull(dto, "dto param can not be null");
 
 		final Display entity = new Display(dto.getId());
-		entity.setWidth(dto.getWidth());
-		entity.setHigh(dto.getHigh());
-		entity.setLayout(layoutConverter.toEntity(dto.getLayout()));
+		entity.setName(dto.getName());
+		entity.setSegmentHeight(dto.getSegmentHeight());
+		entity.setSegmentWidth(dto.getSegmentWidth());
+		entity.setSegmentNumHeight(dto.getSegmentNumHeight());
+		entity.setSegmentNumWidth(dto.getSegmentNumWidth());
 
 		return entity;
 	}
+
 }

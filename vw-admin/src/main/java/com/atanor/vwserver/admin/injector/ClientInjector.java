@@ -2,6 +2,7 @@ package com.atanor.vwserver.admin.injector;
 
 import com.atanor.vwserver.admin.ui.MainPane;
 import com.atanor.vwserver.common.rpc.services.ConfigServiceAsync;
+import com.atanor.vwserver.common.rpc.services.DisplayServiceAsync;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.gwt.place.shared.PlaceController;
@@ -18,6 +19,8 @@ public interface ClientInjector extends Ginjector {
 	PlaceHistoryHandler getHistoryHandler();
 
 	ConfigServiceAsync getConfigService();
+	
+	DisplayServiceAsync getDisplayService();
 
 	MainPane getMainPane();
 }

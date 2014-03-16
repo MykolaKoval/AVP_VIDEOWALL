@@ -5,9 +5,11 @@ public class DisplayDto extends AbstractDto {
 
 	private Long id;
 
-	private Integer width;
-	private Integer high;
-	private PanelLayoutDto layout;
+	private String name;
+	private Integer segmentNumHeight;
+	private Integer segmentNumWidth;
+	private Integer segmentHeight;
+	private Integer segmentWidth;
 
 	public DisplayDto() {
 	}
@@ -20,28 +22,44 @@ public class DisplayDto extends AbstractDto {
 		return id;
 	}
 
-	public Integer getWidth() {
-		return width;
+	public String getName() {
+		return name;
 	}
 
-	public void setWidth(final Integer width) {
-		this.width = width;
+	public void setName(final String name) {
+		this.name = name;
 	}
 
-	public Integer getHigh() {
-		return high;
+	public Integer getSegmentNumHeight() {
+		return segmentNumHeight;
 	}
 
-	public void setHigh(final Integer high) {
-		this.high = high;
+	public void setSegmentNumHeight(final Integer segmentNumHeight) {
+		this.segmentNumHeight = segmentNumHeight;
 	}
 
-	public PanelLayoutDto getLayout() {
-		return layout;
+	public Integer getSegmentNumWidth() {
+		return segmentNumWidth;
 	}
 
-	public void setLayout(final PanelLayoutDto layout) {
-		this.layout = layout;
+	public void setSegmentNumWidth(final Integer segmentNumWidth) {
+		this.segmentNumWidth = segmentNumWidth;
+	}
+
+	public Integer getSegmentHeight() {
+		return segmentHeight;
+	}
+
+	public void setSegmentHeight(final Integer segmentHeight) {
+		this.segmentHeight = segmentHeight;
+	}
+
+	public Integer getSegmentWidth() {
+		return segmentWidth;
+	}
+
+	public void setSegmentWidth(final Integer segmentWidth) {
+		this.segmentWidth = segmentWidth;
 	}
 
 }

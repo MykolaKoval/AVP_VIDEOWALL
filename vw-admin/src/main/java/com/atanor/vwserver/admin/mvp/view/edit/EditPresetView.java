@@ -246,19 +246,19 @@ public class EditPresetView extends VLayout implements EditView {
 
 	private void setDisplay(DisplayDto display) {
 
-		Long displayWidth = new Long(display.getWidth());
-		Long displayHeight = new Long(display.getHigh());
-
-		Double padding = adjustPadding(displayWidth, displayHeight);
-
-		Long panelDisplayWidth = Math.round(getElement().getClientWidth() * padding);
-		panelDisplayWidth = makeDivisibleOn(panelDisplayWidth, display.getLayout().getColumnPanelQuantity());
-
-		scaleFactor = panelDisplayWidth.doubleValue() / displayWidth.doubleValue();
-		Long panelDisplayHeight = Math.round(scaleFactor * displayHeight.doubleValue());
-
-		createDisplayWindow(display.getLayout(), panelDisplayWidth, panelDisplayHeight, scaleFactor);
-		createGridWindow(display.getLayout(), panelDisplayWidth, panelDisplayHeight, scaleFactor);
+//		Long displayWidth = new Long(display.getWidth());
+//		Long displayHeight = new Long(display.getHigh());
+//
+//		Double padding = adjustPadding(displayWidth, displayHeight);
+//
+//		Long panelDisplayWidth = Math.round(getElement().getClientWidth() * padding);
+//		panelDisplayWidth = makeDivisibleOn(panelDisplayWidth, display.getLayout().getColumnPanelQuantity());
+//
+//		scaleFactor = panelDisplayWidth.doubleValue() / displayWidth.doubleValue();
+//		Long panelDisplayHeight = Math.round(scaleFactor * displayHeight.doubleValue());
+//
+//		createDisplayWindow(display.getLayout(), panelDisplayWidth, panelDisplayHeight, scaleFactor);
+//		createGridWindow(display.getLayout(), panelDisplayWidth, panelDisplayHeight, scaleFactor);
 	}
 
 	private Double adjustPadding(Long displayWidth, Long displayHeight) {

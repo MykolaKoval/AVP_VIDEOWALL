@@ -2,8 +2,6 @@ package com.atanor.vwserver.domain.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,7 +9,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "display")
+@Table(name = "displays")
 @NamedQuery(name = "Display.GetAll", query = "SELECT d from Display d")
 public class Display extends AbstractEntity<Long> {
 
@@ -19,27 +17,26 @@ public class Display extends AbstractEntity<Long> {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "width")
-	private Integer width;
+	@Column(name = "name", unique = true, length = 32)
+	private String name;
 
-	@Column(name = "high")
-	private Integer high;
+	@Column(name = "segment_num_height")
+	private Integer segmentNumHeight;
 
-	@Column(name = "panel_layout", length = 32)
-	@Enumerated(EnumType.STRING)
-	private PanelLayout layout;
+	@Column(name = "segment_num_width")
+	private Integer segmentNumWidth;
+
+	@Column(name = "segment_height")
+	private Integer segmentHeight;
+
+	@Column(name = "segment_width")
+	private Integer segmentWidth;
 
 	public Display() {
 	}
-	
+
 	public Display(final Long id) {
 		this.id = id;
-	}
-
-	public Display(final PanelLayout layout, final Integer width, final Integer high) {
-		this.layout = layout;
-		this.width = width;
-		this.high = high;
 	}
 
 	@Override
@@ -47,28 +44,44 @@ public class Display extends AbstractEntity<Long> {
 		return id;
 	}
 
-	public PanelLayout getLayout() {
-		return layout;
+	public String getName() {
+		return name;
 	}
 
-	public void setLayout(final PanelLayout layout) {
-		this.layout = layout;
+	public void setName(final String name) {
+		this.name = name;
 	}
 
-	public Integer getWidth() {
-		return width;
+	public Integer getSegmentNumHeight() {
+		return segmentNumHeight;
 	}
 
-	public void setWidth(final Integer width) {
-		this.width = width;
+	public void setSegmentNumHeight(final Integer segmentNumHeight) {
+		this.segmentNumHeight = segmentNumHeight;
 	}
 
-	public Integer getHigh() {
-		return high;
+	public Integer getSegmentNumWidth() {
+		return segmentNumWidth;
 	}
 
-	public void setHigh(final Integer high) {
-		this.high = high;
+	public void setSegmentNumWidth(final Integer segmentNumWidth) {
+		this.segmentNumWidth = segmentNumWidth;
+	}
+
+	public Integer getSegmentHeight() {
+		return segmentHeight;
+	}
+
+	public void setSegmentHeight(final Integer segmentHeight) {
+		this.segmentHeight = segmentHeight;
+	}
+
+	public Integer getSegmentWidth() {
+		return segmentWidth;
+	}
+
+	public void setSegmentWidth(final Integer segmentWidth) {
+		this.segmentWidth = segmentWidth;
 	}
 
 }

@@ -1,6 +1,11 @@
 package com.atanor.vwserver.admin.ui.modal;
 
+import javax.inject.Inject;
+
 import com.atanor.vwserver.admin.ui.Utils;
+import com.atanor.vwserver.admin.ui.modal.ModalCallbacks.NewDisplayCallback;
+import com.atanor.vwserver.admin.ui.modal.presenter.NewDisplayPresenter;
+import com.atanor.vwserver.common.rpc.dto.DisplayDto;
 import com.smartgwt.client.types.VerticalAlignment;
 import com.smartgwt.client.widgets.IButton;
 import com.smartgwt.client.widgets.events.ClickEvent;
@@ -12,9 +17,11 @@ import com.smartgwt.client.widgets.form.fields.IntegerItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.layout.HLayout;
 
-public class NewDisplayWindow extends ModalWindow {
+public class NewDisplayWindow extends ModalWindow implements NewDisplayCallback {
 
-	private IButton saveButton;
+	@Inject
+	private NewDisplayPresenter presenter;
+
 	private TextItem name;
 	private IntegerItem segmentNumHeight;
 	private IntegerItem segmentNumWidth;
@@ -63,13 +70,13 @@ public class NewDisplayWindow extends ModalWindow {
 			}
 		});
 
-		saveButton = createModalButton("Save");
-		saveButton.setDisabled(true);
-		saveButton.addClickHandler(new ClickHandler() {
+		final IButton createButton = createModalButton("Create");
+		createButton.setDisabled(true);
+		createButton.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-
+				presenter.createDisplay(buildDisplay(), getCallback());
 			}
 		});
 
@@ -78,16 +85,16 @@ public class NewDisplayWindow extends ModalWindow {
 			@Override
 			public void onItemChanged(ItemChangedEvent event) {
 				if (isAllValuesValid(getForm())) {
-					saveButton.enable();
+					createButton.enable();
 					setDiplayName();
 				} else {
-					saveButton.disable();
+					createButton.disable();
 					cleanDiplayName();
 				}
 			}
 		});
 
-		layout.addMembers(cancelButton, saveButton);
+		layout.addMembers(cancelButton, createButton);
 		return layout;
 	}
 
@@ -107,4 +114,24 @@ public class NewDisplayWindow extends ModalWindow {
 			final String segmHeight, final String segWidth) {
 		return "H" + segNumHeight + "xW" + segNumWidth + "_" + segmHeight + "x" + segWidth;
 	}
+
+	private DisplayDto buildDisplay() {
+		final DisplayDto display = new DisplayDto();
+		display.setName(name.getValueAsString());
+		display.setSegmentHeight(Integer.parseInt(segmentHeight.getValueAsString()));
+		display.setSegmentWidth(Integer.parseInt(segmentWidth.getValueAsString()));
+		display.setSegmentNumHeight(Integer.parseInt(segmentNumHeight.getValueAsString()));
+		display.setSegmentNumWidth(Integer.parseInt(segmentNumWidth.getValueAsString()));
+		return display;
+	}
+
+	private NewDisplayCallback getCallback() {
+		return this;
+	}
+
+	@Override
+	public void onDisplayCreated() {
+		destroy();
+	}
+
 }

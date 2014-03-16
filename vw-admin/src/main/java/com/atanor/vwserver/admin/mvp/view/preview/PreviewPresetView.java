@@ -67,17 +67,17 @@ public class PreviewPresetView extends VLayout implements PreviewView, ClickHand
 
 	@Override
 	public void setConfiguration(final HardwareDto config) {
-		Long displayWidth = new Long(config.getDisplay().getWidth());
-		Long displayHeight = new Long(config.getDisplay().getHigh());
-
-		presetWidth = Math.round(getElement().getClientWidth() * 0.8d);
-
-		scaleFactor = presetWidth.doubleValue() / displayWidth.doubleValue();
-		presetHeight = Math.round(scaleFactor * displayHeight.doubleValue());
-
-		for (PresetDto preset : config.getPresets()) {
-			createPresetWindow(preset, presetWidth, presetHeight, scaleFactor);
-		}
+//		Long displayWidth = new Long(config.getDisplay().getWidth());
+//		Long displayHeight = new Long(config.getDisplay().getHigh());
+//
+//		presetWidth = Math.round(getElement().getClientWidth() * 0.8d);
+//
+//		scaleFactor = presetWidth.doubleValue() / displayWidth.doubleValue();
+//		presetHeight = Math.round(scaleFactor * displayHeight.doubleValue());
+//
+//		for (PresetDto preset : config.getPresets()) {
+//			createPresetWindow(preset, presetWidth, presetHeight, scaleFactor);
+//		}
 	}
 
 	@Override

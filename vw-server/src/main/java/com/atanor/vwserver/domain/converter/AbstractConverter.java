@@ -3,7 +3,9 @@ package com.atanor.vwserver.domain.converter;
 import java.util.List;
 
 import com.atanor.vwserver.common.rpc.dto.AbstractDto;
+import com.atanor.vwserver.common.rpc.dto.DisplayDto;
 import com.atanor.vwserver.domain.entity.AbstractEntity;
+import com.atanor.vwserver.domain.entity.Display;
 import com.google.common.collect.Lists;
 
 @SuppressWarnings("rawtypes")
@@ -33,4 +35,11 @@ public abstract class AbstractConverter<D extends AbstractDto, E extends Abstrac
 		return converted;
 	}
 
+	public List<D> toListDto(final List<E> entities) {
+		return convertEntityList(this, entities);
+	}
+
+	public List<E> toListEntities(final List<D> dtos) {
+		return convertDtoList(this, dtos);
+	}
 }
