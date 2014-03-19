@@ -1,5 +1,6 @@
 package com.atanor.vwserver.injector;
 
+import com.atanor.vwserver.graphics.ImgGenerator;
 import com.atanor.vwserver.services.DefaultDisplayService;
 import com.atanor.vwserver.services.EquipmentConfigService;
 import com.atanor.vwserver.services.EquipmentConfigServiceImpl;
@@ -15,6 +16,7 @@ public class AppCoreModule extends AbstractModule {
 		bind(IDisplayService.class).to(DefaultDisplayService.class);
 		bind(EquipmentConfigService.class).to(EquipmentConfigServiceImpl.class);
 		bind(HardwareFacade.class).to(HardwareFacadeImpl.class);
+		bind(ImgGenerator.class);
 	}
 
 }

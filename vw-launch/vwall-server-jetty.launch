@@ -15,9 +15,11 @@
 <booleanAttribute key="run_jetty_run.ENABLE_SSL_ATTR" value="false"/>
 <booleanAttribute key="run_jetty_run.IGNORE_SCAN_CLASS_WHEN_DEBUG_MODE" value="true"/>
 <mapAttribute key="run_jetty_run.JETTY_CLASSPATH_NON_CHECKED">
-<mapEntry key="Custom Jetty Classpath" value="0"/>
+<mapEntry key="Custom Jetty Classpath" value="1"/>
 </mapAttribute>
-<listAttribute key="run_jetty_run.JETTY_CUSTOM_CLASSPATH"/>
+<listAttribute key="run_jetty_run.JETTY_CUSTOM_CLASSPATH">
+<listEntry value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;runtimeClasspathEntry internalArchive=&quot;/vw-launch/target/vwall-server-0.0.1-SNAPSHOT/WEB-INF/lib/commons-codec-1.7.jar&quot; path=&quot;3&quot; type=&quot;2&quot;/&gt;&#13;&#10;"/>
+</listAttribute>
 <stringAttribute key="run_jetty_run.JETTY_XML_PATH" value=""/>
 <stringAttribute key="run_jetty_run.KEYSTORE_ATTR" value=""/>
 <stringAttribute key="run_jetty_run.KEY_PWD_ATTR" value="changeit"/>

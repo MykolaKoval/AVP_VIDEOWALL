@@ -12,6 +12,7 @@ import com.atanor.vwserver.domain.entity.Display;
 
 public class DisplayDaoTest extends BaseDaoTest<Display> {
 
+	private static final String DISPLAY_IMG = "asdfsdfgsdfgdsgh12345145dsfhwdghwghfghfgh";
 	private static final Integer SEGMENT_NUM_WIDTH = 3;
 	private static final Integer SEGMENT_NUM_HEIGHT = 2;
 	private static final Integer SEGMENT_WIDTH = 800;
@@ -56,6 +57,7 @@ public class DisplayDaoTest extends BaseDaoTest<Display> {
 		Assert.assertEquals(SEGMENT_WIDTH, displayFromDB.getSegmentWidth());
 		Assert.assertEquals(SEGMENT_NUM_HEIGHT, displayFromDB.getSegmentNumHeight());
 		Assert.assertEquals(SEGMENT_NUM_WIDTH, displayFromDB.getSegmentNumWidth());
+		Assert.assertEquals(DISPLAY_IMG, displayFromDB.getImgBlob());
 	}
 
 	@Test
@@ -96,6 +98,7 @@ public class DisplayDaoTest extends BaseDaoTest<Display> {
 		display.setSegmentWidth(SEGMENT_WIDTH);
 		display.setSegmentNumHeight(SEGMENT_NUM_HEIGHT);
 		display.setSegmentNumWidth(SEGMENT_NUM_WIDTH);
+		display.setImgBlob(DISPLAY_IMG);
 		return display;
 	}
 }

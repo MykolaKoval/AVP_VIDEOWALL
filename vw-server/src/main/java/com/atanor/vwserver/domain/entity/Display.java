@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -32,6 +33,10 @@ public class Display extends AbstractEntity<Long> {
 	@Column(name = "segment_width")
 	private Integer segmentWidth;
 
+	@Lob
+	@Column(name = "display_blob", length = 300000)
+	private String imgBlob;
+	
 	public Display() {
 	}
 
@@ -84,4 +89,12 @@ public class Display extends AbstractEntity<Long> {
 		this.segmentWidth = segmentWidth;
 	}
 
+	public String getImgBlob() {
+		return imgBlob;
+	}
+
+	public void setImgBlob(final String imgBlob) {
+		this.imgBlob = imgBlob;
+	}
+	
 }

@@ -10,6 +10,7 @@ CREATE TABLE displays (
 	segment_num_width INT NULL DEFAULT NULL,
 	segment_height INT NULL DEFAULT NULL,
 	segment_width INT NULL DEFAULT NULL,
+	display_blob LONGTEXT NULL DEFAULT NULL,
 	PRIMARY KEY (id),
 	UNIQUE KEY uk_name(name)
 );
