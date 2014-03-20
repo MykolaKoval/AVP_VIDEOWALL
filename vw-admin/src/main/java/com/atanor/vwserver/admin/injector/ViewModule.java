@@ -1,5 +1,6 @@
 package com.atanor.vwserver.admin.injector;
 
+import com.atanor.vwserver.admin.mvp.presenter.PreviewPresenter;
 import com.atanor.vwserver.admin.mvp.view.NavigateView;
 import com.atanor.vwserver.admin.mvp.view.edit.EditDisplayView;
 import com.atanor.vwserver.admin.mvp.view.edit.EditLayoutView;
@@ -32,6 +33,7 @@ public class ViewModule extends AbstractGinModule {
 		
 		bind(PreviewPresetView.class).in(Singleton.class);
 		bind(PreviewDisplayView.class).in(Singleton.class);
+		bind(PreviewPresenter.class).asEagerSingleton();
 		bind(PreviewLayoutView.class).in(Singleton.class);
 		
 		bind(EditPresetView.class).in(Singleton.class);

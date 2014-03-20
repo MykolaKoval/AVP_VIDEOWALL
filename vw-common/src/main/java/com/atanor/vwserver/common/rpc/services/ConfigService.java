@@ -1,8 +1,7 @@
 package com.atanor.vwserver.common.rpc.services;
 
 import com.atanor.vwserver.common.AppConstants;
-import com.atanor.vwserver.common.rpc.dto.HardwareDto;
-import com.atanor.vwserver.common.rpc.dto.PresetDto;
+import com.atanor.vwserver.common.rpc.dto.ConfigDto;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -12,9 +11,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath(AppConstants.CONFIG_PATH)
 public interface ConfigService extends RemoteService {
 
-	HardwareDto getHardwareConfiguration();
+	ConfigDto getConfiguration();
 
-	Boolean applyPreset(PresetDto preset);
-
-	PresetDto savePreset(PresetDto preset);
 }

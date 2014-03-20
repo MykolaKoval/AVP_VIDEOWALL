@@ -10,7 +10,8 @@ public class DisplayDto extends AbstractDto {
 	private Integer segmentNumWidth;
 	private Integer segmentHeight;
 	private Integer segmentWidth;
-
+	private String image;
+	
 	public DisplayDto() {
 	}
 
@@ -60,6 +61,14 @@ public class DisplayDto extends AbstractDto {
 
 	public void setSegmentWidth(final Integer segmentWidth) {
 		this.segmentWidth = segmentWidth;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(final String image) {
+		this.image = image;
 	}
 
 }

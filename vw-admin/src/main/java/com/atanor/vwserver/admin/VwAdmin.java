@@ -1,6 +1,7 @@
 package com.atanor.vwserver.admin;
 
-import com.atanor.vwserver.common.rpc.dto.HardwareDto;
+import com.atanor.vwserver.admin.mvp.event.SetModelEvent;
+import com.atanor.vwserver.common.rpc.dto.ConfigDto;
 import com.google.common.base.Preconditions;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -21,23 +22,18 @@ public class VwAdmin implements EntryPoint {
 		RootPanel.get().add(RootLayoutPanel.get());
 		RootLayoutPanel.get().add(Client.getMainPane().asWidget());
 
-		//initConfiguration();
-		Client.getHistoryHandler().handleCurrentHistory();
+		initConfiguration();
 	}
 
 	private static void initConfiguration() {
-		Client.getConfigService().getHardwareConfiguration(new AsyncCallback<HardwareDto>() {
+		Client.getConfigService().getConfiguration(new AsyncCallback<ConfigDto>() {
 
 			@Override
-			public void onSuccess(HardwareDto config) {
-				Preconditions.checkNotNull(config, "Hardware configuration is null");
+			public void onSuccess(ConfigDto config) {
+				Preconditions.checkNotNull(config, "Application configuration is null");
 
-//				Client.getPreviewDisplay().setWidget(Client.getNavigatePresetView());
-//				Client.getEditDisplay().setWidget(Client.getEditPresetView());
-//
-//				// prepare views
-//				Client.getNavigatePresetView().setConfiguration(config);
-//				Client.getEditPresetView().setConfiguration(config);
+				Client.getDisplayStorage().addDisplays(config.getDisplays());
+				Client.getEventBus().fireEvent(new SetModelEvent());
 
 				// Goes to the place represented on URL else default place
 				Client.getHistoryHandler().handleCurrentHistory();
@@ -50,5 +46,5 @@ public class VwAdmin implements EntryPoint {
 			}
 		});
 	}
-	
+
 }

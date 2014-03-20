@@ -2,6 +2,9 @@ package com.atanor.vwserver.admin.ui.modal.presenter;
 
 import javax.inject.Inject;
 
+import com.atanor.vwserver.admin.Client;
+import com.atanor.vwserver.admin.mvp.model.DisplayStorage;
+import com.atanor.vwserver.admin.mvp.place.DisplayPlace;
 import com.atanor.vwserver.admin.ui.modal.ModalCallbacks.NewDisplayCallback;
 import com.atanor.vwserver.common.rpc.dto.DisplayDto;
 import com.atanor.vwserver.common.rpc.exception.DuplicateEntityException;
@@ -16,6 +19,9 @@ public class NewDisplayPresenter {
 	private EventBus eventBus;
 
 	@Inject
+	private DisplayStorage storage;
+	
+	@Inject
 	private DisplayServiceAsync displayService;
 
 	public void createDisplay(final DisplayDto dto, final NewDisplayCallback callback) {
@@ -23,6 +29,8 @@ public class NewDisplayPresenter {
 
 			@Override
 			public void onSuccess(DisplayDto display) {
+				storage.addDisplay(display);
+				Client.goTo(new DisplayPlace(display.getId(), true));
 				callback.onDisplayCreated();
 			}
 

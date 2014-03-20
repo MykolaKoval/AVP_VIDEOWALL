@@ -1,5 +1,7 @@
 package com.atanor.vwserver.admin.injector;
 
+import com.atanor.vwserver.admin.mvp.model.DisplayStorage;
+import com.atanor.vwserver.admin.mvp.presenter.PreviewPresenter;
 import com.atanor.vwserver.admin.ui.MainPane;
 import com.atanor.vwserver.common.rpc.services.ConfigServiceAsync;
 import com.atanor.vwserver.common.rpc.services.DisplayServiceAsync;
@@ -23,4 +25,6 @@ public interface ClientInjector extends Ginjector {
 	DisplayServiceAsync getDisplayService();
 
 	MainPane getMainPane();
+	
+	DisplayStorage getDisplayStorage();
 }

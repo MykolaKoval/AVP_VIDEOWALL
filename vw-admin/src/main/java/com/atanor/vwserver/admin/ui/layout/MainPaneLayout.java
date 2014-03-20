@@ -24,14 +24,12 @@ public class MainPaneLayout extends DockLayoutPanel {
 		// ============ Header ============
 		{
 			headerDisplay = new DisplayPanel();
-			// headerDisplay.setStyleName("header");
 			addNorth(headerDisplay, Utils.HEADER_DISPLAY_HEIGHT);
 		}
 
 		// ============ Preview ============
 		{
 			previewDisplay = new DisplayPanel();
-			previewDisplay.setStyleName("previewer");
 			addWest(previewDisplay, Utils.PREVIEW_DISPLAY_WIDTH);
 		}
 

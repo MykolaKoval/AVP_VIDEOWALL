@@ -17,7 +17,8 @@ public class DisplayConverter extends AbstractConverter<DisplayDto, Display> {
 		dto.setSegmentWidth(entity.getSegmentWidth());
 		dto.setSegmentNumHeight(entity.getSegmentNumHeight());
 		dto.setSegmentNumWidth(entity.getSegmentNumWidth());
-
+		dto.setImage(entity.getImgBlob());
+		
 		return dto;
 	}
 
