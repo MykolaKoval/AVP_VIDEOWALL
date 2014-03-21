@@ -62,7 +62,6 @@ public class PreviewDisplayView extends HLayout implements HeaderView {
 
 	@Override
 	public void clean() {
-		// TODO Auto-generated method stub
-
+		unselect();
 	}
 }

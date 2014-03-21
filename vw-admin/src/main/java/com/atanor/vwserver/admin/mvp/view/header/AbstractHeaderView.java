@@ -10,6 +10,12 @@ import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
 public abstract class AbstractHeaderView extends ToolStrip {
 
+	protected final ToolStripButton createButton;
+	protected final ToolStripButton editButton;
+	protected final ToolStripButton cancelButton;
+	protected final ToolStripButton saveButton;
+	protected final ToolStripButton removeButton;
+
 	public AbstractHeaderView(final String labelName) {
 		setHeight(Utils.HEADER_DISPLAY_HEIGHT);
 		setWidth100();
@@ -25,47 +31,83 @@ public abstract class AbstractHeaderView extends ToolStrip {
 		container.addMember(label);
 		addMembers(container);
 
-		final ToolStripButton newButton = createButton("New", "new.png");
-		newButton.addClickHandler(new ClickHandler() {
+		createButton = createNewButton();
+		editButton = createEditButton();
+		cancelButton = createCancelButton();
+		saveButton = createSaveButton();
+		removeButton = createRemoveButton();
+
+		addButtons();
+
+		addSeparator();
+	}
+
+	protected void addButtons() {
+		addButton(createButton);
+		addButton(editButton);
+		addButton(cancelButton);
+		addButton(saveButton);
+		addButton(removeButton);
+	}
+
+	protected ToolStripButton createNewButton() {
+		final ToolStripButton button = createButton("New", "new.png");
+		button.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				doNew();
 			}
 		});
-		addButton(newButton);
+		return button;
+	}
 
-		final ToolStripButton editButton = createButton("Edit", "edit.png");
-		editButton.addClickHandler(new ClickHandler() {
+	protected ToolStripButton createEditButton() {
+		final ToolStripButton button = createButton("Edit", "edit.png");
+		button.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				doEdit();
 			}
 		});
-		addButton(editButton);
+		return button;
+	}
 
-		final ToolStripButton cancelButton = createButton("Cancel", "undo.png");
-		cancelButton.addClickHandler(new ClickHandler() {
+	protected ToolStripButton createCancelButton() {
+		final ToolStripButton button = createButton("Cancel", "undo.png");
+		button.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				doCancel();
 			}
 		});
-		addButton(cancelButton);
+		return button;
+	}
 
-		final ToolStripButton saveButton = createButton("Save", "save.png");
-		saveButton.addClickHandler(new ClickHandler() {
+	protected ToolStripButton createSaveButton() {
+		final ToolStripButton button = createButton("Save", "save.png");
+		button.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				doSave();
 			}
 		});
-		addButton(saveButton);
+		return button;
+	}
 
-		addSeparator();
+	protected ToolStripButton createRemoveButton() {
+		final ToolStripButton button = createButton("Remove", "remove.png");
+		button.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				doRemove();
+			}
+		});
+		return button;
 	}
 
 	protected ToolStripButton createButton(final String title) {
@@ -90,8 +132,11 @@ public abstract class AbstractHeaderView extends ToolStrip {
 
 	protected void doCancel() {
 	}
-	
+
 	protected void doSave() {
 	}
-	
+
+	protected void doRemove() {
+	}
+
 }
