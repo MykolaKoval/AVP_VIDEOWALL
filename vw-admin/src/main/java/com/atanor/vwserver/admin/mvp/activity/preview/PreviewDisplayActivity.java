@@ -12,7 +12,6 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 public class PreviewDisplayActivity extends AbstractActivity {
 
 	private Long displayId;
-	private Boolean refreshDisplays;
 	
 	@Inject
 	private DisplayStorage storage;
@@ -22,7 +21,6 @@ public class PreviewDisplayActivity extends AbstractActivity {
 
 	public PreviewDisplayActivity withPlace(final DisplayPlace place) {
 		this.displayId = place.getDisplayId();
-		this.refreshDisplays = place.isRefreshDisplays();
 		return this;
 	}
 
@@ -30,9 +28,7 @@ public class PreviewDisplayActivity extends AbstractActivity {
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		panel.setWidget(view);
 		
-//		if(refreshDisplays){
-//			view.setDisplays(storage.getDisplays());
-//		}
+		view.selectDisplay(displayId);
 	}
 
 }

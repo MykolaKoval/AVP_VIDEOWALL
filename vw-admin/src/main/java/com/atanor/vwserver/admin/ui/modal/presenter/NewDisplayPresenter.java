@@ -30,7 +30,7 @@ public class NewDisplayPresenter {
 			@Override
 			public void onSuccess(DisplayDto display) {
 				storage.addDisplay(display);
-				Client.goTo(new DisplayPlace(display.getId(), true));
+				Client.goTo(new DisplayPlace(display.getId()));
 				callback.onDisplayCreated();
 			}
 

@@ -7,29 +7,23 @@ import com.google.gwt.place.shared.PlaceTokenizer;
 public class DisplayPlace extends Place {
 
 	private final Long displayId;
-	private final Boolean refreshDisplays;
 	
 	public DisplayPlace() {
-		this(null, false);
+		this(null);
 	}
 
-	public DisplayPlace(Long displayId, Boolean refreshDisplays) {
+	public DisplayPlace(Long displayId) {
 		this.displayId = displayId;
-		this.refreshDisplays = refreshDisplays;
 	}
 
 	public Long getDisplayId() {
 		return displayId;
 	}
 	
-	public Boolean isRefreshDisplays() {
-		return refreshDisplays;
-	}
-
 	public static class Tokenizer implements PlaceTokenizer<DisplayPlace> {
 
 		public DisplayPlace getPlace(String token) {
-			return new DisplayPlace(Utils.fromToken(token), false);
+			return new DisplayPlace(Utils.fromToken(token));
 		}
 
 		public String getToken(DisplayPlace place) {
