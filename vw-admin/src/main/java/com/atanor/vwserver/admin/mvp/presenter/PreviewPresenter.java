@@ -23,7 +23,18 @@ public class PreviewPresenter implements SetModelHandler {
 
 	@Override
 	public void onSetModel(SetModelEvent event) {
-		displayView.setDisplays(displayStorage.getDisplays());
+
+		switch (event.getModelType()) {
+		case All:
+			displayView.setDisplays(displayStorage.getDisplays());
+			break;
+		case Displays:
+			displayView.setDisplays(displayStorage.getDisplays());
+			break;
+		default:
+			break;
+		}
+
 	}
 
 }

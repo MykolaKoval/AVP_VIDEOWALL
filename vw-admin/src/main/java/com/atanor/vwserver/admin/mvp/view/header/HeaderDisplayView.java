@@ -6,6 +6,7 @@ import javax.inject.Provider;
 import com.atanor.vwserver.admin.Client;
 import com.atanor.vwserver.admin.mvp.place.Action;
 import com.atanor.vwserver.admin.mvp.place.DisplayPlace;
+import com.atanor.vwserver.admin.mvp.presenter.HeaderPresenter;
 import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.modal.NewDisplayWindow;
 import com.atanor.vwserver.common.rpc.dto.DisplayDto;
@@ -15,6 +16,11 @@ public class HeaderDisplayView extends AbstractHeaderView implements HeaderView 
 
 	@Inject
 	private Provider<NewDisplayWindow> provider;
+
+	@Inject
+	private HeaderPresenter presenter;
+
+	private DisplayDto display;
 
 	public HeaderDisplayView() {
 		super("Displays");
@@ -31,6 +37,7 @@ public class HeaderDisplayView extends AbstractHeaderView implements HeaderView 
 
 	@Override
 	public void clean() {
+		this.display = null;
 		createButton.enable();
 		cancelButton.disable();
 		removeButton.disable();
@@ -47,7 +54,14 @@ public class HeaderDisplayView extends AbstractHeaderView implements HeaderView 
 		Client.goTo(new DisplayPlace(Action.CLEAN));
 	}
 
+	@Override
+	protected void doRemove() {
+		presenter.removeDisplay(display);
+		Client.goTo(new DisplayPlace(Action.CLEAN));
+	}
+
 	public void setDisplay(final DisplayDto display) {
+		this.display = display;
 		createButton.disable();
 		cancelButton.enable();
 		removeButton.enable();

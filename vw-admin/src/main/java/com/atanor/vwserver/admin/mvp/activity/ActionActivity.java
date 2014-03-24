@@ -13,12 +13,18 @@ public abstract class ActionActivity extends AbstractActivity {
 		case CLEAN:
 			doClean();
 			break;
+		case UPDATE:
+			doUpdate();
+			break;
 		default:
 			break;
 		}
 	}
 
 	protected void doClean() {
+	}
+	
+	protected void doUpdate() {
 	}
 
 }

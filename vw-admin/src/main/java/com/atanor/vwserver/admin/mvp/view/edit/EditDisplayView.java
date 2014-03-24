@@ -5,7 +5,6 @@ import com.atanor.vwserver.admin.ui.Utils;
 import com.atanor.vwserver.common.rpc.dto.DisplayDto;
 import com.google.common.base.Preconditions;
 import com.google.common.primitives.Ints;
-import com.google.gwt.user.client.Window;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.Img;
 
@@ -14,8 +13,8 @@ public class EditDisplayView extends Canvas implements HeaderView {
 	private Img displayImg;
 
 	public EditDisplayView() {
-		setHeight(Window.getClientHeight() - Utils.NAVIGATION_DISPLAY_HEIGHT - Utils.HEADER_DISPLAY_HEIGHT);
-		setWidth(Window.getClientWidth() - Utils.PREVIEW_DISPLAY_WIDTH);
+		setHeight(Utils.getMainAreaHeight());
+		setWidth(Utils.getEditAreaWidth());
 	}
 
 	public void setDisplay(final DisplayDto display) {

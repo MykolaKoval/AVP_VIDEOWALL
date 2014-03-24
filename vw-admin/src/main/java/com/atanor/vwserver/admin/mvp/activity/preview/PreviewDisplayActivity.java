@@ -40,4 +40,8 @@ public class PreviewDisplayActivity extends ActionActivity {
 		view.clean();
 	}
 	
+	@Override
+	protected void doUpdate() {
+		view.setDisplays(storage.getDisplays());
+	}
 }

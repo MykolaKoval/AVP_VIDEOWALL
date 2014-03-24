@@ -8,7 +8,6 @@ import com.atanor.vwserver.admin.ui.DisplayImg;
 import com.atanor.vwserver.admin.ui.Utils;
 import com.atanor.vwserver.common.rpc.dto.DisplayDto;
 import com.google.common.collect.Maps;
-import com.google.gwt.user.client.Window;
 import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
@@ -20,14 +19,14 @@ public class PreviewDisplayView extends HLayout implements HeaderView {
 
 	public PreviewDisplayView() {
 		setWidth(Utils.PREVIEW_DISPLAY_WIDTH);
-		setHeight(Window.getClientHeight() - Utils.NAVIGATION_DISPLAY_HEIGHT - Utils.HEADER_DISPLAY_HEIGHT);
+		setHeight(Utils.getMainAreaHeight());
 
 		vLayout = new VLayout();
 		vLayout.setWidth100();
 		vLayout.setHeight100();
 		vLayout.setPadding(10);
 		vLayout.setMembersMargin(10);
-		vLayout.setOverflow(Overflow.SCROLL);
+		vLayout.setOverflow(Overflow.AUTO);
 		addMember(vLayout);
 	}
 
@@ -42,7 +41,7 @@ public class PreviewDisplayView extends HLayout implements HeaderView {
 
 	private void remove() {
 		for (Map.Entry<Long, DisplayImg> entry : content.entrySet()) {
-			entry.getValue().removeFromParent();
+			vLayout.removeMember(entry.getValue());
 		}
 		content.clear();
 	}

@@ -1,9 +1,12 @@
 package com.atanor.vwserver.admin.ui.modal.presenter;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import com.atanor.vwserver.admin.Client;
 import com.atanor.vwserver.admin.mvp.model.DisplayStorage;
+import com.atanor.vwserver.admin.mvp.place.Action;
 import com.atanor.vwserver.admin.mvp.place.DisplayPlace;
 import com.atanor.vwserver.admin.ui.modal.ModalCallbacks.NewDisplayCallback;
 import com.atanor.vwserver.common.rpc.dto.DisplayDto;
@@ -20,7 +23,7 @@ public class NewDisplayPresenter {
 
 	@Inject
 	private DisplayStorage storage;
-	
+
 	@Inject
 	private DisplayServiceAsync displayService;
 
@@ -29,9 +32,7 @@ public class NewDisplayPresenter {
 
 			@Override
 			public void onSuccess(DisplayDto display) {
-				storage.addDisplay(display);
-				Client.goTo(new DisplayPlace(display.getId()));
-				callback.onDisplayCreated();
+				refreshAndSelect(display.getId(), callback);
 			}
 
 			@Override
@@ -42,6 +43,23 @@ public class NewDisplayPresenter {
 				}
 
 				SC.say("Error. Can not create display.");
+			}
+		});
+	}
+
+	private void refreshAndSelect(final Long id, final NewDisplayCallback callback) {
+		displayService.getDisplays(new AsyncCallback<List<DisplayDto>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				SC.say("Error. Can not receive displays info.");
+			}
+
+			@Override
+			public void onSuccess(List<DisplayDto> displays) {
+				storage.replace(displays);
+				Client.goTo(new DisplayPlace(id, Action.UPDATE));
+				callback.onDisplayCreated();
 			}
 		});
 	}

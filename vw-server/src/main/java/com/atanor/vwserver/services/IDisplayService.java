@@ -8,7 +8,7 @@ public interface IDisplayService {
 
 	Long createDisplay(Display display);
 
-	void deleteDisplay(Display display);
+	void removeDisplay(Long id);
 	
 	Display getDisplay(Long id);
 	

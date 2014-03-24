@@ -20,7 +20,7 @@ public class DefaultDisplayService implements IDisplayService {
 
 	@Inject
 	private ImgGenerator imgGenerator;
-	
+
 	@Inject
 	private DisplayDao dao;
 
@@ -51,9 +51,13 @@ public class DefaultDisplayService implements IDisplayService {
 	}
 
 	@Override
-	public void deleteDisplay(Display display) {
-		final String name = display.getName();
-		dao.delete(display);
+	public void removeDisplay(final Long id) {
+		final Display toRemove = dao.find(id);
+		if (toRemove == null) {
+			throw new IllegalStateException(String.format("Display with id %s not found", id));
+		}
+		final String name = toRemove.getName();
+		dao.delete(toRemove);
 		LOG.debug("Display {} was successfully deleted", name);
 	}
 

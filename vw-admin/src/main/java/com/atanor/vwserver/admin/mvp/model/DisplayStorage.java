@@ -8,7 +8,7 @@ import com.google.common.collect.Maps;
 
 public class DisplayStorage {
 
-	private final Map<Long, DisplayDto> storage = Maps.newHashMap();
+	private final Map<Long, DisplayDto> storage = Maps.newLinkedHashMap();
 
 	public void addDisplay(final DisplayDto display) {
 		storage.put(display.getId(), display);
@@ -20,6 +20,13 @@ public class DisplayStorage {
 		}
 	}
 
+	public void replace(final Collection<DisplayDto> displays) {
+		clean();
+		for (DisplayDto display : displays) {
+			addDisplay(display);
+		}
+	}
+	
 	public DisplayDto getDisplay(final Long id) {
 		return storage.get(id);
 	}
@@ -28,6 +35,12 @@ public class DisplayStorage {
 		return storage.values();
 	}
 
+	public void removeDisplay(final Long id) {
+		if(storage.containsKey(id)){
+			storage.remove(id);
+		}
+	}
+	
 	public void clean() {
 		storage.clear();
 	}

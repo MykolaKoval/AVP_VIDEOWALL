@@ -16,5 +16,7 @@ public interface DisplayService extends RemoteService {
 
 	List<DisplayDto> getDisplays();
 
-	DisplayDto createDisplay(DisplayDto preset) throws DuplicateEntityException;
+	DisplayDto createDisplay(DisplayDto display) throws DuplicateEntityException;
+	
+	void removeDisplay(DisplayDto display);
 }

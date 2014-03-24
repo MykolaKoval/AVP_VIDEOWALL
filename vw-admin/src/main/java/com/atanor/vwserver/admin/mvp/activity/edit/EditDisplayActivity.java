@@ -33,13 +33,10 @@ public class EditDisplayActivity extends ActionActivity {
 		panel.setWidget(view);
 
 		execute(action);
-
-		if (displayId == null) {
-			return;
-		}
-
 		final DisplayDto display = storage.getDisplay(displayId);
-		view.setDisplay(display);
+		if (display != null) {
+			view.setDisplay(display);
+		}
 	}
 
 	@Override

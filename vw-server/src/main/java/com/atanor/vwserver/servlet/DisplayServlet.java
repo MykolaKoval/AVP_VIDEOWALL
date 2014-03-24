@@ -38,4 +38,10 @@ public class DisplayServlet extends RemoteServiceServlet implements DisplayServi
 		return displayConverter.toDto(displayService.getDisplay(id));
 	}
 
+	@Override
+	public void removeDisplay(final DisplayDto dto) {
+		LOG.debug("Remove {} display called..", dto.getName());
+		displayService.removeDisplay(dto.getId());
+	}
+
 }

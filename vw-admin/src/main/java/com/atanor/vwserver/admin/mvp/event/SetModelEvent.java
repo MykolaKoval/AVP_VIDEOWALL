@@ -1,5 +1,6 @@
 package com.atanor.vwserver.admin.mvp.event;
 
+import com.atanor.vwserver.admin.mvp.model.ModelType;
 import com.google.gwt.event.shared.GwtEvent;
 
 public class SetModelEvent extends GwtEvent<SetModelHandler> {
@@ -11,6 +12,20 @@ public class SetModelEvent extends GwtEvent<SetModelHandler> {
 			TYPE = new Type<SetModelHandler>();
 		}
 		return TYPE;
+	}
+
+	private final ModelType modelType;
+
+	public SetModelEvent() {
+		this(ModelType.All);
+	}
+
+	public SetModelEvent(final ModelType modelType) {
+		this.modelType = modelType;
+	}
+
+	public ModelType getModelType() {
+		return modelType;
 	}
 
 	@Override

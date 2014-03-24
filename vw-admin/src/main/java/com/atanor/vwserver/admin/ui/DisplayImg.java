@@ -11,11 +11,14 @@ public class DisplayImg extends Img {
 
 	private static final String SELECTED_BORDER = "5px solid yellow";
 	private static final String DEFAULT_BORDER = "5px solid white";
-	
+
 	final DisplayDto display;
 
 	public DisplayImg(final DisplayDto display) {
 		this.display = display;
+		setWidth100();
+		setHeight(100);
+		
 		setBorder(DEFAULT_BORDER);
 		
 		final String source = "data:image/png;base64," + display.getImage();
@@ -31,10 +34,14 @@ public class DisplayImg extends Img {
 	}
 
 	public void select() {
-		setBorder(SELECTED_BORDER);  
+		setBorder(SELECTED_BORDER);
 	}
 
 	public void unselect() {
-		setBorder(DEFAULT_BORDER); 
+		setBorder(DEFAULT_BORDER);
+	}
+
+	public boolean selected() {
+		return getBorder().equals(SELECTED_BORDER);
 	}
 }

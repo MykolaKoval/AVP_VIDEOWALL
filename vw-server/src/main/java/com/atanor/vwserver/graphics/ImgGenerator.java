@@ -14,9 +14,7 @@ import com.google.common.collect.Lists;
 
 public class ImgGenerator {
 
-	private static final Float borderThickness = 2f;
-	private static final Integer IMG_MAX_WIDTH = 1364;
-	private static final Integer IMG_MAX_HEIGHT = 768;
+	private static final Float borderThickness = 4f;
 
 	/**
 	 * @param args

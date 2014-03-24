@@ -1,16 +1,18 @@
 package com.atanor.vwserver.admin.ui;
 
+import com.google.gwt.user.client.Window;
+
 public abstract class Utils {
 
 	public static Integer NAVIGATION_DISPLAY_HEIGHT = 40;
 	public static Integer HEADER_DISPLAY_HEIGHT = 40;
 	public static Integer PREVIEW_DISPLAY_WIDTH = 200;
 	public static Integer NAVIGATE_ICON_SIZE = 30;
-	
+
 	public static Integer MODAL_WINDOW_WIDTH = 320;
-	
+
 	public static final String ITEM_SKIPVALIDATION = "itemskipvalidation";
-	
+
 	public static String toToken(final Long id) {
 		return id == null ? "" : String.valueOf(id);
 	}
@@ -18,4 +20,13 @@ public abstract class Utils {
 	public static Long fromToken(String token) {
 		return token == null || token.isEmpty() ? null : Long.parseLong(token);
 	}
+
+	public static Integer getMainAreaHeight() {
+		return Window.getClientHeight() - Utils.NAVIGATION_DISPLAY_HEIGHT - Utils.HEADER_DISPLAY_HEIGHT;
+	}
+
+	public static Integer getEditAreaWidth() {
+		return Window.getClientWidth() - Utils.PREVIEW_DISPLAY_WIDTH;
+	}
+	
 }
