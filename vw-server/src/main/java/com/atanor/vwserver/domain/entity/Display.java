@@ -1,5 +1,7 @@
 package com.atanor.vwserver.domain.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "displays")
-@NamedQuery(name = "Display.GetAll", query = "SELECT d from Display d")
+@NamedQuery(name = "Display.GetAll", query = "SELECT d from Display d order by d.createTS desc")
 public class Display extends AbstractEntity<Long> {
 
 	@Id
@@ -21,6 +23,9 @@ public class Display extends AbstractEntity<Long> {
 	@Column(name = "name", unique = true, length = 32)
 	private String name;
 
+	@Column(name = "create_ts")
+	private Date createTS;
+	
 	@Column(name = "segment_num_height")
 	private Integer segmentNumHeight;
 
@@ -95,6 +100,14 @@ public class Display extends AbstractEntity<Long> {
 
 	public void setImgBlob(final String imgBlob) {
 		this.imgBlob = imgBlob;
+	}
+
+	public Date getCreateTS() {
+		return createTS;
+	}
+
+	public void setCreateTS(final Date createTS) {
+		this.createTS = createTS;
 	}
 	
 }

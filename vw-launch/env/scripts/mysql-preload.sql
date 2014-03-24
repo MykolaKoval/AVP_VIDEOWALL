@@ -6,6 +6,7 @@ USE vwserver;
 CREATE TABLE displays (
 	id BIGINT NOT NULL AUTO_INCREMENT,
 	name VARCHAR(32) NULL DEFAULT NULL,
+	create_ts DATETIME NULL DEFAULT NULL,
 	segment_num_height INT NULL DEFAULT NULL,
 	segment_num_width INT NULL DEFAULT NULL,
 	segment_height INT NULL DEFAULT NULL,

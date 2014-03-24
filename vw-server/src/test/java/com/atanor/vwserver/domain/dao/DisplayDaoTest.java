@@ -1,5 +1,6 @@
 package com.atanor.vwserver.domain.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.PersistenceException;
@@ -17,6 +18,7 @@ public class DisplayDaoTest extends BaseDaoTest<Display> {
 	private static final Integer SEGMENT_NUM_HEIGHT = 2;
 	private static final Integer SEGMENT_WIDTH = 800;
 	private static final Integer SEGMENT_HEIGHT = 600;
+	private static final Date CREATE_TS = new Date();
 
 	@Test
 	public void testInsertRecord() throws Exception {
@@ -58,6 +60,7 @@ public class DisplayDaoTest extends BaseDaoTest<Display> {
 		Assert.assertEquals(SEGMENT_NUM_HEIGHT, displayFromDB.getSegmentNumHeight());
 		Assert.assertEquals(SEGMENT_NUM_WIDTH, displayFromDB.getSegmentNumWidth());
 		Assert.assertEquals(DISPLAY_IMG, displayFromDB.getImgBlob());
+		Assert.assertEquals(CREATE_TS, displayFromDB.getCreateTS());
 	}
 
 	@Test
@@ -78,17 +81,29 @@ public class DisplayDaoTest extends BaseDaoTest<Display> {
 		Assert.assertEquals("Display2", displayFromDB.getName());
 	}
 
+	@Test
 	public void testGetAll() {
 		Display display1 = new Display();
+		display1.setName("Display1");
+		display1.setCreateTS(new Date(1000));
+		
 		Display display2 = new Display();
+		display2.setName("Display2");
+		display2.setCreateTS(new Date(5000));
+		
 		Display display3 = new Display();
-
+		display3.setName("Display3");
+		display3.setCreateTS(new Date(2000));
+		
 		dao.insert(display1);
 		dao.insert(display2);
 		dao.insert(display3);
 
 		List<Display> allDisplays = dao.findAll();
 		Assert.assertEquals(3, allDisplays.size());
+		Assert.assertEquals("Display2", allDisplays.get(0).getName());
+		Assert.assertEquals("Display3", allDisplays.get(1).getName());
+		Assert.assertEquals("Display1", allDisplays.get(2).getName());
 	}
 
 	private Display createDisplay() {
@@ -99,6 +114,7 @@ public class DisplayDaoTest extends BaseDaoTest<Display> {
 		display.setSegmentNumHeight(SEGMENT_NUM_HEIGHT);
 		display.setSegmentNumWidth(SEGMENT_NUM_WIDTH);
 		display.setImgBlob(DISPLAY_IMG);
+		display.setCreateTS(CREATE_TS);
 		return display;
 	}
 }

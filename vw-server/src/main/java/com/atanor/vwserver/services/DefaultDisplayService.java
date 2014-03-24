@@ -1,6 +1,7 @@
 package com.atanor.vwserver.services;
 
 import java.awt.image.BufferedImage;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -30,7 +31,8 @@ public class DefaultDisplayService implements IDisplayService {
 
 		final BufferedImage img = imgGenerator.generate(display);
 		display.setImgBlob(ImageEncoder.encodeImage(img));
-
+		display.setCreateTS(new Date());
+		
 		final Long id = dao.insert(display);
 
 		LOG.debug("Display {} was successfully created", display.getName());
