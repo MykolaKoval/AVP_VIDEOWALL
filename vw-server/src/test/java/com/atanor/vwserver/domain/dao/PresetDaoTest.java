@@ -116,6 +116,7 @@ public class PresetDaoTest extends BaseDaoTest<Preset> {
 		Assert.assertNull(presetFromDB.getWindows());
 	}
 	
+	@Test
 	public void testGetAll() {
 		Preset preset1 = new Preset();
 		Preset preset2 = new Preset();

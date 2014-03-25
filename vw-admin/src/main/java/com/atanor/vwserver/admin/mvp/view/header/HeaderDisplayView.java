@@ -10,7 +10,6 @@ import com.atanor.vwserver.admin.mvp.presenter.HeaderPresenter;
 import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.modal.NewDisplayWindow;
 import com.atanor.vwserver.common.rpc.dto.DisplayDto;
-import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.VerticalAlignment;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.Window;
@@ -34,7 +33,6 @@ public class HeaderDisplayView extends AbstractHeaderView implements HeaderView 
 		
 		final HLayout layout = new HLayout();
 		layout.setWidth100();
-		layout.setAlign(Alignment.LEFT);
 		layout.setAlign(VerticalAlignment.CENTER);
 		
 		selectedDisplay = new Label("");
