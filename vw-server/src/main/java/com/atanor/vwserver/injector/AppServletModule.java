@@ -20,6 +20,7 @@ public class AppServletModule extends ServletModule {
 
 		serve(BASE_URL + AppConstants.CONFIG_PATH).with(ConfigServlet.class);
 		serve(BASE_URL + AppConstants.DISPLAY_PATH).with(DisplayServlet.class);
+		serve(BASE_URL + AppConstants.LAYOUT_PATH).with(DisplayServlet.class);
 	}
 
 }

@@ -1,0 +1,63 @@
+package com.atanor.vwserver.services;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.atanor.vwserver.common.rpc.exception.DuplicateEntityException;
+import com.atanor.vwserver.domain.dao.LayoutDao;
+import com.atanor.vwserver.domain.entity.Layout;
+
+public class DefaultLayoutService implements ILayoutService {
+
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultLayoutService.class);
+
+	@Inject
+	private LayoutDao dao;
+
+	@Override
+	public Long createLayout(final Layout layout) {
+		valdate(layout);
+
+		layout.setCreateTS(new Date());
+
+		final Long id = dao.insert(layout);
+
+		LOG.debug("Layout {} was successfully created", layout.getName());
+		return id;
+	}
+
+	private void valdate(final Layout layout) {
+		Layout entity = null;
+		try {
+			entity = dao.findByName(layout.getName());
+		} catch (Exception e) {
+		}
+
+		if (entity != null) {
+			LOG.error("Duplicate layout {} found", layout.getName());
+			throw new DuplicateEntityException();
+		}
+	}
+
+	@Override
+	public void removeLayout(final Long id) {
+		final Layout toRemove = dao.find(id);
+		if (toRemove == null) {
+			throw new IllegalStateException(String.format("Layout with id %s not found", id));
+		}
+		final String name = toRemove.getName();
+		dao.delete(toRemove);
+		LOG.debug("Layout {} was successfully deleted", name);
+	}
+
+	@Override
+	public List<Layout> getLayouts() {
+		return dao.findAll();
+	}
+
+}
