@@ -38,7 +38,6 @@ public class EditDisplayView extends Canvas implements HeaderView {
 		alignInDesktop(displayImg);
 
 		addChild(displayImg);
-
 	}
 
 	private Img createDisplay(final DisplayDto display) {

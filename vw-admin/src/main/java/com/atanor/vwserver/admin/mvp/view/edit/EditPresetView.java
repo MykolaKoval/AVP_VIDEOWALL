@@ -6,16 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.atanor.vwserver.common.rpc.dto.DisplayDto;
-import com.atanor.vwserver.common.rpc.dto.HardwareDto;
-import com.atanor.vwserver.common.rpc.dto.PanelLayoutDto;
-import com.atanor.vwserver.common.rpc.dto.PresetDto;
 import com.atanor.vwserver.admin.Client;
 import com.atanor.vwserver.admin.mvp.event.ActivateGridEvent;
 import com.atanor.vwserver.admin.mvp.event.CleanGridActivationEvent;
 import com.atanor.vwserver.admin.mvp.event.CleanWindowSelectionEvent;
 import com.atanor.vwserver.admin.mvp.place.DefaultPresetPlace;
-import com.atanor.vwserver.admin.mvp.presenter.EditPresetPresenter;
 import com.atanor.vwserver.admin.mvp.view.EditView;
 import com.atanor.vwserver.admin.ui.GridLabel;
 import com.atanor.vwserver.admin.ui.PresetLabel;
@@ -25,6 +20,10 @@ import com.atanor.vwserver.admin.ui.builder.UiBuilder;
 import com.atanor.vwserver.admin.ui.builder.post.EditPresetPostBuilder;
 import com.atanor.vwserver.admin.ui.builder.post.EditWindowPostBuilder;
 import com.atanor.vwserver.admin.ui.style.PanelsDisplayStyleApplier;
+import com.atanor.vwserver.common.rpc.dto.DisplayDto;
+import com.atanor.vwserver.common.rpc.dto.HardwareDto;
+import com.atanor.vwserver.common.rpc.dto.PanelLayoutDto;
+import com.atanor.vwserver.common.rpc.dto.PresetDto;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Ints;
@@ -58,8 +57,6 @@ import com.smartgwt.client.widgets.layout.VLayout;
 public class EditPresetView extends VLayout implements EditView {
 
 	private static final int HEADER_SIZE = 60;
-
-	private EditPresetPresenter presenter;
 
 	private final Label panelDisplay;
 	private final Label gridDisplay;
@@ -246,19 +243,25 @@ public class EditPresetView extends VLayout implements EditView {
 
 	private void setDisplay(DisplayDto display) {
 
-//		Long displayWidth = new Long(display.getWidth());
-//		Long displayHeight = new Long(display.getHigh());
-//
-//		Double padding = adjustPadding(displayWidth, displayHeight);
-//
-//		Long panelDisplayWidth = Math.round(getElement().getClientWidth() * padding);
-//		panelDisplayWidth = makeDivisibleOn(panelDisplayWidth, display.getLayout().getColumnPanelQuantity());
-//
-//		scaleFactor = panelDisplayWidth.doubleValue() / displayWidth.doubleValue();
-//		Long panelDisplayHeight = Math.round(scaleFactor * displayHeight.doubleValue());
-//
-//		createDisplayWindow(display.getLayout(), panelDisplayWidth, panelDisplayHeight, scaleFactor);
-//		createGridWindow(display.getLayout(), panelDisplayWidth, panelDisplayHeight, scaleFactor);
+		// Long displayWidth = new Long(display.getWidth());
+		// Long displayHeight = new Long(display.getHigh());
+		//
+		// Double padding = adjustPadding(displayWidth, displayHeight);
+		//
+		// Long panelDisplayWidth = Math.round(getElement().getClientWidth() *
+		// padding);
+		// panelDisplayWidth = makeDivisibleOn(panelDisplayWidth,
+		// display.getLayout().getColumnPanelQuantity());
+		//
+		// scaleFactor = panelDisplayWidth.doubleValue() /
+		// displayWidth.doubleValue();
+		// Long panelDisplayHeight = Math.round(scaleFactor *
+		// displayHeight.doubleValue());
+		//
+		// createDisplayWindow(display.getLayout(), panelDisplayWidth,
+		// panelDisplayHeight, scaleFactor);
+		// createGridWindow(display.getLayout(), panelDisplayWidth,
+		// panelDisplayHeight, scaleFactor);
 	}
 
 	private Double adjustPadding(Long displayWidth, Long displayHeight) {
@@ -562,11 +565,6 @@ public class EditPresetView extends VLayout implements EditView {
 	}
 
 	@Override
-	public void setPresenter(EditPresetPresenter presenter) {
-		this.presenter = presenter;
-	}
-
-	@Override
 	public void setPresetConfiguration(final PresetDto preset) {
 		Long panelDisplayWidth = new Long(panelDisplay.getWidth());
 		Long panelDisplayHeight = new Long(panelDisplay.getHeight());
@@ -686,14 +684,12 @@ public class EditPresetView extends VLayout implements EditView {
 	private void applyPreset() {
 		if (currentPreset != null) {
 			updateWindowDtos(currentPreset);
-			presenter.applyPreset(currentPreset.getDto());
 		}
 	}
 
 	private void savePreset() {
 		if (currentPreset != null) {
 			updateWindowDtos(currentPreset);
-			presenter.savePreset(currentPreset.getDto());
 		}
 	}
 

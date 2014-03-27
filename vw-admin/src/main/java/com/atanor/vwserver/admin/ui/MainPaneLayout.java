@@ -1,7 +1,5 @@
-package com.atanor.vwserver.admin.ui.layout;
+package com.atanor.vwserver.admin.ui;
 
-import com.atanor.vwserver.admin.ui.DisplayPanel;
-import com.atanor.vwserver.admin.ui.Utils;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 

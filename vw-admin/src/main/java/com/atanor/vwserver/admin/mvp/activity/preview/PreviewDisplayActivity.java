@@ -32,6 +32,9 @@ public class PreviewDisplayActivity extends ActionActivity {
 		panel.setWidget(view);
 
 		execute(action);
+		if(displayId == null){
+			return;
+		}
 		view.selectDisplay(displayId);
 	}
 

@@ -1,5 +1,6 @@
 package com.atanor.vwserver.admin.injector;
 
+import com.atanor.vwserver.admin.mvp.presenter.EditPresenter;
 import com.atanor.vwserver.admin.mvp.presenter.HeaderPresenter;
 import com.atanor.vwserver.admin.mvp.presenter.PreviewPresenter;
 import com.atanor.vwserver.admin.mvp.view.NavigateView;
@@ -41,6 +42,7 @@ public class ViewModule extends AbstractGinModule {
 		bind(EditPresetView.class).in(Singleton.class);
 		bind(EditDisplayView.class).in(Singleton.class);
 		bind(EditLayoutView.class).in(Singleton.class);
+		bind(EditPresenter.class).asEagerSingleton();
 		
 		// Modal Windows
 		bind(NewDisplayWindow.class);

@@ -1,18 +1,26 @@
 package com.atanor.vwserver.admin.mvp.place;
 
 import com.atanor.vwserver.admin.ui.Utils;
-import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;
 
-public class LayoutPlace extends Place {
+public class LayoutPlace extends ActionPlace {
 
 	private final Long layoutId;
 
 	public LayoutPlace() {
-		this(null);
+		this(null, Action.NOTHING);
+	}
+
+	public LayoutPlace(final Action action) {
+		this(null, action);
 	}
 
 	public LayoutPlace(Long layoutId) {
+		this(layoutId, Action.NOTHING);
+	}
+
+	public LayoutPlace(final Long layoutId, final Action action) {
+		super(action);
 		this.layoutId = layoutId;
 	}
 
