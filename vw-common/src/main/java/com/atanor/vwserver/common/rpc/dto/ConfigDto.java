@@ -6,6 +6,7 @@ import java.util.List;
 public class ConfigDto extends AbstractDto {
 
 	private List<DisplayDto> displays;
+	private List<LayoutDto> layouts;
 
 	public List<DisplayDto> getDisplays() {
 		return displays;
@@ -14,5 +15,18 @@ public class ConfigDto extends AbstractDto {
 	public void setDisplays(final List<DisplayDto> displays) {
 		this.displays = displays;
 	}
-	
+
+	public List<LayoutDto> getLayouts() {
+		return layouts;
+	}
+
+	public void setLayouts(final List<LayoutDto> layouts) {
+		this.layouts = layouts;
+	}
+
+	@Override
+	public Long getId() {
+		throw new IllegalStateException("Operation is not implemented");
+	}
+
 }

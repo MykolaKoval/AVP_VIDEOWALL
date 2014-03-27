@@ -26,10 +26,10 @@ public class PreviewPresenter implements SetModelHandler {
 
 		switch (event.getModelType()) {
 		case All:
-			displayView.setDisplays(displayStorage.getDisplays());
+			displayView.setDisplays(displayStorage.getAll());
 			break;
 		case Displays:
-			displayView.setDisplays(displayStorage.getDisplays());
+			displayView.setDisplays(displayStorage.getAll());
 			break;
 		default:
 			break;

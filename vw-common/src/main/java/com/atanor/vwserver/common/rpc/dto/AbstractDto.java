@@ -5,4 +5,5 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public abstract class AbstractDto implements Serializable {
 
+	public abstract Long getId();
 }

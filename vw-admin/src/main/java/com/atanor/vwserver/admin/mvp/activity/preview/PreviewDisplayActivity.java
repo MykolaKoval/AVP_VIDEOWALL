@@ -42,6 +42,6 @@ public class PreviewDisplayActivity extends ActionActivity {
 	
 	@Override
 	protected void doUpdate() {
-		view.setDisplays(storage.getDisplays());
+		view.setDisplays(storage.getAll());
 	}
 }

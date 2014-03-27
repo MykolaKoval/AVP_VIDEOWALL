@@ -38,7 +38,7 @@ public class HeaderDisplayActivity extends ActionActivity {
 			return;
 		}
 
-		final DisplayDto display = storage.getDisplay(displayId);
+		final DisplayDto display = storage.get(displayId);
 		view.setDisplay(display);
 	}
 

@@ -34,7 +34,7 @@ public class HeaderPresenter {
 
 			@Override
 			public void onSuccess(Void result) {
-				displayStorage.removeDisplay(display.getId());
+				displayStorage.remove(display.getId());
 				refreshDisplays();
 			}
 		});

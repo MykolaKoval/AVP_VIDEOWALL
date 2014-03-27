@@ -34,4 +34,8 @@ public class PanelLayoutDto extends AbstractDto {
 		this.columnPanelQuantity = columnPanelQuantity;
 	}
 
+	@Override
+	public Long getId() {
+		throw new IllegalStateException("Operation is not implemented");
+	}
 }
