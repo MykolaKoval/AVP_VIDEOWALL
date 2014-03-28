@@ -3,6 +3,10 @@ package com.atanor.vwserver.admin.mvp.view.edit;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import com.atanor.vwserver.admin.mvp.event.LayoutWindowChangedEvent;
+import com.atanor.vwserver.admin.mvp.event.WindowAction;
 import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.Utils;
 import com.atanor.vwserver.admin.ui.layout.LayoutWindow;
@@ -12,11 +16,15 @@ import com.atanor.vwserver.common.rpc.dto.LayoutWindowDto;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.primitives.Ints;
+import com.google.web.bindery.event.shared.EventBus;
 import com.smartgwt.client.core.Rectangle;
 import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.widgets.Canvas;
 
 public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowChanged {
+
+	@Inject
+	private EventBus eventBus;
 
 	private final Canvas display;
 	private final List<LayoutWindow> windows = Lists.newArrayList();
@@ -66,7 +74,7 @@ public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowCh
 		dto.setName(generateWinName(windows.size()));
 
 		fetchSize(dto);
-		
+
 		final LayoutWindow win = new LayoutWindow(dto, this);
 		win.setKeepInParentRect(new Rectangle(0, 0, display.getWidth(), display.getHeight()));
 
@@ -74,6 +82,8 @@ public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowCh
 
 		windows.add(win);
 		display.addChild(win);
+
+		eventBus.fireEvent(new LayoutWindowChangedEvent(WindowAction.CREATED, dto));
 	}
 
 	private void fetchSize(final LayoutWindowDto dto) {
@@ -96,6 +106,9 @@ public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowCh
 		if (windows.size() > 0) {
 			windows.get(0).select();
 		}
+
+		final WindowAction action = windows.isEmpty() ? WindowAction.REMOVED_LAST : WindowAction.REMOVED;
+		eventBus.fireEvent(new LayoutWindowChangedEvent(action));
 	}
 
 	private void renameWindows() {

@@ -4,16 +4,19 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.atanor.vwserver.admin.mvp.event.LayoutWindowChangedEvent;
+import com.atanor.vwserver.admin.mvp.event.LayoutWindowChangedHandler;
 import com.atanor.vwserver.admin.mvp.event.SetModelEvent;
 import com.atanor.vwserver.admin.mvp.model.DisplayStorage;
 import com.atanor.vwserver.admin.mvp.model.ModelType;
+import com.atanor.vwserver.admin.mvp.view.header.HeaderLayoutView;
 import com.atanor.vwserver.common.rpc.dto.DisplayDto;
 import com.atanor.vwserver.common.rpc.services.DisplayServiceAsync;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.smartgwt.client.util.SC;
 
-public class HeaderPresenter {
+public class HeaderPresenter implements LayoutWindowChangedHandler {
 
 	@Inject
 	private DisplayStorage displayStorage;
@@ -22,7 +25,32 @@ public class HeaderPresenter {
 	private DisplayServiceAsync displayService;
 
 	@Inject
+	private HeaderLayoutView layoutView;
+
 	private EventBus eventBus;
+
+	@Inject
+	public HeaderPresenter(final EventBus eventBus) {
+		this.eventBus = eventBus;
+		eventBus.addHandler(LayoutWindowChangedEvent.getType(), this);
+	}
+
+	@Override
+	public void onLayoutWindowChanged(final LayoutWindowChangedEvent event) {
+		switch (event.getAction()) {
+		case CREATED:
+			layoutView.onWindowCreated(event.getDto());
+			break;
+		case REMOVED:
+			layoutView.onWindowRemoved(false);
+			break;
+		case REMOVED_LAST:
+			layoutView.onWindowRemoved(true);
+			break;
+		default:
+			break;
+		}
+	}
 
 	public void removeDisplay(final DisplayDto display) {
 		displayService.removeDisplay(display, new AsyncCallback<Void>() {

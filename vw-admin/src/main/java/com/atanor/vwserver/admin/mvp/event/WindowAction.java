@@ -1,5 +1,5 @@
 package com.atanor.vwserver.admin.mvp.event;
 
 public enum WindowAction {
-	SELECT, CREATE, REMOVE
+	SELECT, CREATE, CREATED, REMOVE, REMOVED, REMOVED_LAST
 }

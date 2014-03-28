@@ -10,8 +10,12 @@ import com.atanor.vwserver.admin.mvp.place.Action;
 import com.atanor.vwserver.admin.mvp.place.LayoutPlace;
 import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.modal.NewLayoutWindow;
+import com.atanor.vwserver.common.rpc.dto.LayoutWindowDto;
 import com.google.web.bindery.event.shared.EventBus;
 import com.smartgwt.client.types.VerticalAlignment;
+import com.smartgwt.client.util.BooleanCallback;
+import com.smartgwt.client.util.SC;
+import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
@@ -26,34 +30,69 @@ public class HeaderLayoutView extends AbstractHeaderView implements HeaderView {
 	@Inject
 	private EventBus eventBus;
 
+	private final ToolStripButton newWindowButton;
+	private final ToolStripButton removeWindowButton;
+
+	private final Label selectedLayout;
+
 	public HeaderLayoutView() {
 		super("Layouts");
 
 		final HLayout layout = new HLayout();
 		layout.setWidth100();
 		layout.setAlign(VerticalAlignment.CENTER);
+
+		selectedLayout = new Label("");
+		selectedLayout.setWidth(300);
+		layout.addMembers(selectedLayout);
+
 		addMember(layout);
-		
-		final ToolStripButton newWindowButton = createNewWindowButton();
-		final ToolStripButton removeWindowButton = createRemoveWindowButton();
+
+		newWindowButton = createNewWindowButton();
+		newWindowButton.setDisabled(true);
+		removeWindowButton = createRemoveWindowButton();
+		removeWindowButton.setDisabled(true);
+
 		addButton(newWindowButton);
 		addButton(removeWindowButton);
+
+		saveButton.setDisabled(true);
+		editButton.setDisabled(true);
+		cancelButton.setDisabled(true);
+		removeButton.setDisabled(true);
 	}
 
 	@Override
 	public void clean() {
-		// TODO Auto-generated method stub
-
+		selectedLayout.setContents("");
+		createButton.enable();
+		editButton.disable();
+		cancelButton.disable();
+		saveButton.disable();
+		removeButton.disable();
+		newWindowButton.disable();
+		removeWindowButton.disable();
 	}
 
 	@Override
 	protected void doNew() {
-
+		selectedLayout.setContents("Unsaved*");
+		cancelButton.enable();
+		newWindowButton.enable();
+		createButton.disable();
 	}
 
 	@Override
 	protected void doCancel() {
-		Client.goTo(new LayoutPlace(Action.CLEAN));
+		SC.ask("Undo", "All changes for unsaved layout will be lost. Are you sure?", new BooleanCallback() {
+
+			@Override
+			public void execute(Boolean result) {
+				if (result) {
+					Client.goTo(new LayoutPlace(Action.CLEAN));
+				}
+			}
+		});
 	}
 
 	@Override
@@ -94,4 +133,15 @@ public class HeaderLayoutView extends AbstractHeaderView implements HeaderView {
 		return button;
 	}
 
+	public void onWindowCreated(final LayoutWindowDto dto) {
+		saveButton.enable();
+		removeWindowButton.enable();
+	}
+
+	public void onWindowRemoved(boolean isLast) {
+		if (isLast) {
+			saveButton.disable();
+			removeWindowButton.disable();
+		}
+	}
 }
