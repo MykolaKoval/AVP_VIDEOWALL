@@ -11,15 +11,15 @@ import com.smartgwt.client.widgets.events.ClickHandler;
 public class LayoutWindow extends Label {
 
 	private final LayoutWindowDto dto;
+	private boolean isSelected;
 
-	public LayoutWindow(final String name, final LayoutWindowChanged callback) {
-		dto = new LayoutWindowDto();
-		dto.setName(name);
+	public LayoutWindow(final LayoutWindowDto dto, final LayoutWindowChanged callback) {
+		this.dto = dto;
 
-		setLeft(0);
-		setTop(0);
-		setWidth(200);
-		setHeight(200);
+		setLeft(dto.getLeft());
+		setTop(dto.getTop());
+		setWidth(dto.getWidth());
+		setHeight(dto.getHeight());
 		setBackgroundColor("yellow");
 		setBorder("1px inset black");
 		setAlign(Alignment.CENTER);
@@ -29,18 +29,20 @@ public class LayoutWindow extends Label {
 		setCanDragReposition(true);
 		setDragAppearance(DragAppearance.TARGET);
 
-		setContents(name);
+		setContents(dto.getName());
 		bringToFront();
 
 		addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				final LayoutWindow win = (LayoutWindow)event.getSource();
-				win.setOpacity(100);
-				callback.onLayoutWindowSelected(win.getName());
+				final LayoutWindow win = (LayoutWindow) event.getSource();
+				win.select();
+				callback.onLayoutWindowSelected(win);
 			}
 		});
+		
+		select();
 	}
 
 	public void updateDto() {
@@ -52,5 +54,23 @@ public class LayoutWindow extends Label {
 
 	public String getName() {
 		return getContents();
+	}
+
+	public void setName(final String name){
+		setContents(name);
+	}
+	
+	public void select() {
+		setOpacity(100);
+		isSelected = true;
+	}
+
+	public void unselect() {
+		setOpacity(50);
+		isSelected = false;
+	}
+
+	public boolean selected() {
+		return isSelected;
 	}
 }

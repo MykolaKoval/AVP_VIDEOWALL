@@ -1,13 +1,16 @@
 package com.atanor.vwserver.admin.mvp.view.edit;
 
-import java.util.Map;
+import java.util.Iterator;
+import java.util.List;
 
 import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.Utils;
 import com.atanor.vwserver.admin.ui.layout.LayoutWindow;
 import com.atanor.vwserver.admin.ui.layout.LayoutWindowChanged;
 import com.atanor.vwserver.common.rpc.dto.LayoutDto;
-import com.google.common.collect.Maps;
+import com.atanor.vwserver.common.rpc.dto.LayoutWindowDto;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import com.google.common.primitives.Ints;
 import com.smartgwt.client.core.Rectangle;
 import com.smartgwt.client.types.Overflow;
@@ -16,7 +19,7 @@ import com.smartgwt.client.widgets.Canvas;
 public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowChanged {
 
 	private final Canvas display;
-	private final Map<String, Canvas> windows = Maps.newHashMap();
+	private final List<LayoutWindow> windows = Lists.newArrayList();
 
 	public EditLayoutView() {
 		setHeight(Utils.getMainAreaHeight());
@@ -39,7 +42,6 @@ public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowCh
 		return canvas;
 	}
 
-
 	private void alignInDesktop(final Canvas canvas) {
 		final Long leftOffset = Math.round((getWidth() - canvas.getWidth()) / 2d);
 		final Long topOffset = Math.round((getHeight() - canvas.getHeight()) / 2d);
@@ -49,8 +51,8 @@ public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowCh
 
 	@Override
 	public void clean() {
-		for (Map.Entry<String, Canvas> entry : windows.entrySet()) {
-			display.removeChild(entry.getValue());
+		for (LayoutWindow window : windows) {
+			display.removeChild(window);
 		}
 		windows.clear();
 	}
@@ -59,25 +61,63 @@ public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowCh
 
 	}
 
-	public void addLayoutWindow() {
-		final LayoutWindow win = new LayoutWindow(generateWinName(), this);
+	public void addNewWindow(final LayoutWindowDto dto) {
+		Preconditions.checkNotNull(dto, "window dto can not be null");
+		dto.setName(generateWinName(windows.size()));
+
+		fetchSize(dto);
+		
+		final LayoutWindow win = new LayoutWindow(dto, this);
 		win.setKeepInParentRect(new Rectangle(0, 0, display.getWidth(), display.getHeight()));
-		onLayoutWindowSelected(win.getName());
-		windows.put(win.getName(), win);
+
+		onLayoutWindowSelected(win);
+
+		windows.add(win);
 		display.addChild(win);
 	}
 
-	private String generateWinName() {
-		return "Window " + (windows.size() + 1);
+	private void fetchSize(final LayoutWindowDto dto) {
+		dto.setLeft(display.getWidth() * dto.getLeft() / 100);
+		dto.setTop(display.getHeight() * dto.getTop() / 100);
+		dto.setHeight(display.getHeight() * dto.getHeight() / 100);
+		dto.setWidth(display.getWidth() * dto.getWidth() / 100);
+	}
+
+	public void removeAnySelectedWindow() {
+		for (Iterator<LayoutWindow> it = windows.iterator(); it.hasNext();) {
+			LayoutWindow window = (LayoutWindow) it.next();
+			if (window.selected()) {
+				display.removeChild(window);
+				it.remove();
+				window.destroy();
+			}
+		}
+		renameWindows();
+		if (windows.size() > 0) {
+			windows.get(0).select();
+		}
+	}
+
+	private void renameWindows() {
+		final List<LayoutWindow> result = Lists.newArrayList(windows);
+		for (int i = 0; i < result.size(); i++) {
+			result.get(i).setName(generateWinName(i));
+		}
+		windows.clear();
+		windows.addAll(result);
+	}
+
+	private String generateWinName(int winCount) {
+		return "Window " + (++winCount);
 	}
 
 	@Override
-	public void onLayoutWindowSelected(final String name) {
-		for (Map.Entry<String, Canvas> entry : windows.entrySet()) {
-			if(entry.getKey().equals(name)){
+	public void onLayoutWindowSelected(final LayoutWindow window) {
+		for (LayoutWindow win : windows) {
+			if (win.getName().equals(window.getName())) {
 				continue;
 			}
-			entry.getValue().setOpacity(50);
+			win.unselect();
 		}
 	}
 }

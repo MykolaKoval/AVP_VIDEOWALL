@@ -20,7 +20,7 @@ public class HeaderPresenter {
 
 	@Inject
 	private DisplayServiceAsync displayService;
-	
+
 	@Inject
 	private EventBus eventBus;
 
@@ -55,4 +55,5 @@ public class HeaderPresenter {
 			}
 		});
 	}
+
 }
