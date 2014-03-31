@@ -1,5 +1,6 @@
 package com.atanor.vwserver.common;
 
+import com.atanor.vwserver.common.rpc.dto.DisplayDto;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
@@ -28,5 +29,17 @@ public class AppUtils {
 		final Integer width = Integer.parseInt(Iterables.getFirst(it, "0"));
 		final Integer height = Integer.parseInt(Iterables.getLast(it));
 		return isLandscape ? height : width;
+	}
+
+	public static Integer getDisplayWidth(final DisplayDto display) {
+		final boolean isLandscape = isLandscape(display.getOrientation());
+		final Integer panelWidth = getPanelWidth(isLandscape, display.getResolution());
+		return panelWidth * display.getSegmentNumWidth();
+	}
+	
+	public static Integer getDisplayHeight(final DisplayDto display) {
+		final boolean isLandscape = isLandscape(display.getOrientation());
+		final Integer panelHeight = AppUtils.getPanelHeight(isLandscape, display.getResolution());
+		return panelHeight * display.getSegmentNumHeight();
 	}
 }

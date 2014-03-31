@@ -23,11 +23,8 @@ public class EditDisplayView extends Canvas implements HeaderView {
 
 		clean();
 
-		final boolean isLandscape = AppUtils.isLandscape(display.getOrientation());
-		final Integer panelWidth = AppUtils.getPanelWidth(isLandscape, display.getResolution());
-		final Integer panelHeight = AppUtils.getPanelHeight(isLandscape, display.getResolution());
-		final Long displayWidth = new Long(panelWidth * display.getSegmentNumWidth());
-		final Long displayHeight = new Long(panelHeight * display.getSegmentNumHeight());
+		final Long displayWidth = new Long(AppUtils.getDisplayWidth(display));
+		final Long displayHeight = new Long(AppUtils.getDisplayHeight(display));
 
 		final Double padding = adjustPadding(displayWidth, displayHeight);
 		final Long panelDisplayWidth = Math.round(getElement().getClientWidth() * padding);
