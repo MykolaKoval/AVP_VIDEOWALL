@@ -1,11 +1,14 @@
 package com.atanor.vwserver.admin.ui.modal;
 
+import java.util.LinkedHashMap;
+
 import javax.inject.Inject;
 
-import com.atanor.vwserver.admin.ui.Utils;
 import com.atanor.vwserver.admin.ui.modal.ModalCallbacks.NewDisplayCallback;
 import com.atanor.vwserver.admin.ui.modal.presenter.NewDisplayPresenter;
+import com.atanor.vwserver.common.AppUtils;
 import com.atanor.vwserver.common.rpc.dto.DisplayDto;
+import com.google.common.collect.Maps;
 import com.smartgwt.client.types.VerticalAlignment;
 import com.smartgwt.client.widgets.IButton;
 import com.smartgwt.client.widgets.events.ClickEvent;
@@ -14,10 +17,16 @@ import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.events.ItemChangedEvent;
 import com.smartgwt.client.widgets.form.events.ItemChangedHandler;
 import com.smartgwt.client.widgets.form.fields.IntegerItem;
+import com.smartgwt.client.widgets.form.fields.SelectItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.layout.HLayout;
 
 public class NewDisplayWindow extends ModalWindow implements NewDisplayCallback {
+
+	private static final String[] RESOLUTIONS = { "1920 x 1080", "1600 x 900", "1366 x 768", "1280 x 720",
+			"1024 x 576", "960 x 540", "854 x 480", "640 x 360" };
+
+	private static final String[] ORIENTATIONS = { "Landscape", "Portrait" };
 
 	@Inject
 	private NewDisplayPresenter presenter;
@@ -25,8 +34,8 @@ public class NewDisplayWindow extends ModalWindow implements NewDisplayCallback 
 	private TextItem name;
 	private IntegerItem segmentNumHeight;
 	private IntegerItem segmentNumWidth;
-	private IntegerItem segmentHeight;
-	private IntegerItem segmentWidth;
+	private SelectItem resolution;
+	private SelectItem orientation;
 
 	public NewDisplayWindow() {
 		super("New Display");
@@ -42,17 +51,30 @@ public class NewDisplayWindow extends ModalWindow implements NewDisplayCallback 
 		form.setColWidths("70%", "*");
 		form.setLayoutAlign(VerticalAlignment.BOTTOM);
 
-		name = new TextItem();
-		name.setAttribute(Utils.ITEM_SKIPVALIDATION, true);
-		name.setTitle("Name");
+		name = createModalTextItem("Name");
 		name.setCanEdit(false);
 
 		segmentNumHeight = createModalIntegerItem("Segments (height)");
 		segmentNumWidth = createModalIntegerItem("Segments (width)");
-		segmentHeight = createModalIntegerItem("Segment height, px");
-		segmentWidth = createModalIntegerItem("Segment width, px");
 
-		form.setFields(name, segmentNumHeight, segmentNumWidth, segmentHeight, segmentWidth);
+		resolution = createModalSelectItem("Resolution");
+		
+		final LinkedHashMap<String, String> resolutions = Maps.newLinkedHashMap();
+		resolutions.put("1920x1080", "1920 x 1080");
+		resolutions.put("1600x900", "1600 x 900");
+		resolutions.put("1366x768", "1366 x 768");
+		resolutions.put("1280x720", "1280 x 720");
+		resolutions.put("1024x576", "1024 x 576");
+		resolutions.put("960x540", "960 x 540");
+		resolutions.put("854x480", "854 x 480");
+		resolutions.put("640x360", "640 x 360");
+		
+		resolution.setValueMap(resolutions);
+		
+		orientation = createModalSelectItem("Orientation");
+		orientation.setValueMap(ORIENTATIONS);
+
+		form.setFields(name, segmentNumHeight, segmentNumWidth, resolution, orientation);
 
 		return form;
 	}
@@ -101,9 +123,9 @@ public class NewDisplayWindow extends ModalWindow implements NewDisplayCallback 
 	private void setDiplayName() {
 		final String segNumHeight = segmentNumHeight.getValueAsString();
 		final String segNumWidth = segmentNumWidth.getValueAsString();
-		final String segHeight = segmentHeight.getValueAsString();
-		final String segWidth = segmentWidth.getValueAsString();
-		name.setValue(generateDisplayName(segNumHeight, segNumWidth, segHeight, segWidth));
+		final String res = AppUtils.removeSpaces(resolution.getValueAsString());
+		final String orient = orientation.getValueAsString();
+		name.setValue(generateDisplayName(segNumHeight, segNumWidth, res, orient));
 	}
 
 	private void cleanDiplayName() {
@@ -111,15 +133,15 @@ public class NewDisplayWindow extends ModalWindow implements NewDisplayCallback 
 	}
 
 	private static String generateDisplayName(final String segNumHeight, final String segNumWidth,
-			final String segmHeight, final String segWidth) {
-		return "H" + segNumHeight + "xW" + segNumWidth + "_" + segmHeight + "x" + segWidth;
+			final String resolution, final String orientation) {
+		return "H" + segNumHeight + "xW" + segNumWidth + "_" + resolution + "_" + orientation;
 	}
 
 	private DisplayDto buildDisplay() {
 		final DisplayDto display = new DisplayDto();
 		display.setName(name.getValueAsString());
-		display.setSegmentHeight(Integer.parseInt(segmentHeight.getValueAsString()));
-		display.setSegmentWidth(Integer.parseInt(segmentWidth.getValueAsString()));
+		display.setOrientation(orientation.getValueAsString());
+		display.setResolution(resolution.getValueAsString());
 		display.setSegmentNumHeight(Integer.parseInt(segmentNumHeight.getValueAsString()));
 		display.setSegmentNumWidth(Integer.parseInt(segmentNumWidth.getValueAsString()));
 		return display;

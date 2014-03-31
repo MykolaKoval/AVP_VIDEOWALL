@@ -17,10 +17,10 @@ public class ImgGeneratorTest {
 	public static void main(String[] args) throws IOException {
 		
 		Display display = new Display();
-		display.setSegmentNumHeight(3);
-		display.setSegmentNumWidth(4);
-		display.setSegmentHeight(600);
-		display.setSegmentWidth(800);
+		display.setSegmentNumHeight(1);
+		display.setSegmentNumWidth(2);
+		display.setResolution("1920x1080");
+		display.setOrientation("Landscape");
 		
 		ImgGenerator gen = new ImgGenerator();
 		BufferedImage bi = gen.generate(display);

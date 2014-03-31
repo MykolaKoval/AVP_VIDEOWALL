@@ -10,6 +10,8 @@ import com.smartgwt.client.widgets.events.CloseClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.IntegerItem;
+import com.smartgwt.client.widgets.form.fields.SelectItem;
+import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
 
@@ -51,6 +53,19 @@ public abstract class ModalWindow extends Window {
 		final IntegerItem item = new IntegerItem();
 		item.setTitle(title);
 		item.setValidateOnChange(true);
+		return item;
+	}
+
+	protected TextItem createModalTextItem(final String title) {
+		final TextItem item = new TextItem();
+		item.setAttribute(Utils.ITEM_SKIPVALIDATION, true);
+		item.setTitle(title);
+		return item;
+	}
+
+	protected SelectItem createModalSelectItem(final String title) {
+		final SelectItem item = new SelectItem();
+		item.setTitle(title);
 		return item;
 	}
 

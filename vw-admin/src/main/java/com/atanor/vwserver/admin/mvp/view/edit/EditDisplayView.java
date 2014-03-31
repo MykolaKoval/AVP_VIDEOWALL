@@ -2,6 +2,7 @@ package com.atanor.vwserver.admin.mvp.view.edit;
 
 import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.Utils;
+import com.atanor.vwserver.common.AppUtils;
 import com.atanor.vwserver.common.rpc.dto.DisplayDto;
 import com.google.common.base.Preconditions;
 import com.google.common.primitives.Ints;
@@ -22,8 +23,11 @@ public class EditDisplayView extends Canvas implements HeaderView {
 
 		clean();
 
-		final Long displayWidth = new Long(display.getSegmentWidth() * display.getSegmentNumWidth());
-		final Long displayHeight = new Long(display.getSegmentHeight() * display.getSegmentNumHeight());
+		final boolean isLandscape = AppUtils.isLandscape(display.getOrientation());
+		final Integer panelWidth = AppUtils.getPanelWidth(isLandscape, display.getResolution());
+		final Integer panelHeight = AppUtils.getPanelHeight(isLandscape, display.getResolution());
+		final Long displayWidth = new Long(panelWidth * display.getSegmentNumWidth());
+		final Long displayHeight = new Long(panelHeight * display.getSegmentNumHeight());
 
 		final Double padding = adjustPadding(displayWidth, displayHeight);
 		final Long panelDisplayWidth = Math.round(getElement().getClientWidth() * padding);
@@ -81,4 +85,5 @@ public class EditDisplayView extends Canvas implements HeaderView {
 			displayImg = null;
 		}
 	}
+
 }

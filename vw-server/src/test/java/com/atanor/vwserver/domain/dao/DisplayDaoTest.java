@@ -16,8 +16,8 @@ public class DisplayDaoTest extends BaseDaoTest<Display> {
 	private static final String DISPLAY_IMG = "asdfsdfgsdfgdsgh12345145dsfhwdghwghfghfgh";
 	private static final Integer SEGMENT_NUM_WIDTH = 3;
 	private static final Integer SEGMENT_NUM_HEIGHT = 2;
-	private static final Integer SEGMENT_WIDTH = 800;
-	private static final Integer SEGMENT_HEIGHT = 600;
+	private static final String RESOLUTION = "1920x1080";
+	private static final String ORIENTATION = "Landscape";
 	private static final Date CREATE_TS = new Date();
 
 	@Test
@@ -55,8 +55,8 @@ public class DisplayDaoTest extends BaseDaoTest<Display> {
 		Display displayFromDB = dao.find(id);
 		Assert.assertNotNull(displayFromDB);
 		Assert.assertEquals("Display1", displayFromDB.getName());
-		Assert.assertEquals(SEGMENT_HEIGHT, displayFromDB.getSegmentHeight());
-		Assert.assertEquals(SEGMENT_WIDTH, displayFromDB.getSegmentWidth());
+		Assert.assertEquals(ORIENTATION, displayFromDB.getOrientation());
+		Assert.assertEquals(RESOLUTION, displayFromDB.getResolution());
 		Assert.assertEquals(SEGMENT_NUM_HEIGHT, displayFromDB.getSegmentNumHeight());
 		Assert.assertEquals(SEGMENT_NUM_WIDTH, displayFromDB.getSegmentNumWidth());
 		Assert.assertEquals(DISPLAY_IMG, displayFromDB.getImgBlob());
@@ -109,8 +109,8 @@ public class DisplayDaoTest extends BaseDaoTest<Display> {
 	private Display createDisplay() {
 		Display display = new Display();
 		display.setName("Display1");
-		display.setSegmentHeight(SEGMENT_HEIGHT);
-		display.setSegmentWidth(SEGMENT_WIDTH);
+		display.setResolution(RESOLUTION);
+		display.setOrientation(ORIENTATION);
 		display.setSegmentNumHeight(SEGMENT_NUM_HEIGHT);
 		display.setSegmentNumWidth(SEGMENT_NUM_WIDTH);
 		display.setImgBlob(DISPLAY_IMG);

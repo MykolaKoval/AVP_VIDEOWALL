@@ -13,8 +13,8 @@ public class DisplayConverter extends AbstractConverter<DisplayDto, Display> {
 
 		final DisplayDto dto = new DisplayDto(entity.getId());
 		dto.setName(entity.getName());
-		dto.setSegmentHeight(entity.getSegmentHeight());
-		dto.setSegmentWidth(entity.getSegmentWidth());
+		dto.setOrientation(entity.getOrientation());
+		dto.setResolution(entity.getResolution());
 		dto.setSegmentNumHeight(entity.getSegmentNumHeight());
 		dto.setSegmentNumWidth(entity.getSegmentNumWidth());
 		dto.setImage(entity.getImgBlob());
@@ -28,8 +28,8 @@ public class DisplayConverter extends AbstractConverter<DisplayDto, Display> {
 
 		final Display entity = new Display(dto.getId());
 		entity.setName(dto.getName());
-		entity.setSegmentHeight(dto.getSegmentHeight());
-		entity.setSegmentWidth(dto.getSegmentWidth());
+		entity.setOrientation(dto.getOrientation());
+		entity.setResolution(dto.getResolution());
 		entity.setSegmentNumHeight(dto.getSegmentNumHeight());
 		entity.setSegmentNumWidth(dto.getSegmentNumWidth());
 

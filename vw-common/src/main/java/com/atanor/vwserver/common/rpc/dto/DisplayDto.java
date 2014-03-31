@@ -8,10 +8,10 @@ public class DisplayDto extends AbstractDto {
 	private String name;
 	private Integer segmentNumHeight;
 	private Integer segmentNumWidth;
-	private Integer segmentHeight;
-	private Integer segmentWidth;
+	private String resolution;
+	private String orientation;
 	private String image;
-	
+
 	public DisplayDto() {
 	}
 
@@ -47,20 +47,20 @@ public class DisplayDto extends AbstractDto {
 		this.segmentNumWidth = segmentNumWidth;
 	}
 
-	public Integer getSegmentHeight() {
-		return segmentHeight;
+	public String getResolution() {
+		return resolution;
 	}
 
-	public void setSegmentHeight(final Integer segmentHeight) {
-		this.segmentHeight = segmentHeight;
+	public void setResolution(final String resolution) {
+		this.resolution = resolution;
 	}
 
-	public Integer getSegmentWidth() {
-		return segmentWidth;
+	public String getOrientation() {
+		return orientation;
 	}
 
-	public void setSegmentWidth(final Integer segmentWidth) {
-		this.segmentWidth = segmentWidth;
+	public void setOrientation(final String orientation) {
+		this.orientation = orientation;
 	}
 
 	public String getImage() {

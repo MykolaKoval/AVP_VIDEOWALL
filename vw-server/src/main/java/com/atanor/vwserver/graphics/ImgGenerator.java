@@ -9,38 +9,35 @@ import java.util.List;
 
 import org.apache.commons.lang3.Validate;
 
+import com.atanor.vwserver.common.AppUtils;
 import com.atanor.vwserver.domain.entity.Display;
 import com.google.common.collect.Lists;
 
 public class ImgGenerator {
 
-	private static final Float borderThickness = 4f;
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-
-	}
+	private static final Float borderThickness = 8f;
 
 	public BufferedImage generate(final Display display) {
-		Validate.notNull(display.getSegmentHeight(), "Display segment height can not be null");
-		Validate.notNull(display.getSegmentWidth(), "Display segment width can not be null");
+		Validate.notEmpty(display.getOrientation(), "Display orientation can not be null or empty");
+		Validate.notEmpty(display.getResolution(), "Display resolution can not be null or empty");
 		Validate.notNull(display.getSegmentNumHeight(), "Display segment number (height) can not be null");
 		Validate.notNull(display.getSegmentNumWidth(), "Display segment number (width) can not be null");
 
-		final Integer width = display.getSegmentWidth() * display.getSegmentNumWidth();
-		final Integer height = display.getSegmentHeight() * display.getSegmentNumHeight();
+		final boolean isLandscape = AppUtils.isLandscape(display.getOrientation());
+		final Integer panelWidth = AppUtils.getPanelWidth(isLandscape, display.getResolution());
+		final Integer panelHeight = AppUtils.getPanelHeight(isLandscape, display.getResolution());
 
-		final List<Rectangle> panels = createDisplayPanels(display);
+		final Integer width = panelWidth * display.getSegmentNumWidth();
+		final Integer height = panelHeight * display.getSegmentNumHeight();
+
+		final List<Rectangle> panels = createDisplayPanels(display, panelWidth, panelHeight);
 
 		return createDisplayImg(width, height, panels);
 	}
 
-	private List<Rectangle> createDisplayPanels(final Display display) {
+	private List<Rectangle> createDisplayPanels(final Display display, final Integer panelWidth,
+			final Integer panelHeight) {
 		final List<Rectangle> panels = Lists.newArrayList();
-		final Integer panelWidth = display.getSegmentWidth();
-		final Integer panelHeight = display.getSegmentHeight();
 
 		for (int row = 0, left = 0, top = 0; row < display.getSegmentNumHeight(); row++) {
 			for (int col = 0; col < display.getSegmentNumWidth(); col++) {
@@ -94,4 +91,5 @@ public class ImgGenerator {
 	private static int fitLength(Double length) {
 		return length.intValue() - borderThickness.intValue();
 	}
+
 }

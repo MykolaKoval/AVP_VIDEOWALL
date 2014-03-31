@@ -32,11 +32,11 @@ public class Display extends AbstractEntity<Long> {
 	@Column(name = "segment_num_width")
 	private Integer segmentNumWidth;
 
-	@Column(name = "segment_height")
-	private Integer segmentHeight;
+	@Column(name = "resolution")
+	private String resolution;
 
-	@Column(name = "segment_width")
-	private Integer segmentWidth;
+	@Column(name = "orientation")
+	private String orientation;
 
 	@Lob
 	@Column(name = "display_blob", length = 300000)
@@ -78,20 +78,20 @@ public class Display extends AbstractEntity<Long> {
 		this.segmentNumWidth = segmentNumWidth;
 	}
 
-	public Integer getSegmentHeight() {
-		return segmentHeight;
+	public String getResolution() {
+		return resolution;
 	}
 
-	public void setSegmentHeight(final Integer segmentHeight) {
-		this.segmentHeight = segmentHeight;
+	public void setResolution(final String resolution) {
+		this.resolution = resolution;
 	}
 
-	public Integer getSegmentWidth() {
-		return segmentWidth;
+	public String getOrientation() {
+		return orientation;
 	}
 
-	public void setSegmentWidth(final Integer segmentWidth) {
-		this.segmentWidth = segmentWidth;
+	public void setOrientation(final String orientation) {
+		this.orientation = orientation;
 	}
 
 	public String getImgBlob() {
