@@ -3,11 +3,9 @@ package com.atanor.vwserver.admin.mvp;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import com.atanor.vwserver.admin.mvp.activity.edit.DefaultEditPresetActivity;
 import com.atanor.vwserver.admin.mvp.activity.edit.EditDisplayActivity;
 import com.atanor.vwserver.admin.mvp.activity.edit.EditLayoutActivity;
 import com.atanor.vwserver.admin.mvp.activity.edit.EditPresetActivity;
-import com.atanor.vwserver.admin.mvp.place.DefaultPresetPlace;
 import com.atanor.vwserver.admin.mvp.place.DisplayPlace;
 import com.atanor.vwserver.admin.mvp.place.LayoutPlace;
 import com.atanor.vwserver.admin.mvp.place.PresetPlace;
@@ -20,8 +18,6 @@ public class EditMapper implements ActivityMapper {
 	@Inject
 	private Provider<EditPresetActivity> presetProvider;
 	@Inject
-	private Provider<DefaultEditPresetActivity> defaultPresetProvider;
-	@Inject
 	private Provider<EditLayoutActivity> layoutProvider;
 	@Inject
 	private Provider<EditDisplayActivity> displayProvider;
@@ -31,8 +27,6 @@ public class EditMapper implements ActivityMapper {
 
 		if (place instanceof PresetPlace) {
 			return presetProvider.get().withPlace((PresetPlace) place);
-		} else if (place instanceof DefaultPresetPlace) {
-			return defaultPresetProvider.get().withPlace((DefaultPresetPlace) place);
 		} else if (place instanceof LayoutPlace) {
 			return layoutProvider.get().withPlace((LayoutPlace) place);
 		} else if (place instanceof DisplayPlace) {

@@ -3,11 +3,9 @@ package com.atanor.vwserver.admin.mvp;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import com.atanor.vwserver.admin.mvp.activity.preview.DefaultPreviewPresetActivity;
 import com.atanor.vwserver.admin.mvp.activity.preview.PreviewDisplayActivity;
 import com.atanor.vwserver.admin.mvp.activity.preview.PreviewLayoutActivity;
 import com.atanor.vwserver.admin.mvp.activity.preview.PreviewPresetActivity;
-import com.atanor.vwserver.admin.mvp.place.DefaultPresetPlace;
 import com.atanor.vwserver.admin.mvp.place.DisplayPlace;
 import com.atanor.vwserver.admin.mvp.place.LayoutPlace;
 import com.atanor.vwserver.admin.mvp.place.PresetPlace;
@@ -20,8 +18,6 @@ public class PreviewMapper implements ActivityMapper {
 	@Inject
 	private Provider<PreviewPresetActivity> presetProvider;
 	@Inject
-	private Provider<DefaultPreviewPresetActivity> defaultPresetProvider;
-	@Inject
 	private Provider<PreviewLayoutActivity> layoutProvider;
 	@Inject
 	private Provider<PreviewDisplayActivity> displayProvider;
@@ -31,8 +27,6 @@ public class PreviewMapper implements ActivityMapper {
 
 		if (place instanceof PresetPlace) {
 			return presetProvider.get().withPlace((PresetPlace) place);
-		} else if (place instanceof DefaultPresetPlace) {
-			return defaultPresetProvider.get().withPlace((DefaultPresetPlace) place);
 		} else if (place instanceof LayoutPlace) {
 			return layoutProvider.get().withPlace((LayoutPlace) place);
 		} else if (place instanceof DisplayPlace) {

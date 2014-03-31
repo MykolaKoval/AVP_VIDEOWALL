@@ -6,21 +6,21 @@ import com.atanor.vwserver.admin.mvp.EditMapper;
 import com.atanor.vwserver.admin.mvp.HeaderMapper;
 import com.atanor.vwserver.admin.mvp.NavigateMapper;
 import com.atanor.vwserver.admin.mvp.PreviewMapper;
-import com.atanor.vwserver.admin.mvp.activity.edit.DefaultEditPresetActivity;
+import com.atanor.vwserver.admin.mvp.activity.edit.EditDisplayActivity;
+import com.atanor.vwserver.admin.mvp.activity.edit.EditLayoutActivity;
 import com.atanor.vwserver.admin.mvp.activity.edit.EditPresetActivity;
-import com.atanor.vwserver.admin.mvp.activity.header.DefaultHeaderDisplayActivity;
-import com.atanor.vwserver.admin.mvp.activity.header.DefaultHeaderLayoutActivity;
-import com.atanor.vwserver.admin.mvp.activity.header.DefaultHeaderPresetActivity;
 import com.atanor.vwserver.admin.mvp.activity.header.HeaderDisplayActivity;
 import com.atanor.vwserver.admin.mvp.activity.header.HeaderLayoutActivity;
 import com.atanor.vwserver.admin.mvp.activity.header.HeaderPresetActivity;
 import com.atanor.vwserver.admin.mvp.activity.navigate.DisplayControlActivity;
 import com.atanor.vwserver.admin.mvp.activity.navigate.LayoutControlActivity;
 import com.atanor.vwserver.admin.mvp.activity.navigate.PresetControlActivity;
-import com.atanor.vwserver.admin.mvp.activity.preview.DefaultPreviewPresetActivity;
+import com.atanor.vwserver.admin.mvp.activity.preview.PreviewDisplayActivity;
+import com.atanor.vwserver.admin.mvp.activity.preview.PreviewLayoutActivity;
 import com.atanor.vwserver.admin.mvp.activity.preview.PreviewPresetActivity;
 import com.atanor.vwserver.admin.mvp.model.DisplayStorage;
-import com.atanor.vwserver.admin.mvp.place.DefaultPresetPlace;
+import com.atanor.vwserver.admin.mvp.model.LayoutStorage;
+import com.atanor.vwserver.admin.mvp.place.PresetPlace;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
@@ -45,24 +45,29 @@ public class MvpModule extends AbstractGinModule {
 		bind(PreviewMapper.class);
 		bind(EditMapper.class);
 
-		bind(DefaultHeaderDisplayActivity.class);
-		bind(DefaultHeaderLayoutActivity.class);
-		bind(DefaultHeaderPresetActivity.class);
+		// Navigate
+		bind(DisplayControlActivity.class);
+		bind(LayoutControlActivity.class);
+		bind(PresetControlActivity.class);
+
+		// Header
 		bind(HeaderDisplayActivity.class);
 		bind(HeaderLayoutActivity.class);
 		bind(HeaderPresetActivity.class);
 
-		bind(DisplayControlActivity.class);
-		bind(LayoutControlActivity.class);
-		bind(PresetControlActivity.class);
-		
-		bind(DefaultEditPresetActivity.class);
+		// Preview
+		bind(PreviewDisplayActivity.class);
+		bind(PreviewLayoutActivity.class);
+		bind(PreviewPresetActivity.class);
+
+		// Edit
+		bind(EditDisplayActivity.class);
+		bind(EditLayoutActivity.class);
 		bind(EditPresetActivity.class);
 
-		bind(DefaultPreviewPresetActivity.class);
-		bind(PreviewPresetActivity.class);
-		
+		// Storages
 		bind(DisplayStorage.class).in(Singleton.class);
+		bind(LayoutStorage.class).in(Singleton.class);
 	}
 
 	/**
@@ -83,7 +88,7 @@ public class MvpModule extends AbstractGinModule {
 	public PlaceHistoryHandler getHistoryHandler(PlaceController placeController, PlaceHistoryMapper historyMapper,
 			EventBus eventBus) {
 		final PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
-		historyHandler.register(placeController, eventBus, new DefaultPresetPlace());
+		historyHandler.register(placeController, eventBus, new PresetPlace());
 
 		return historyHandler;
 	}

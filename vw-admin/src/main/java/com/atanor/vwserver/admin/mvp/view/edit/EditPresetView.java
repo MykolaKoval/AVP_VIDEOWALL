@@ -10,7 +10,7 @@ import com.atanor.vwserver.admin.Client;
 import com.atanor.vwserver.admin.mvp.event.ActivateGridEvent;
 import com.atanor.vwserver.admin.mvp.event.CleanGridActivationEvent;
 import com.atanor.vwserver.admin.mvp.event.CleanWindowSelectionEvent;
-import com.atanor.vwserver.admin.mvp.place.DefaultPresetPlace;
+import com.atanor.vwserver.admin.mvp.place.PresetPlace;
 import com.atanor.vwserver.admin.mvp.view.EditView;
 import com.atanor.vwserver.admin.ui.GridLabel;
 import com.atanor.vwserver.admin.ui.PresetLabel;
@@ -123,7 +123,7 @@ public class EditPresetView extends VLayout implements EditView {
 
 		cancelButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				Client.goTo(new DefaultPresetPlace());
+				Client.goTo(new PresetPlace());
 			}
 		});
 
