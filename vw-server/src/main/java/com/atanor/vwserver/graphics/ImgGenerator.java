@@ -12,10 +12,16 @@ import org.apache.commons.lang3.Validate;
 import com.atanor.vwserver.common.AppUtils;
 import com.atanor.vwserver.domain.entity.Display;
 import com.google.common.collect.Lists;
+import com.google.common.primitives.Ints;
 
 public class ImgGenerator {
 
-	private static final Float borderThickness = 8f;
+	private static final Integer FULL_HD_DISPLAY_WIDTH = 1920;
+	private static final Integer FULL_HD_DISPLAY_HEIGHT = 1080;
+	private static final Double SCALE_FACTOR = FULL_HD_DISPLAY_HEIGHT.doubleValue()
+			/ FULL_HD_DISPLAY_WIDTH.doubleValue();
+
+	private static final Float borderThickness = 4f;
 
 	public BufferedImage generate(final Display display) {
 		Validate.notEmpty(display.getOrientation(), "Display orientation can not be null or empty");
@@ -24,11 +30,22 @@ public class ImgGenerator {
 		Validate.notNull(display.getSegmentNumWidth(), "Display segment number (width) can not be null");
 
 		final boolean isLandscape = AppUtils.isLandscape(display.getOrientation());
-		final Integer panelWidth = AppUtils.getPanelWidth(isLandscape, display.getResolution());
-		final Integer panelHeight = AppUtils.getPanelHeight(isLandscape, display.getResolution());
 
-		final Integer width = panelWidth * display.getSegmentNumWidth();
-		final Integer height = panelHeight * display.getSegmentNumHeight();
+		Integer panelWidth = AppUtils.getPanelWidth(isLandscape, display.getResolution());
+		Integer panelHeight = AppUtils.getPanelHeight(isLandscape, display.getResolution());
+
+		// scale display to Full HD size
+		Integer width = FULL_HD_DISPLAY_WIDTH;
+		Integer height = FULL_HD_DISPLAY_HEIGHT;
+		if (isLandscape) {
+			panelWidth = FULL_HD_DISPLAY_WIDTH / display.getSegmentNumWidth();
+			panelHeight = Ints.checkedCast(Math.round(SCALE_FACTOR * panelWidth));
+			height = panelHeight * display.getSegmentNumHeight();
+		} else {
+			panelHeight = FULL_HD_DISPLAY_HEIGHT / display.getSegmentNumHeight();
+			panelWidth = Ints.checkedCast(Math.round(SCALE_FACTOR * panelHeight));
+			width = panelWidth * display.getSegmentNumWidth();
+		}
 
 		final List<Rectangle> panels = createDisplayPanels(display, panelWidth, panelHeight);
 
