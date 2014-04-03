@@ -3,13 +3,18 @@ package com.atanor.vwserver.admin.mvp.activity.header;
 import javax.inject.Inject;
 
 import com.atanor.vwserver.admin.mvp.activity.ActionActivity;
+import com.atanor.vwserver.admin.mvp.model.LayoutStorage;
 import com.atanor.vwserver.admin.mvp.place.Action;
 import com.atanor.vwserver.admin.mvp.place.LayoutPlace;
 import com.atanor.vwserver.admin.mvp.view.header.HeaderLayoutView;
+import com.atanor.vwserver.common.rpc.dto.LayoutDto;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class HeaderLayoutActivity extends ActionActivity {
+
+	@Inject
+	private LayoutStorage storage;
 
 	@Inject
 	private HeaderLayoutView view;
@@ -28,6 +33,13 @@ public class HeaderLayoutActivity extends ActionActivity {
 		panel.setWidget(view);
 
 		execute(action);
+
+		if (layoutId == null) {
+			return;
+		}
+
+		final LayoutDto layout = storage.get(layoutId);
+		view.setLayout(layout);
 	}
 
 	@Override

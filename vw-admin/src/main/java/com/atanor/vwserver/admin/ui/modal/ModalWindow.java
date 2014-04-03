@@ -77,7 +77,7 @@ public abstract class ModalWindow extends Window {
 
 	protected HLayout createModalControlsLayout() {
 		final HLayout layout = new HLayout();
-		layout.setHeight100();
+		layout.setHeight(30);
 		layout.setWidth100();
 		layout.setPadding(5);
 		layout.setMembersMargin(5);

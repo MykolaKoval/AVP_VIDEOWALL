@@ -83,7 +83,7 @@ public class HeaderDisplayView extends AbstractHeaderView implements HeaderView 
 		selectedDisplay.setContents(genContent(display.getName()));
 	}
 	
-	private static String genContent(final String displayName){
-		return "Display: " + displayName;
+	private static String genContent(final String name){
+		return "Display: " + name;
 	}
 }

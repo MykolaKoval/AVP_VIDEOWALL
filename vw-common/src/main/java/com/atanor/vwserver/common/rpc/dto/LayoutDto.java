@@ -7,6 +7,7 @@ public class LayoutDto extends AbstractDto {
 
 	private Long id;
 	private String name;
+	private String image;
 	private List<LayoutWindowDto> windows;
 
 	public LayoutDto() {
@@ -26,6 +27,15 @@ public class LayoutDto extends AbstractDto {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(final String image) {
+		this.image = image;
 	}
 
 	public List<LayoutWindowDto> getWindows() {

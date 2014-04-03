@@ -5,4 +5,8 @@ public interface ModalCallbacks {
 	interface NewDisplayCallback {
 		void onDisplayCreated();
 	}
+	
+	interface SaveLayoutCallback {
+		void onLayoutSaved();
+	}
 }

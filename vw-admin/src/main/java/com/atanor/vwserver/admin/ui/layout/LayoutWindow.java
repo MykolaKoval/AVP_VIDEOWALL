@@ -41,7 +41,7 @@ public class LayoutWindow extends Label {
 				callback.onLayoutWindowSelected(win);
 			}
 		});
-		
+
 		select();
 	}
 
@@ -50,16 +50,17 @@ public class LayoutWindow extends Label {
 		dto.setTop(getTop());
 		dto.setHeight(getHeight());
 		dto.setWidth(getWidth());
+		dto.setName(getName());
 	}
 
 	public String getName() {
 		return getContents();
 	}
 
-	public void setName(final String name){
+	public void setName(final String name) {
 		setContents(name);
 	}
-	
+
 	public void select() {
 		setOpacity(100);
 		isSelected = true;
@@ -72,5 +73,9 @@ public class LayoutWindow extends Label {
 
 	public boolean selected() {
 		return isSelected;
+	}
+
+	public LayoutWindowDto getDto() {
+		return dto;
 	}
 }

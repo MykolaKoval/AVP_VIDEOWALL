@@ -33,6 +33,7 @@ public class VwAdmin implements EntryPoint {
 				Preconditions.checkNotNull(config, "Application configuration is null");
 
 				Client.getDisplayStorage().addAll(config.getDisplays());
+				Client.getLayoutStorage().addAll(config.getLayouts());
 				Client.getEventBus().fireEvent(new SetModelEvent());
 
 				// Goes to the place represented on URL else default place

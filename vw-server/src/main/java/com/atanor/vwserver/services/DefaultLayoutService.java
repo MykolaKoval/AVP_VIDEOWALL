@@ -1,5 +1,6 @@
 package com.atanor.vwserver.services;
 
+import java.awt.image.BufferedImage;
 import java.util.Date;
 import java.util.List;
 
@@ -11,11 +12,16 @@ import org.slf4j.LoggerFactory;
 import com.atanor.vwserver.common.rpc.exception.DuplicateEntityException;
 import com.atanor.vwserver.domain.dao.LayoutDao;
 import com.atanor.vwserver.domain.entity.Layout;
+import com.atanor.vwserver.graphics.ImgGenerator;
+import com.atanor.vwserver.util.ImageEncoder;
 
 public class DefaultLayoutService implements ILayoutService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(DefaultLayoutService.class);
 
+	@Inject
+	private ImgGenerator imgGenerator;
+	
 	@Inject
 	private LayoutDao dao;
 
@@ -23,6 +29,8 @@ public class DefaultLayoutService implements ILayoutService {
 	public Long createLayout(final Layout layout) {
 		valdate(layout);
 
+		final BufferedImage img = imgGenerator.generate(layout);
+		layout.setImgBlob(ImageEncoder.encodeImage(img));
 		layout.setCreateTS(new Date());
 
 		final Long id = dao.insert(layout);
@@ -58,6 +66,11 @@ public class DefaultLayoutService implements ILayoutService {
 	@Override
 	public List<Layout> getLayouts() {
 		return dao.findAll();
+	}
+
+	@Override
+	public Layout getLayout(Long id) {
+		return dao.find(id);
 	}
 
 }

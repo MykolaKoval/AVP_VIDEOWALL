@@ -8,14 +8,10 @@ import javax.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.atanor.vwserver.common.rpc.dto.DisplayDto;
 import com.atanor.vwserver.common.rpc.dto.LayoutDto;
 import com.atanor.vwserver.common.rpc.exception.DuplicateEntityException;
-import com.atanor.vwserver.common.rpc.services.DisplayService;
 import com.atanor.vwserver.common.rpc.services.LayoutService;
-import com.atanor.vwserver.domain.converter.DisplayConverter;
 import com.atanor.vwserver.domain.converter.LayoutConverter;
-import com.atanor.vwserver.services.IDisplayService;
 import com.atanor.vwserver.services.ILayoutService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -37,15 +33,16 @@ public class LayoutServlet extends RemoteServiceServlet implements LayoutService
 	}
 
 	@Override
-	public LayoutDto createLayout(LayoutDto layout) throws DuplicateEntityException {
-		// TODO Auto-generated method stub
-		return null;
+	public LayoutDto createLayout(final LayoutDto dto) throws DuplicateEntityException {
+		LOG.debug("Create {} layout called..", dto.getName());
+		final Long id = layoutService.createLayout(layoutConverter.toEntity(dto));
+		return layoutConverter.toDto(layoutService.getLayout(id));
 	}
 
 	@Override
 	public void removeLayout(LayoutDto display) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

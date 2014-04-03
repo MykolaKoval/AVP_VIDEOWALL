@@ -10,6 +10,8 @@ import com.atanor.vwserver.admin.mvp.place.Action;
 import com.atanor.vwserver.admin.mvp.place.LayoutPlace;
 import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.modal.NewLayoutWindow;
+import com.atanor.vwserver.admin.ui.modal.SaveLayoutWindow;
+import com.atanor.vwserver.common.rpc.dto.LayoutDto;
 import com.atanor.vwserver.common.rpc.dto.LayoutWindowDto;
 import com.google.web.bindery.event.shared.EventBus;
 import com.smartgwt.client.types.VerticalAlignment;
@@ -25,7 +27,10 @@ import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 public class HeaderLayoutView extends AbstractHeaderView implements HeaderView {
 
 	@Inject
-	private Provider<NewLayoutWindow> provider;
+	private Provider<NewLayoutWindow> newWinProvider;
+
+	@Inject
+	private Provider<SaveLayoutWindow> saveLayoutProvider;
 
 	@Inject
 	private EventBus eventBus;
@@ -34,6 +39,7 @@ public class HeaderLayoutView extends AbstractHeaderView implements HeaderView {
 	private final ToolStripButton removeWindowButton;
 
 	private final Label selectedLayout;
+	private LayoutDto layout;
 
 	public HeaderLayoutView() {
 		super("Layouts");
@@ -64,6 +70,7 @@ public class HeaderLayoutView extends AbstractHeaderView implements HeaderView {
 
 	@Override
 	public void clean() {
+		this.layout = null;
 		selectedLayout.setContents("");
 		createButton.enable();
 		editButton.disable();
@@ -84,6 +91,11 @@ public class HeaderLayoutView extends AbstractHeaderView implements HeaderView {
 
 	@Override
 	protected void doCancel() {
+		if (hasSelectedLayout()) {
+			Client.goTo(new LayoutPlace(Action.CLEAN));
+			return;
+		}
+
 		SC.ask("Undo", "All changes for unsaved layout will be lost. Are you sure?", new BooleanCallback() {
 
 			@Override
@@ -97,11 +109,12 @@ public class HeaderLayoutView extends AbstractHeaderView implements HeaderView {
 
 	@Override
 	protected void doSave() {
-
+		final Window window = saveLayoutProvider.get();
+		window.show();
 	}
 
 	protected void doNewWindow() {
-		final Window window = provider.get();
+		final Window window = newWinProvider.get();
 		window.show();
 	}
 
@@ -144,4 +157,21 @@ public class HeaderLayoutView extends AbstractHeaderView implements HeaderView {
 			removeWindowButton.disable();
 		}
 	}
+
+	public void setLayout(final LayoutDto layout) {
+		this.layout = layout;
+		createButton.disable();
+		cancelButton.enable();
+		removeButton.enable();
+		selectedLayout.setContents(genContent(layout.getName()));
+	}
+
+	private static String genContent(final String name) {
+		return "Layout: " + name;
+	}
+
+	private boolean hasSelectedLayout() {
+		return layout != null;
+	}
+
 }

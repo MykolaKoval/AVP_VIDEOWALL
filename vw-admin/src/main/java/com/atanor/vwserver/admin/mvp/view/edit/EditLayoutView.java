@@ -11,6 +11,7 @@ import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.Utils;
 import com.atanor.vwserver.admin.ui.layout.LayoutWindow;
 import com.atanor.vwserver.admin.ui.layout.LayoutWindowChanged;
+import com.atanor.vwserver.common.AppConstants;
 import com.atanor.vwserver.common.rpc.dto.LayoutDto;
 import com.atanor.vwserver.common.rpc.dto.LayoutWindowDto;
 import com.google.common.base.Preconditions;
@@ -20,6 +21,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.smartgwt.client.core.Rectangle;
 import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.Img;
 
 public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowChanged {
 
@@ -28,6 +30,8 @@ public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowCh
 
 	private final Canvas display;
 	private final List<LayoutWindow> windows = Lists.newArrayList();
+
+	private Img layoutImg;
 
 	public EditLayoutView() {
 		setHeight(Utils.getMainAreaHeight());
@@ -42,12 +46,21 @@ public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowCh
 	private Canvas createDisplay() {
 		final Canvas canvas = new Canvas();
 		final Long displayWidth = Math.round(getWidth() * 0.7);
-		final Long displayHeight = Math.round(getHeight() * 0.7);
+		final Long displayHeight = Math.round(AppConstants.FULL_HD_SCALE_FACTOR * displayWidth);
 		canvas.setWidth(displayWidth.intValue());
 		canvas.setHeight(displayHeight.intValue());
 		canvas.setBackgroundColor("grey");
 		canvas.setOverflow(Overflow.HIDDEN);
 		return canvas;
+	}
+
+	private Img createLayout(final LayoutDto layout) {
+		final Img img = new Img();
+		img.setHeight100();
+		img.setWidth100();
+		final String source = "data:image/png;base64," + layout.getImage();
+		img.setSrc(source);
+		return img;
 	}
 
 	private void alignInDesktop(final Canvas canvas) {
@@ -63,19 +76,34 @@ public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowCh
 			display.removeChild(window);
 		}
 		windows.clear();
+
+		if (layoutImg != null) {
+			removeChild(layoutImg);
+			layoutImg = null;
+		}
 	}
 
 	public void setLayout(final LayoutDto layout) {
+		Preconditions.checkNotNull(display, "Display can not be null");
 
+		clean();
+
+		layoutImg = createLayout(layout);
+		layoutImg.setLeft(display.getLeft());
+		layoutImg.setTop(display.getTop());
+		layoutImg.setWidth(display.getWidth());
+		layoutImg.setHeight(display.getHeight());
+
+		addChild(layoutImg);
 	}
 
 	public void addNewWindow(final LayoutWindowDto dto) {
 		Preconditions.checkNotNull(dto, "window dto can not be null");
-		dto.setName(generateWinName(windows.size()));
 
-		fetchSize(dto);
+		final LayoutWindowDto appliedDto = toRealDimensions(dto);
+		appliedDto.setName(generateWinName(windows.size()));
 
-		final LayoutWindow win = new LayoutWindow(dto, this);
+		final LayoutWindow win = new LayoutWindow(appliedDto, this);
 		win.setKeepInParentRect(new Rectangle(0, 0, display.getWidth(), display.getHeight()));
 
 		onLayoutWindowSelected(win);
@@ -83,14 +111,35 @@ public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowCh
 		windows.add(win);
 		display.addChild(win);
 
-		eventBus.fireEvent(new LayoutWindowChangedEvent(WindowAction.CREATED, dto));
+		eventBus.fireEvent(new LayoutWindowChangedEvent(WindowAction.CREATED, appliedDto));
 	}
 
-	private void fetchSize(final LayoutWindowDto dto) {
-		dto.setLeft(display.getWidth() * dto.getLeft() / 100);
-		dto.setTop(display.getHeight() * dto.getTop() / 100);
-		dto.setHeight(display.getHeight() * dto.getHeight() / 100);
-		dto.setWidth(display.getWidth() * dto.getWidth() / 100);
+	private LayoutWindowDto toRealDimensions(final LayoutWindowDto dto) {
+		final LayoutWindowDto result = new LayoutWindowDto();
+		result.setName(dto.getName());
+		result.setLeft(toRealValue(dto.getLeft(), display.getWidth()));
+		result.setTop(toRealValue(dto.getTop(), display.getHeight()));
+		result.setHeight(toRealValue(dto.getHeight(), display.getHeight()));
+		result.setWidth(toRealValue(dto.getWidth(), display.getWidth()));
+		return result;
+	}
+
+	private LayoutWindowDto toPercentDimensions(final LayoutWindowDto dto) {
+		final LayoutWindowDto result = new LayoutWindowDto();
+		result.setName(dto.getName());
+		result.setLeft(toPercentValue(dto.getLeft(), display.getWidth()));
+		result.setTop(toPercentValue(dto.getTop(), display.getHeight()));
+		result.setHeight(toPercentValue(dto.getHeight(), display.getHeight()));
+		result.setWidth(toPercentValue(dto.getWidth(), display.getWidth()));
+		return result;
+	}
+
+	private static Integer toRealValue(final Integer percent, final Integer base) {
+		return base * percent / 100;
+	}
+
+	private static Integer toPercentValue(final Integer value, final Integer base) {
+		return Math.round(value.floatValue() / base.floatValue() * 100);
 	}
 
 	public void removeAnySelectedWindow() {
@@ -132,5 +181,14 @@ public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowCh
 			}
 			win.unselect();
 		}
+	}
+
+	public List<LayoutWindowDto> getLayoutWindows() {
+		final List<LayoutWindowDto> result = Lists.newArrayList();
+		for (final LayoutWindow window : windows) {
+			window.updateDto();
+			result.add(toPercentDimensions(window.getDto()));
+		}
+		return result;
 	}
 }

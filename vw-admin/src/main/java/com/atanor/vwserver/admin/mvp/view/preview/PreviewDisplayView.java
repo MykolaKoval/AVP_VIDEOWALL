@@ -27,6 +27,8 @@ public class PreviewDisplayView extends HLayout implements HeaderView {
 		vLayout.setPadding(10);
 		vLayout.setMembersMargin(10);
 		vLayout.setOverflow(Overflow.AUTO);
+		vLayout.setBackgroundColor("lightgrey");
+		
 		addMember(vLayout);
 	}
 

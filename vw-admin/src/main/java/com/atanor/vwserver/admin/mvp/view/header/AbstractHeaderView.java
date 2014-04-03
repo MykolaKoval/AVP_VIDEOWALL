@@ -44,9 +44,8 @@ public abstract class AbstractHeaderView extends ToolStrip {
 
 	protected void addButtons() {
 		addButton(createButton);
-		addButton(editButton);
-		addButton(cancelButton);
 		addButton(saveButton);
+		addButton(cancelButton);
 		addButton(removeButton);
 	}
 

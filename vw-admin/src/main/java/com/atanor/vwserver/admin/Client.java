@@ -2,6 +2,7 @@ package com.atanor.vwserver.admin;
 
 import com.atanor.vwserver.admin.injector.ClientInjector;
 import com.atanor.vwserver.admin.mvp.model.DisplayStorage;
+import com.atanor.vwserver.admin.mvp.model.LayoutStorage;
 import com.atanor.vwserver.admin.ui.MainPane;
 import com.atanor.vwserver.common.rpc.services.ConfigServiceAsync;
 import com.google.gwt.core.client.GWT;
@@ -40,6 +41,10 @@ public class Client {
 
 	public static DisplayStorage getDisplayStorage() {
 		return injector.getDisplayStorage();
+	}
+	
+	public static LayoutStorage getLayoutStorage() {
+		return injector.getLayoutStorage();
 	}
 
 }

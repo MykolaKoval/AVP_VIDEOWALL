@@ -14,7 +14,7 @@ import com.smartgwt.client.widgets.layout.HLayout;
 public class DisplayImg extends HLayout {
 
 	private static final String SELECTED_BORDER = "5px solid yellow";
-	private static final String DEFAULT_BORDER = "5px solid white";
+	private static final String DEFAULT_BORDER = "5px solid lightgrey";
 	
 	private final Img img;
 	

@@ -23,9 +23,6 @@ import com.smartgwt.client.widgets.layout.HLayout;
 
 public class NewDisplayWindow extends ModalWindow implements NewDisplayCallback {
 
-	private static final String[] RESOLUTIONS = { "1920 x 1080", "1600 x 900", "1366 x 768", "1280 x 720",
-			"1024 x 576", "960 x 540", "854 x 480", "640 x 360" };
-
 	private static final String[] ORIENTATIONS = { "Landscape", "Portrait" };
 
 	@Inject
@@ -58,7 +55,7 @@ public class NewDisplayWindow extends ModalWindow implements NewDisplayCallback 
 		segmentNumWidth = createModalIntegerItem("Segments (width)");
 
 		resolution = createModalSelectItem("Resolution");
-		
+
 		final LinkedHashMap<String, String> resolutions = Maps.newLinkedHashMap();
 		resolutions.put("1920x1080", "1920 x 1080");
 		resolutions.put("1600x900", "1600 x 900");
@@ -68,9 +65,9 @@ public class NewDisplayWindow extends ModalWindow implements NewDisplayCallback 
 		resolutions.put("960x540", "960 x 540");
 		resolutions.put("854x480", "854 x 480");
 		resolutions.put("640x360", "640 x 360");
-		
+
 		resolution.setValueMap(resolutions);
-		
+
 		orientation = createModalSelectItem("Orientation");
 		orientation.setValueMap(ORIENTATIONS);
 

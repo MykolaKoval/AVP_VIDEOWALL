@@ -11,4 +11,6 @@ public interface ILayoutService {
 	void removeLayout(Long id);
 
 	List<Layout> getLayouts();
+
+	Layout getLayout(Long id);
 }

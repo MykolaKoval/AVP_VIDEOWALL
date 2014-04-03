@@ -34,7 +34,7 @@ public class ConfigServlet extends RemoteServiceServlet implements ConfigService
 		final ConfigDto config = new ConfigDto();
 
 		config.setDisplays(getDisplays());
-		//config.setLayouts(getLayouts());
+		config.setLayouts(getLayouts());
 
 		return config;
 	}

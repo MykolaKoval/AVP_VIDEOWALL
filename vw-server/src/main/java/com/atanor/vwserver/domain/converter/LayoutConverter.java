@@ -21,6 +21,7 @@ public class LayoutConverter extends AbstractConverter<LayoutDto, Layout> {
 
 		final LayoutDto dto = new LayoutDto(entity.getId());
 		dto.setName(entity.getName());
+		dto.setImage(entity.getImgBlob());
 		dto.setWindows(convertEntityList(winConverter, entity.getWindows()));
 
 		return dto;
