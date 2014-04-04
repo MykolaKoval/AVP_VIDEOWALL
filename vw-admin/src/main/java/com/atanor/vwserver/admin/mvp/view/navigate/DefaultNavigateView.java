@@ -4,6 +4,7 @@ import com.atanor.vwserver.admin.Client;
 import com.atanor.vwserver.admin.mvp.place.DisplayPlace;
 import com.atanor.vwserver.admin.mvp.place.LayoutPlace;
 import com.atanor.vwserver.admin.mvp.place.PresetPlace;
+import com.atanor.vwserver.admin.mvp.place.SourcePlace;
 import com.atanor.vwserver.admin.mvp.view.Control;
 import com.atanor.vwserver.admin.mvp.view.NavigateView;
 import com.atanor.vwserver.admin.ui.Utils;
@@ -22,6 +23,7 @@ public class DefaultNavigateView extends HLayout implements NavigateView {
 	private final Canvas presetControl;
 	private final Canvas layoutControl;
 	private final Canvas displayControl;
+	private final Canvas sourceControl;
 
 	public DefaultNavigateView() {
 		setHeight(Utils.NAVIGATION_DISPLAY_HEIGHT);
@@ -30,12 +32,13 @@ public class DefaultNavigateView extends HLayout implements NavigateView {
 		setMembersMargin(20);
 		setDefaultLayoutAlign(Alignment.CENTER);
 		setLayoutLeftMargin(20);
-		
+
 		presetControl = createNavigateControl("presets.png", "Presets", new PresetPlace());
 		layoutControl = createNavigateControl("layouts.png", "Layouts", new LayoutPlace());
 		displayControl = createNavigateControl("displays.png", "Displays", new DisplayPlace());
+		sourceControl = createNavigateControl("sources.png", "Sources", new SourcePlace());
 
-		addMembers(presetControl, layoutControl, displayControl, new LayoutSpacer());
+		addMembers(presetControl, layoutControl, displayControl, sourceControl, new LayoutSpacer());
 	}
 
 	private Canvas createNavigateControl(final String imgSource, final String tooltip, final Place place) {
@@ -65,6 +68,7 @@ public class DefaultNavigateView extends HLayout implements NavigateView {
 		presetControl.enable();
 		layoutControl.enable();
 		displayControl.enable();
+		sourceControl.enable();
 	}
 
 	@Override
@@ -82,6 +86,10 @@ public class DefaultNavigateView extends HLayout implements NavigateView {
 		case Displays:
 			enableAllControls();
 			displayControl.disable();
+			break;
+		case Sources:
+			enableAllControls();
+			sourceControl.disable();
 			break;
 		default:
 			break;

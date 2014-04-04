@@ -9,6 +9,7 @@ import com.atanor.vwserver.admin.mvp.PreviewMapper;
 import com.atanor.vwserver.admin.mvp.activity.edit.EditDisplayActivity;
 import com.atanor.vwserver.admin.mvp.activity.edit.EditLayoutActivity;
 import com.atanor.vwserver.admin.mvp.activity.edit.EditPresetActivity;
+import com.atanor.vwserver.admin.mvp.activity.edit.EditSourceActivity;
 import com.atanor.vwserver.admin.mvp.activity.header.HeaderDisplayActivity;
 import com.atanor.vwserver.admin.mvp.activity.header.HeaderLayoutActivity;
 import com.atanor.vwserver.admin.mvp.activity.header.HeaderPresetActivity;
@@ -64,6 +65,7 @@ public class MvpModule extends AbstractGinModule {
 		bind(EditDisplayActivity.class);
 		bind(EditLayoutActivity.class);
 		bind(EditPresetActivity.class);
+		bind(EditSourceActivity.class);
 
 		// Storages
 		bind(DisplayStorage.class).in(Singleton.class);
