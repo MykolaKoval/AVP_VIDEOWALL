@@ -7,16 +7,19 @@ import javax.inject.Inject;
 import com.atanor.vwserver.admin.mvp.event.LayoutWindowChangedEvent;
 import com.atanor.vwserver.admin.mvp.event.LayoutWindowChangedHandler;
 import com.atanor.vwserver.admin.mvp.event.SetModelEvent;
+import com.atanor.vwserver.admin.mvp.event.SourceChangedEvent;
+import com.atanor.vwserver.admin.mvp.event.SourceChangedHandler;
 import com.atanor.vwserver.admin.mvp.model.DisplayStorage;
 import com.atanor.vwserver.admin.mvp.model.ModelType;
 import com.atanor.vwserver.admin.mvp.view.header.HeaderLayoutView;
+import com.atanor.vwserver.admin.mvp.view.header.HeaderSourceView;
 import com.atanor.vwserver.common.rpc.dto.DisplayDto;
 import com.atanor.vwserver.common.rpc.services.DisplayServiceAsync;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.smartgwt.client.util.SC;
 
-public class HeaderPresenter implements LayoutWindowChangedHandler {
+public class HeaderPresenter implements LayoutWindowChangedHandler, SourceChangedHandler {
 
 	@Inject
 	private DisplayStorage displayStorage;
@@ -26,13 +29,16 @@ public class HeaderPresenter implements LayoutWindowChangedHandler {
 
 	@Inject
 	private HeaderLayoutView layoutView;
-
+	@Inject
+	private HeaderSourceView sourceView;
+	
 	private EventBus eventBus;
 
 	@Inject
 	public HeaderPresenter(final EventBus eventBus) {
 		this.eventBus = eventBus;
 		eventBus.addHandler(LayoutWindowChangedEvent.getType(), this);
+		eventBus.addHandler(SourceChangedEvent.getType(), this);
 	}
 
 	@Override
@@ -52,6 +58,20 @@ public class HeaderPresenter implements LayoutWindowChangedHandler {
 		}
 	}
 
+	@Override
+	public void onSourceChanged(final SourceChangedEvent event) {
+		switch (event.getAction()) {
+		case SELECTED:
+			sourceView.enableRemove();
+			break;
+		case UNSELECTED:
+			sourceView.disableRemove();
+			break;
+		default:
+			break;
+		}		
+	}
+	
 	public void removeDisplay(final DisplayDto display) {
 		displayService.removeDisplay(display, new AsyncCallback<Void>() {
 

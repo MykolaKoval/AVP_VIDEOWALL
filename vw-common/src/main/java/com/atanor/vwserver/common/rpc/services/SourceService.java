@@ -18,5 +18,5 @@ public interface SourceService extends RemoteService {
 
 	SourceDto createSource(SourceDto source) throws DuplicateEntityException;
 
-	void removeSource(SourceDto source);
+	void removeSources(List<Long> ids);
 }

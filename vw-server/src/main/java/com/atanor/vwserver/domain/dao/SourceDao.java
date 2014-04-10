@@ -11,9 +11,9 @@ public class SourceDao extends GenericDaoImpl<Source, Long> {
 		return Source.class;
 	}
 
-	public Source findByCodeAndDesc(final String code, final String desc) {
+	public Source findByCodeOrDesc(final String code, final String desc) {
 		final TypedQuery<Source> query = getEntityManager().createQuery(
-				"SELECT s FROM Source s WHERE s.code = :code AND s.description = :desc", Source.class);
+				"SELECT s FROM Source s WHERE s.code = :code OR s.description = :desc", Source.class);
 		query.setParameter("code", code);
 		query.setParameter("desc", desc);
 		return query.getSingleResult();

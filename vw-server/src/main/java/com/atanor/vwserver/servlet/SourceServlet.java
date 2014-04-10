@@ -40,9 +40,9 @@ public class SourceServlet extends RemoteServiceServlet implements SourceService
 	}
 
 	@Override
-	public void removeSource(final SourceDto dto) {
-		LOG.debug("Remove {} source called..", dto.getDescription());
-		sourceService.removeSource(dto.getId());
+	public void removeSources(final List<Long> ids) {
+		LOG.debug("Remove sources called..");
+		sourceService.removeSources(ids);
 	}
 
 }

@@ -8,11 +8,14 @@ import javax.inject.Singleton;
 import com.atanor.vwserver.common.rpc.dto.ConfigDto;
 import com.atanor.vwserver.common.rpc.dto.DisplayDto;
 import com.atanor.vwserver.common.rpc.dto.LayoutDto;
+import com.atanor.vwserver.common.rpc.dto.SourceDto;
 import com.atanor.vwserver.common.rpc.services.ConfigService;
 import com.atanor.vwserver.domain.converter.DisplayConverter;
 import com.atanor.vwserver.domain.converter.LayoutConverter;
+import com.atanor.vwserver.domain.converter.SourceConverter;
 import com.atanor.vwserver.services.IDisplayService;
 import com.atanor.vwserver.services.ILayoutService;
+import com.atanor.vwserver.services.ISourceService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @Singleton
@@ -23,11 +26,15 @@ public class ConfigServlet extends RemoteServiceServlet implements ConfigService
 	private IDisplayService displayService;
 	@Inject
 	private ILayoutService layoutService;
+	@Inject
+	private ISourceService sourceService;
 
 	@Inject
 	private DisplayConverter displayConverter;
 	@Inject
 	private LayoutConverter layoutConverter;
+	@Inject
+	private SourceConverter sourceConverter;
 
 	@Override
 	public ConfigDto getConfiguration() {
@@ -35,7 +42,8 @@ public class ConfigServlet extends RemoteServiceServlet implements ConfigService
 
 		config.setDisplays(getDisplays());
 		config.setLayouts(getLayouts());
-
+		config.setSources(getSources());
+		
 		return config;
 	}
 
@@ -47,4 +55,7 @@ public class ConfigServlet extends RemoteServiceServlet implements ConfigService
 		return layoutConverter.toListDto(layoutService.getLayouts());
 	}
 
+	private List<SourceDto> getSources() {
+		return sourceConverter.toListDto(sourceService.getSources());
+	}
 }

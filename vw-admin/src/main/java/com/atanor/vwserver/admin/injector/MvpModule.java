@@ -21,6 +21,7 @@ import com.atanor.vwserver.admin.mvp.activity.preview.PreviewLayoutActivity;
 import com.atanor.vwserver.admin.mvp.activity.preview.PreviewPresetActivity;
 import com.atanor.vwserver.admin.mvp.model.DisplayStorage;
 import com.atanor.vwserver.admin.mvp.model.LayoutStorage;
+import com.atanor.vwserver.admin.mvp.model.SourceStorage;
 import com.atanor.vwserver.admin.mvp.place.PresetPlace;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.gwt.place.shared.PlaceController;
@@ -70,6 +71,7 @@ public class MvpModule extends AbstractGinModule {
 		// Storages
 		bind(DisplayStorage.class).in(Singleton.class);
 		bind(LayoutStorage.class).in(Singleton.class);
+		bind(SourceStorage.class).in(Singleton.class);
 	}
 
 	/**

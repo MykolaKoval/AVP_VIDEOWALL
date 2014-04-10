@@ -57,8 +57,12 @@ public abstract class ModalWindow extends Window {
 	}
 
 	protected TextItem createModalTextItem(final String title) {
+		return createModalTextItem(title, false);
+	}
+
+	protected TextItem createModalTextItem(final String title, final boolean skipValidation) {
 		final TextItem item = new TextItem();
-		item.setAttribute(Utils.ITEM_SKIPVALIDATION, true);
+		item.setAttribute(Utils.ITEM_SKIPVALIDATION, skipValidation);
 		item.setTitle(title);
 		return item;
 	}

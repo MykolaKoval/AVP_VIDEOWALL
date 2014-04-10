@@ -20,8 +20,10 @@ import com.atanor.vwserver.admin.mvp.view.preview.PreviewSourceView;
 import com.atanor.vwserver.admin.ui.MainPane;
 import com.atanor.vwserver.admin.ui.modal.NewDisplayWindow;
 import com.atanor.vwserver.admin.ui.modal.NewLayoutWindow;
+import com.atanor.vwserver.admin.ui.modal.NewSourceWindow;
 import com.atanor.vwserver.admin.ui.modal.SaveLayoutWindow;
 import com.atanor.vwserver.admin.ui.modal.presenter.NewDisplayPresenter;
+import com.atanor.vwserver.admin.ui.modal.presenter.NewSourcePresenter;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
 
@@ -54,9 +56,12 @@ public class ViewModule extends AbstractGinModule {
 		
 		// Modal Windows
 		bind(NewDisplayWindow.class);
-		bind(NewDisplayPresenter.class);
 		bind(NewLayoutWindow.class);
 		bind(SaveLayoutWindow.class);
+		bind(NewSourceWindow.class);
+		
+		bind(NewDisplayPresenter.class);
+		bind(NewSourcePresenter.class);
 	}
 
 }

@@ -7,7 +7,8 @@ public class ConfigDto extends AbstractDto {
 
 	private List<DisplayDto> displays;
 	private List<LayoutDto> layouts;
-
+	private List<SourceDto> sources;
+	
 	public List<DisplayDto> getDisplays() {
 		return displays;
 	}
@@ -22,6 +23,15 @@ public class ConfigDto extends AbstractDto {
 
 	public void setLayouts(final List<LayoutDto> layouts) {
 		this.layouts = layouts;
+	}
+
+	
+	public List<SourceDto> getSources() {
+		return sources;
+	}
+
+	public void setSources(final List<SourceDto> sources) {
+		this.sources = sources;
 	}
 
 	@Override

@@ -34,6 +34,7 @@ public class VwAdmin implements EntryPoint {
 
 				Client.getDisplayStorage().addAll(config.getDisplays());
 				Client.getLayoutStorage().addAll(config.getLayouts());
+				Client.getSourceStorage().addAll(config.getSources());
 				Client.getEventBus().fireEvent(new SetModelEvent());
 
 				// Goes to the place represented on URL else default place

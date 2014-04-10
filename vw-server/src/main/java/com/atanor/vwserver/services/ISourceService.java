@@ -8,7 +8,7 @@ public interface ISourceService {
 
 	Long createSource(Source source);
 
-	void removeSource(Long id);
+	void removeSources(List<Long> ids);
 
 	Source getSource(Long id);
 

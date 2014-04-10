@@ -24,22 +24,30 @@ public class DefaultSourceService implements ISourceService {
 
 		final Long id = dao.insert(source);
 
-		LOG.debug("Source {} was successfully created", source.getDescription());
+		LOG.debug("Source '{}' was successfully created", source.getDescription());
 		return id;
 	}
 
 	@Override
-	public void removeSource(final Long id) {
-		final Source toRemove = dao.find(id);
-		if (toRemove == null) {
-			throw new IllegalStateException(String.format("Source with id %s not found", id));
+	public void removeSources(final List<Long> ids) {
+		for (final Long id : ids) {
+			removeSource(id);
 		}
-		final String desc = toRemove.getDescription();
-		dao.delete(toRemove);
-		LOG.debug("Source {} was successfully deleted", desc);
-
 	}
 
+	private void removeSource(final Long id) {
+		final Source toRemove = dao.find(id);
+		if (toRemove == null) {
+			LOG.error("Error. Source with id {} not found", id);
+			return;
+		}
+		
+		final String desc = toRemove.getDescription();
+		dao.delete(toRemove);
+		LOG.debug("Source '{}' was successfully deleted", desc);
+
+	}
+	
 	@Override
 	public Source getSource(final Long id) {
 		return dao.find(id);
@@ -53,12 +61,12 @@ public class DefaultSourceService implements ISourceService {
 	private void valdate(final Source source) {
 		Source entity = null;
 		try {
-			entity = dao.findByCodeAndDesc(source.getCode(), source.getDescription());
+			entity = dao.findByCodeOrDesc(source.getCode(), source.getDescription());
 		} catch (Exception e) {
 		}
 
 		if (entity != null) {
-			LOG.error("Duplicate source {} found", source.getDescription());
+			LOG.error("Duplicate source '{}' found", source.getDescription());
 			throw new DuplicateEntityException();
 		}
 	}

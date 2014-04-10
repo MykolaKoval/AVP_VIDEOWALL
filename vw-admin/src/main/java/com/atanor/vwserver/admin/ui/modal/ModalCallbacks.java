@@ -9,4 +9,8 @@ public interface ModalCallbacks {
 	interface SaveLayoutCallback {
 		void onLayoutSaved();
 	}
+	
+	interface NewSourceCallback {
+		void onSourceCreated();
+	}
 }

@@ -48,7 +48,7 @@ public class NewDisplayWindow extends ModalWindow implements NewDisplayCallback 
 		form.setColWidths("70%", "*");
 		form.setLayoutAlign(VerticalAlignment.BOTTOM);
 
-		name = createModalTextItem("Name");
+		name = createModalTextItem("Name", true);
 		name.setCanEdit(false);
 
 		segmentNumHeight = createModalIntegerItem("Segments (height)");
