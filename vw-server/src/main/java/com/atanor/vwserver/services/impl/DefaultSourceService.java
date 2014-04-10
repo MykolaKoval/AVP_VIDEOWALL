@@ -1,4 +1,4 @@
-package com.atanor.vwserver.services;
+package com.atanor.vwserver.services.impl;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.atanor.vwserver.common.rpc.exception.DuplicateEntityException;
 import com.atanor.vwserver.domain.dao.SourceDao;
 import com.atanor.vwserver.domain.entity.Source;
+import com.atanor.vwserver.services.ISourceService;
 
 public class DefaultSourceService implements ISourceService {
 

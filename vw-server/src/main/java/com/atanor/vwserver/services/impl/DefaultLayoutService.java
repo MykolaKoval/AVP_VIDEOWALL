@@ -1,4 +1,4 @@
-package com.atanor.vwserver.services;
+package com.atanor.vwserver.services.impl;
 
 import java.awt.image.BufferedImage;
 import java.util.Date;
@@ -13,6 +13,7 @@ import com.atanor.vwserver.common.rpc.exception.DuplicateEntityException;
 import com.atanor.vwserver.domain.dao.LayoutDao;
 import com.atanor.vwserver.domain.entity.Layout;
 import com.atanor.vwserver.graphics.ImgGenerator;
+import com.atanor.vwserver.services.ILayoutService;
 import com.atanor.vwserver.util.ImageEncoder;
 
 public class DefaultLayoutService implements ILayoutService {
