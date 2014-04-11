@@ -22,27 +22,27 @@ public class SourceServlet extends RemoteServiceServlet implements SourceService
 	private static final Logger LOG = LoggerFactory.getLogger(SourceServlet.class);
 
 	@Inject
-	private ISourceService sourceService;
+	private ISourceService service;
 
 	@Inject
-	private SourceConverter sourceConverter;
+	private SourceConverter converter;
 
 	@Override
 	public List<SourceDto> getSources() {
-		return sourceConverter.toListDto(sourceService.getSources());
+		return converter.toListDto(service.getSources());
 	}
 
 	@Override
 	public SourceDto createSource(final SourceDto dto) throws DuplicateEntityException {
 		LOG.debug("Create {} source called..", dto.getDescription());
-		final Long id = sourceService.createSource(sourceConverter.toEntity(dto));
-		return sourceConverter.toDto(sourceService.getSource(id));
+		final Long id = service.createSource(converter.toEntity(dto));
+		return converter.toDto(service.getSource(id));
 	}
 
 	@Override
 	public void removeSources(final List<Long> ids) {
 		LOG.debug("Remove sources called..");
-		sourceService.removeSources(ids);
+		service.removeSources(ids);
 	}
 
 }

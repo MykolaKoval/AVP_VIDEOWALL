@@ -8,12 +8,12 @@ import org.apache.commons.lang3.Validate;
 
 import com.atanor.vwserver.common.rpc.dto.PresetDto;
 import com.atanor.vwserver.domain.entity.Preset;
-import com.atanor.vwserver.domain.entity.Window;
+import com.atanor.vwserver.domain.entity.PresetWindow;
 
 public class PresetConverter extends AbstractConverter<PresetDto, Preset> {
 
 	@Inject
-	private WindowConverter winConverter;
+	private PresetWindowConverter winConverter;
 
 	@Override
 	public PresetDto toDto(final Preset entity) {
@@ -33,15 +33,15 @@ public class PresetConverter extends AbstractConverter<PresetDto, Preset> {
 		final Preset entity = new Preset(dto.getId());
 		entity.setName(dto.getName());
 		
-		final List<Window> windows = convertDtoList(winConverter, dto.getWindows());
+		final List<PresetWindow> windows = convertDtoList(winConverter, dto.getWindows());
 		updatePresetReference(entity, windows);
 		entity.setWindows(windows);
 		
 		return entity;
 	}
 
-	private void updatePresetReference(final Preset preset, final List<Window> windows) {
-		for (Window window : windows) {
+	private void updatePresetReference(final Preset preset, final List<PresetWindow> windows) {
+		for (PresetWindow window : windows) {
 			window.setPreset(preset);
 		}
 	}

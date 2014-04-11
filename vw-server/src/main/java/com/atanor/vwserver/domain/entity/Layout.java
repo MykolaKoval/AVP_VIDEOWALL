@@ -23,7 +23,7 @@ public class Layout extends AbstractEntity<Long> {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "name", length = 32)
+	@Column(name = "name", unique = true, length = 32)
 	private String name;
 
 	@Column(name = "create_ts")

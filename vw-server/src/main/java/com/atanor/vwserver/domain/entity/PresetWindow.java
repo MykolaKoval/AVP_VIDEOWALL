@@ -1,5 +1,6 @@
 package com.atanor.vwserver.domain.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,13 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
 @Table(name = "preset_windows")
-@NamedQuery(name = "Window.GetAll", query = "SELECT w FROM Window w")
-public class Window extends AbstractEntity<Long> {
+@NamedQuery(name = "PresetWindow.GetAll", query = "SELECT w FROM PresetWindow w")
+public class PresetWindow extends AbstractEntity<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,12 +25,9 @@ public class Window extends AbstractEntity<Long> {
 	@Column(name = "name", length = 32)
 	private String name;
 
-	@Column(name = "source", length = 32)
-	private String source;
-
-	@ManyToOne
-	@JoinColumn(name = "preset_id", nullable = false)
-	private Preset preset;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "source_id")
+	private Source source;
 
 	@Column(name = "x_top_left")
 	private Integer xTopLeft;
@@ -45,23 +44,26 @@ public class Window extends AbstractEntity<Long> {
 	@Column(name = "z_index")
 	private Integer zIndex;
 
+	@ManyToOne
+	@JoinColumn(name = "preset_id", nullable = false)
+	private Preset preset;
+	
 	@Transient
 	private Boolean modified;
 	
 	@Transient
 	private Boolean selected;
 	
-	public Window() {
+	public PresetWindow() {
 	}
 
-	public Window(final Long id){
+	public PresetWindow(final Long id){
 		this.id = id;
 	}
 	
-	public Window(final String name, final String source, final Integer xTopLeft, final Integer yTopLeft,
+	public PresetWindow(final String name, final Integer xTopLeft, final Integer yTopLeft,
 			final Integer xBottomRight, final Integer yBottomRight, final Integer zIndex) {
 		this.name = name;
-		this.source = source;
 		this.xTopLeft = xTopLeft;
 		this.yTopLeft = yTopLeft;
 		this.xBottomRight = xBottomRight;
@@ -90,11 +92,11 @@ public class Window extends AbstractEntity<Long> {
 		this.name = name;
 	}
 
-	public String getSource() {
+	public Source getSource() {
 		return source;
 	}
 
-	public void setSource(final String source) {
+	public void setSource(final Source source) {
 		this.source = source;
 	}
 

@@ -1,6 +1,6 @@
 package com.atanor.vwserver.admin.ui;
 
-import com.atanor.vwserver.common.rpc.dto.WindowDto;
+import com.atanor.vwserver.common.rpc.dto.PresetWindowDto;
 import com.atanor.vwserver.admin.Client;
 import com.atanor.vwserver.admin.mvp.event.CleanWindowSelectionEvent;
 import com.atanor.vwserver.admin.mvp.event.CleanWindowSelectionHandler;
@@ -10,7 +10,7 @@ import com.smartgwt.client.widgets.Label;
 
 public class WindowLabel extends Label implements CleanWindowSelectionHandler {
 
-	private final WindowDto dto;
+	private final PresetWindowDto dto;
 	private final Double scaleFactor;
 
 	private Boolean selected = Boolean.FALSE;
@@ -18,12 +18,12 @@ public class WindowLabel extends Label implements CleanWindowSelectionHandler {
 	private Long leftOffset;
 	private Long topOffset;
 
-	public WindowLabel(final WindowDto dto, final Double scaleFactor) {
+	public WindowLabel(final PresetWindowDto dto, final Double scaleFactor) {
 		this.dto = dto;
 		this.scaleFactor = scaleFactor;
 	}
 
-	public WindowDto getDto() {
+	public PresetWindowDto getDto() {
 		return dto;
 	}
 

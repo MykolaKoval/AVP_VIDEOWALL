@@ -22,27 +22,27 @@ public class LayoutServlet extends RemoteServiceServlet implements LayoutService
 	private static final Logger LOG = LoggerFactory.getLogger(LayoutServlet.class);
 
 	@Inject
-	private ILayoutService layoutService;
+	private ILayoutService service;
 
 	@Inject
-	private LayoutConverter layoutConverter;
+	private LayoutConverter converter;
 
 	@Override
 	public List<LayoutDto> getLayouts() {
-		return layoutConverter.toListDto(layoutService.getLayouts());
+		return converter.toListDto(service.getLayouts());
 	}
 
 	@Override
 	public LayoutDto createLayout(final LayoutDto dto) throws DuplicateEntityException {
 		LOG.debug("Create {} layout called..", dto.getName());
-		final Long id = layoutService.createLayout(layoutConverter.toEntity(dto));
-		return layoutConverter.toDto(layoutService.getLayout(id));
+		final Long id = service.createLayout(converter.toEntity(dto));
+		return converter.toDto(service.getLayout(id));
 	}
 
 	@Override
-	public void removeLayout(LayoutDto display) {
-		// TODO Auto-generated method stub
-
+	public void removeLayout(final LayoutDto dto) {
+		LOG.debug("Remove {} layout called..", dto.getName());
+		service.removeLayout(dto.getId());
 	}
 
 }

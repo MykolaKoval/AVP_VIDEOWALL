@@ -141,7 +141,7 @@ public class EditPresetView extends VLayout implements EditView {
 				final WindowLabel window = getSelectedWindow();
 				if (window != null && !newValue.equals(window.getContents())) {
 					window.setContents(newValue);
-					window.getDto().setSource(newValue);
+					//window.getDto().setSource(newValue);
 					onWindowChanged(window);
 				}
 			}

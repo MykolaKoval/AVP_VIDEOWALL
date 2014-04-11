@@ -1,25 +1,25 @@
 package com.atanor.vwserver.common.rpc.dto;
 
 @SuppressWarnings("serial")
-public class WindowDto extends AbstractDto {
+public class PresetWindowDto extends AbstractDto {
 
 	private Long id;
 	private String name;
-	private String source;
 	private Integer xTopLeft;
 	private Integer yTopLeft;
 	private Integer xBottomRight;
 	private Integer yBottomRight;
 	private Integer zIndex;
-
+	private SourceDto source;
+	
 	// state attributes
 	private Boolean modified = Boolean.FALSE;
 	private Boolean selected = Boolean.FALSE;
 
-	public WindowDto() {
+	public PresetWindowDto() {
 	}
 
-	public WindowDto(final Long id) {
+	public PresetWindowDto(final Long id) {
 		this.id = id;
 	}
 
@@ -75,11 +75,11 @@ public class WindowDto extends AbstractDto {
 		this.zIndex = zIndex;
 	}
 
-	public String getSource() {
+	public SourceDto getSource() {
 		return source;
 	}
 
-	public void setSource(final String source) {
+	public void setSource(final SourceDto source) {
 		this.source = source;
 	}
 

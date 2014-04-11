@@ -9,6 +9,7 @@ public class AppConstants implements Serializable {
 	public static final String DISPLAY_PATH = "display";
 	public static final String LAYOUT_PATH = "layout";
 	public static final String SOURCE_PATH = "source";
+	public static final String PRESET_PATH = "preset";
 	
 	public static final Integer FULL_HD_DISPLAY_WIDTH = 1920;
 	public static final Integer FULL_HD_DISPLAY_HEIGHT = 1080;

@@ -21,7 +21,7 @@ public class DefaultSourceService implements ISourceService {
 
 	@Override
 	public Long createSource(final Source source) {
-		valdate(source);
+		validate(source);
 
 		final Long id = dao.insert(source);
 
@@ -59,7 +59,7 @@ public class DefaultSourceService implements ISourceService {
 		return dao.findAll();
 	}
 
-	private void valdate(final Source source) {
+	private void validate(final Source source) {
 		Source entity = null;
 		try {
 			entity = dao.findByCodeOrDesc(source.getCode(), source.getDescription());

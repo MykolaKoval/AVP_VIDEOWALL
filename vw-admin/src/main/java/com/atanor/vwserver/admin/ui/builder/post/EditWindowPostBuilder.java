@@ -18,7 +18,7 @@ public class EditWindowPostBuilder implements WindowPostBuilder {
 
 		new EditWindowStyleApplier().applyStyle(window);
 
-		window.setContents(window.getDto().getSource());
+		//window.setContents(window.getDto().getSource());
 
 		// adjust left and top position in according to display panel
 		final int newLeft = window.getLeft() + leftOffset.intValue();

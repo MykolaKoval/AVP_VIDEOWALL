@@ -1,7 +1,7 @@
 package com.atanor.vwserver.admin.ui.builder;
 
 import com.atanor.vwserver.common.rpc.dto.PresetDto;
-import com.atanor.vwserver.common.rpc.dto.WindowDto;
+import com.atanor.vwserver.common.rpc.dto.PresetWindowDto;
 import com.atanor.vwserver.admin.ui.PresetLabel;
 import com.atanor.vwserver.admin.ui.WindowLabel;
 import com.atanor.vwserver.admin.ui.builder.post.PresetPostBuilder;
@@ -19,7 +19,7 @@ public class UiBuilder {
 		plabel.setHeight(Ints.checkedCast(presetHeight));
 		presetPostBuilder.doPostBuild(plabel);
 
-		for (WindowDto window : preset.getWindows()) {
+		for (PresetWindowDto window : preset.getWindows()) {
 
 			final WindowLabel wlabel = new WindowLabel(window, scaleFactor);
 

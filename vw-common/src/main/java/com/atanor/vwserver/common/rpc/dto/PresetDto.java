@@ -7,7 +7,7 @@ public class PresetDto extends AbstractDto {
 
 	private Long id;
 	private String name;
-	private List<WindowDto> windows;
+	private List<PresetWindowDto> windows;
 
 	public PresetDto() {
 	}
@@ -28,11 +28,11 @@ public class PresetDto extends AbstractDto {
 		this.name = name;
 	}
 
-	public List<WindowDto> getWindows() {
+	public List<PresetWindowDto> getWindows() {
 		return windows;
 	}
 
-	public void setWindows(final List<WindowDto> windows) {
+	public void setWindows(final List<PresetWindowDto> windows) {
 		this.windows = windows;
 	}
 

@@ -21,27 +21,27 @@ public class DisplayServlet extends RemoteServiceServlet implements DisplayServi
 	private static final Logger LOG = LoggerFactory.getLogger(DisplayServlet.class);
 
 	@Inject
-	private IDisplayService displayService;
+	private IDisplayService service;
 
 	@Inject
-	private DisplayConverter displayConverter;
+	private DisplayConverter converter;
 
 	@Override
 	public List<DisplayDto> getDisplays() {
-		return displayConverter.toListDto(displayService.getDisplays());
+		return converter.toListDto(service.getDisplays());
 	}
 
 	@Override
 	public DisplayDto createDisplay(final DisplayDto dto) {
 		LOG.debug("Create {} display called..", dto.getName());
-		final Long id = displayService.createDisplay(displayConverter.toEntity(dto));
-		return displayConverter.toDto(displayService.getDisplay(id));
+		final Long id = service.createDisplay(converter.toEntity(dto));
+		return converter.toDto(service.getDisplay(id));
 	}
 
 	@Override
 	public void removeDisplay(final DisplayDto dto) {
 		LOG.debug("Remove {} display called..", dto.getName());
-		displayService.removeDisplay(dto.getId());
+		service.removeDisplay(dto.getId());
 	}
 
 }

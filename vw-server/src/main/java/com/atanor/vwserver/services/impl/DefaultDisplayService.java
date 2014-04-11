@@ -28,7 +28,7 @@ public class DefaultDisplayService implements IDisplayService {
 
 	@Override
 	public Long createDisplay(final Display display) {
-		valdate(display);
+		validate(display);
 
 		final BufferedImage img = imgGenerator.generate(display);
 		display.setImgBlob(ImageEncoder.encodeImage(img));
@@ -36,11 +36,11 @@ public class DefaultDisplayService implements IDisplayService {
 		
 		final Long id = dao.insert(display);
 
-		LOG.debug("Display {} was successfully created", display.getName());
+		LOG.debug("Display '{}' was successfully created", display.getName());
 		return id;
 	}
 
-	private void valdate(final Display display) {
+	private void validate(final Display display) {
 		Display entity = null;
 		try {
 			entity = dao.findByName(display.getName());
@@ -48,7 +48,7 @@ public class DefaultDisplayService implements IDisplayService {
 		}
 
 		if (entity != null) {
-			LOG.error("Duplicate display {} found", display.getName());
+			LOG.error("Duplicate display '{}' found", display.getName());
 			throw new DuplicateEntityException();
 		}
 	}
@@ -61,7 +61,7 @@ public class DefaultDisplayService implements IDisplayService {
 		}
 		final String name = toRemove.getName();
 		dao.delete(toRemove);
-		LOG.debug("Display {} was successfully deleted", name);
+		LOG.debug("Display '{}' was successfully deleted", name);
 	}
 
 	@Override

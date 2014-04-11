@@ -28,7 +28,7 @@ public class DefaultLayoutService implements ILayoutService {
 
 	@Override
 	public Long createLayout(final Layout layout) {
-		valdate(layout);
+		validate(layout);
 
 		final BufferedImage img = imgGenerator.generate(layout);
 		layout.setImgBlob(ImageEncoder.encodeImage(img));
@@ -36,11 +36,11 @@ public class DefaultLayoutService implements ILayoutService {
 
 		final Long id = dao.insert(layout);
 
-		LOG.debug("Layout {} was successfully created", layout.getName());
+		LOG.debug("Layout '{}' was successfully created", layout.getName());
 		return id;
 	}
 
-	private void valdate(final Layout layout) {
+	private void validate(final Layout layout) {
 		Layout entity = null;
 		try {
 			entity = dao.findByName(layout.getName());
@@ -48,7 +48,7 @@ public class DefaultLayoutService implements ILayoutService {
 		}
 
 		if (entity != null) {
-			LOG.error("Duplicate layout {} found", layout.getName());
+			LOG.error("Duplicate layout '{}' found", layout.getName());
 			throw new DuplicateEntityException();
 		}
 	}
@@ -61,7 +61,7 @@ public class DefaultLayoutService implements ILayoutService {
 		}
 		final String name = toRemove.getName();
 		dao.delete(toRemove);
-		LOG.debug("Layout {} was successfully deleted", name);
+		LOG.debug("Layout '{}' was successfully deleted", name);
 	}
 
 	@Override

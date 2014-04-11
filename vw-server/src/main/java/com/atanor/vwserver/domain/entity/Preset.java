@@ -1,16 +1,15 @@
 package com.atanor.vwserver.domain.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Lob;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,15 +23,18 @@ public class Preset extends AbstractEntity<Long> {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "name", length = 32)
+	@Column(name = "name", unique = true, length = 32)
 	private String name;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "hardware_id")
-	private Hardware hardware;
+
+	@Column(name = "create_ts")
+	private Date createTS;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "preset")
-	private List<Window> windows;
+	private List<PresetWindow> windows;
+
+	@Lob
+	@Column(name = "preset_blob", length = 300000)
+	private String imgBlob;
 
 	public Preset() {
 	}
@@ -46,28 +48,36 @@ public class Preset extends AbstractEntity<Long> {
 		return id;
 	}
 
-	public List<Window> getWindows() {
-		return windows;
-	}
-
-	public void setWindows(final List<Window> windows) {
-		this.windows = windows;
-	}
-
-	public Hardware getHardware() {
-		return hardware;
-	}
-
-	public void setHardware(final Hardware hardware) {
-		this.hardware = hardware;
-	}
-
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
+	}
+
+	public Date getCreateTS() {
+		return createTS;
+	}
+
+	public void setCreateTS(final Date createTS) {
+		this.createTS = createTS;
+	}
+
+	public List<PresetWindow> getWindows() {
+		return windows;
+	}
+
+	public void setWindows(final List<PresetWindow> windows) {
+		this.windows = windows;
+	}
+
+	public String getImgBlob() {
+		return imgBlob;
+	}
+
+	public void setImgBlob(final String imgBlob) {
+		this.imgBlob = imgBlob;
 	}
 
 }

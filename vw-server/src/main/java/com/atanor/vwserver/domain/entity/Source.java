@@ -30,6 +30,11 @@ public class Source extends AbstractEntity<Long> {
 		this.id = id;
 	}
 
+	public Source(final String code, final String description) {
+		this.code = code;
+		this.description = description;
+	}
+
 	@Override
 	public Long getId() {
 		return id;

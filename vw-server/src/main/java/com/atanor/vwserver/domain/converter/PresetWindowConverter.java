@@ -1,19 +1,24 @@
 package com.atanor.vwserver.domain.converter;
 
+import javax.inject.Inject;
+
 import org.apache.commons.lang3.Validate;
 
-import com.atanor.vwserver.common.rpc.dto.WindowDto;
-import com.atanor.vwserver.domain.entity.Window;
+import com.atanor.vwserver.common.rpc.dto.PresetWindowDto;
+import com.atanor.vwserver.domain.entity.PresetWindow;
 
-public class WindowConverter extends AbstractConverter<WindowDto, Window> {
+public class PresetWindowConverter extends AbstractConverter<PresetWindowDto, PresetWindow> {
 
+	@Inject
+	private SourceConverter sourceConverter;
+	
 	@Override
-	public WindowDto toDto(final Window entity) {
+	public PresetWindowDto toDto(final PresetWindow entity) {
 		Validate.notNull(entity, "entity param can not be null");
 		
-		final WindowDto dto = new WindowDto(entity.getId());
+		final PresetWindowDto dto = new PresetWindowDto(entity.getId());
 		dto.setName(entity.getName());
-		dto.setSource(entity.getSource());
+		dto.setSource(sourceConverter.toDto(entity.getSource()));
 		dto.setXTopLeft(entity.getXTopLeft());
 		dto.setYTopLeft(entity.getYTopLeft());
 		dto.setXBottomRight(entity.getXBottomRight());
@@ -24,12 +29,12 @@ public class WindowConverter extends AbstractConverter<WindowDto, Window> {
 	}
 
 	@Override
-	public Window toEntity(final WindowDto dto) {
+	public PresetWindow toEntity(final PresetWindowDto dto) {
 		Validate.notNull(dto, "dto param can not be null");
 		
-		final Window entity = new Window(dto.getId());
+		final PresetWindow entity = new PresetWindow(dto.getId());
 		entity.setName(dto.getName());
-		entity.setSource(dto.getSource());
+		entity.setSource(sourceConverter.toEntity(dto.getSource()));
 		entity.setXTopLeft(dto.getXTopLeft());
 		entity.setYTopLeft(dto.getYTopLeft());
 		entity.setXBottomRight(dto.getXBottomRight());
