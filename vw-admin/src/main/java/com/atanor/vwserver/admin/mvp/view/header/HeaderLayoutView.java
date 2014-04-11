@@ -8,7 +8,6 @@ import com.atanor.vwserver.admin.mvp.event.LayoutWindowChangedEvent;
 import com.atanor.vwserver.admin.mvp.event.WindowAction;
 import com.atanor.vwserver.admin.mvp.place.Action;
 import com.atanor.vwserver.admin.mvp.place.LayoutPlace;
-import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.modal.NewLayoutWindow;
 import com.atanor.vwserver.admin.ui.modal.SaveLayoutWindow;
 import com.atanor.vwserver.common.rpc.dto.LayoutDto;
@@ -24,7 +23,7 @@ import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.toolbar.ToolStripButton;
 
-public class HeaderLayoutView extends AbstractHeaderView implements HeaderView {
+public class HeaderLayoutView extends AbstractHeaderView {
 
 	@Inject
 	private Provider<NewLayoutWindow> newWinProvider;
@@ -68,7 +67,6 @@ public class HeaderLayoutView extends AbstractHeaderView implements HeaderView {
 		removeButton.setDisabled(true);
 	}
 
-	@Override
 	public void clean() {
 		this.layout = null;
 		selectedLayout.setContents("");

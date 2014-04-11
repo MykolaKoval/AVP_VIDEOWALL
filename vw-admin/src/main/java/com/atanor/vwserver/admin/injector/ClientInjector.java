@@ -2,6 +2,7 @@ package com.atanor.vwserver.admin.injector;
 
 import com.atanor.vwserver.admin.mvp.model.DisplayStorage;
 import com.atanor.vwserver.admin.mvp.model.LayoutStorage;
+import com.atanor.vwserver.admin.mvp.model.PresetStorage;
 import com.atanor.vwserver.admin.mvp.model.SourceStorage;
 import com.atanor.vwserver.admin.ui.MainPane;
 import com.atanor.vwserver.common.rpc.services.ConfigServiceAsync;
@@ -27,6 +28,8 @@ public interface ClientInjector extends Ginjector {
 	DisplayStorage getDisplayStorage();
 
 	LayoutStorage getLayoutStorage();
-	
+
 	SourceStorage getSourceStorage();
+
+	PresetStorage getPresetStorage();
 }

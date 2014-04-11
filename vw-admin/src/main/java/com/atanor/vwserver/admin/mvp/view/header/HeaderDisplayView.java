@@ -7,7 +7,6 @@ import com.atanor.vwserver.admin.Client;
 import com.atanor.vwserver.admin.mvp.place.Action;
 import com.atanor.vwserver.admin.mvp.place.DisplayPlace;
 import com.atanor.vwserver.admin.mvp.presenter.HeaderPresenter;
-import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.modal.NewDisplayWindow;
 import com.atanor.vwserver.common.rpc.dto.DisplayDto;
 import com.smartgwt.client.types.VerticalAlignment;
@@ -15,7 +14,7 @@ import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.layout.HLayout;
 
-public class HeaderDisplayView extends AbstractHeaderView implements HeaderView {
+public class HeaderDisplayView extends AbstractHeaderView {
 
 	@Inject
 	private Provider<NewDisplayWindow> provider;
@@ -30,15 +29,15 @@ public class HeaderDisplayView extends AbstractHeaderView implements HeaderView 
 		super("Displays");
 		cancelButton.disable();
 		removeButton.disable();
-		
+
 		final HLayout layout = new HLayout();
 		layout.setWidth100();
 		layout.setAlign(VerticalAlignment.CENTER);
-		
+
 		selectedDisplay = new Label("");
 		selectedDisplay.setWidth(300);
 		layout.addMembers(selectedDisplay);
-		
+
 		addMember(layout);
 	}
 
@@ -49,7 +48,6 @@ public class HeaderDisplayView extends AbstractHeaderView implements HeaderView 
 		addButton(removeButton);
 	}
 
-	@Override
 	public void clean() {
 		this.display = null;
 		createButton.enable();
@@ -82,8 +80,8 @@ public class HeaderDisplayView extends AbstractHeaderView implements HeaderView 
 		removeButton.enable();
 		selectedDisplay.setContents(genContent(display.getName()));
 	}
-	
-	private static String genContent(final String name){
+
+	private static String genContent(final String name) {
 		return "Display: " + name;
 	}
 }

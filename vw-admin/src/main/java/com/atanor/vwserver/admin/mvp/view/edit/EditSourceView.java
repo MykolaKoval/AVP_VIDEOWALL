@@ -7,7 +7,6 @@ import javax.inject.Inject;
 
 import com.atanor.vwserver.admin.mvp.event.SourceAction;
 import com.atanor.vwserver.admin.mvp.event.SourceChangedEvent;
-import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.Utils;
 import com.atanor.vwserver.common.rpc.dto.SourceDto;
 import com.google.common.collect.Lists;
@@ -23,7 +22,7 @@ import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.LayoutSpacer;
 import com.smartgwt.client.widgets.layout.VLayout;
 
-public class EditSourceView extends HLayout implements HeaderView {
+public class EditSourceView extends HLayout {
 
 	private static final String DTO_GRID_ATTR = "dto";
 	private static final String SOURCE_ID_GRID_ATTR = "sourceCode";
@@ -31,7 +30,7 @@ public class EditSourceView extends HLayout implements HeaderView {
 
 	@Inject
 	private EventBus eventBus;
-	
+
 	private final ListGrid listGrid;
 
 	public EditSourceView() {
@@ -75,7 +74,6 @@ public class EditSourceView extends HLayout implements HeaderView {
 		addMembers(layout, spacer);
 	}
 
-	@Override
 	public void clean() {
 
 	}
@@ -106,7 +104,7 @@ public class EditSourceView extends HLayout implements HeaderView {
 		}
 		return false;
 	}
-	
+
 	public List<SourceDto> getSelectedSources() {
 		final List<SourceDto> result = Lists.newArrayList();
 		for (final ListGridRecord record : listGrid.getRecords()) {

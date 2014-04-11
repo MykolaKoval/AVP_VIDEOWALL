@@ -1,6 +1,5 @@
 package com.atanor.vwserver.admin.mvp.view.edit;
 
-import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.Utils;
 import com.atanor.vwserver.common.AppUtils;
 import com.atanor.vwserver.common.rpc.dto.DisplayDto;
@@ -9,7 +8,7 @@ import com.google.common.primitives.Ints;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.Img;
 
-public class EditDisplayView extends Canvas implements HeaderView {
+public class EditDisplayView extends Canvas {
 
 	private Img displayImg;
 
@@ -75,7 +74,6 @@ public class EditDisplayView extends Canvas implements HeaderView {
 		canvas.setTop(Ints.checkedCast(topOffset));
 	}
 
-	@Override
 	public void clean() {
 		if (displayImg != null) {
 			removeChild(displayImg);

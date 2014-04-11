@@ -5,12 +5,11 @@ import javax.inject.Provider;
 
 import com.atanor.vwserver.admin.mvp.event.SourceAction;
 import com.atanor.vwserver.admin.mvp.event.SourceChangedEvent;
-import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.modal.NewSourceWindow;
 import com.google.web.bindery.event.shared.EventBus;
 import com.smartgwt.client.widgets.Window;
 
-public class HeaderSourceView extends AbstractHeaderView implements HeaderView {
+public class HeaderSourceView extends AbstractHeaderView {
 
 	@Inject
 	private Provider<NewSourceWindow> provider;
@@ -29,7 +28,6 @@ public class HeaderSourceView extends AbstractHeaderView implements HeaderView {
 		addButton(removeButton);
 	}
 
-	@Override
 	public void clean() {
 		createButton.enable();
 		removeButton.disable();

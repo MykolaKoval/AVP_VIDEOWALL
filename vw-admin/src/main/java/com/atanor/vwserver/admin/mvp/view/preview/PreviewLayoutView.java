@@ -3,7 +3,6 @@ package com.atanor.vwserver.admin.mvp.view.preview;
 import java.util.Collection;
 import java.util.Map;
 
-import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.LayoutImg;
 import com.atanor.vwserver.admin.ui.Utils;
 import com.atanor.vwserver.common.rpc.dto.LayoutDto;
@@ -12,7 +11,7 @@ import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
 
-public class PreviewLayoutView extends HLayout implements HeaderView {
+public class PreviewLayoutView extends HLayout {
 
 	private final VLayout vLayout;
 	private final Map<Long, LayoutImg> content = Maps.newHashMap();
@@ -28,11 +27,10 @@ public class PreviewLayoutView extends HLayout implements HeaderView {
 		vLayout.setMembersMargin(10);
 		vLayout.setOverflow(Overflow.AUTO);
 		vLayout.setBackgroundColor("lightgrey");
-		
+
 		addMember(vLayout);
 	}
 
-	@Override
 	public void clean() {
 		unselect();
 	}

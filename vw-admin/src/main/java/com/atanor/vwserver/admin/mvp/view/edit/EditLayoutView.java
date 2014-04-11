@@ -7,7 +7,6 @@ import javax.inject.Inject;
 
 import com.atanor.vwserver.admin.mvp.event.LayoutWindowChangedEvent;
 import com.atanor.vwserver.admin.mvp.event.WindowAction;
-import com.atanor.vwserver.admin.mvp.view.HeaderView;
 import com.atanor.vwserver.admin.ui.Utils;
 import com.atanor.vwserver.admin.ui.layout.LayoutWindow;
 import com.atanor.vwserver.admin.ui.layout.LayoutWindowChanged;
@@ -23,7 +22,7 @@ import com.smartgwt.client.types.Overflow;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.Img;
 
-public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowChanged {
+public class EditLayoutView extends Canvas implements LayoutWindowChanged {
 
 	@Inject
 	private EventBus eventBus;
@@ -70,7 +69,6 @@ public class EditLayoutView extends Canvas implements HeaderView, LayoutWindowCh
 		canvas.setTop(Ints.checkedCast(topOffset));
 	}
 
-	@Override
 	public void clean() {
 		for (LayoutWindow window : windows) {
 			display.removeChild(window);

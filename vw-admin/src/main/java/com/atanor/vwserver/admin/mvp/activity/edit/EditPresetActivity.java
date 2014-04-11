@@ -10,14 +10,11 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class EditPresetActivity extends AbstractActivity {
 
-	private Long presetId;
-	private final EditPresetView view;
-
 	@Inject
-	public EditPresetActivity(final EditPresetView view) {
-		this.view = view;
-	}
+	private EditPresetView view;
 
+	private Long presetId;
+	
 	public EditPresetActivity withPlace(PresetPlace place) {
 		this.presetId = place.getPresetId();
 		return this;
@@ -26,7 +23,7 @@ public class EditPresetActivity extends AbstractActivity {
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		panel.setWidget(view);
-		view.setPreset(presetId);
+		
 	}
 
 }
