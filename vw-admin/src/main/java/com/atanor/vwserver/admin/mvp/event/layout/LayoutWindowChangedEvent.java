@@ -1,4 +1,4 @@
-package com.atanor.vwserver.admin.mvp.event;
+package com.atanor.vwserver.admin.mvp.event.layout;
 
 import com.atanor.vwserver.common.rpc.dto.LayoutWindowDto;
 import com.google.gwt.event.shared.GwtEvent;

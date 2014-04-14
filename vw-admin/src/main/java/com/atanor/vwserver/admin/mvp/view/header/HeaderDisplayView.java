@@ -4,12 +4,16 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import com.atanor.vwserver.admin.Client;
+import com.atanor.vwserver.admin.mvp.event.display.DisplayAction;
+import com.atanor.vwserver.admin.mvp.event.display.DisplayChangedEvent;
 import com.atanor.vwserver.admin.mvp.place.Action;
 import com.atanor.vwserver.admin.mvp.place.DisplayPlace;
-import com.atanor.vwserver.admin.mvp.presenter.HeaderPresenter;
 import com.atanor.vwserver.admin.ui.modal.NewDisplayWindow;
 import com.atanor.vwserver.common.rpc.dto.DisplayDto;
+import com.google.web.bindery.event.shared.EventBus;
 import com.smartgwt.client.types.VerticalAlignment;
+import com.smartgwt.client.util.BooleanCallback;
+import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.layout.HLayout;
@@ -20,10 +24,9 @@ public class HeaderDisplayView extends AbstractHeaderView {
 	private Provider<NewDisplayWindow> provider;
 
 	@Inject
-	private HeaderPresenter presenter;
+	private EventBus eventBus;
 
 	private final Label selectedDisplay;
-	private DisplayDto display;
 
 	public HeaderDisplayView() {
 		super("Displays");
@@ -49,7 +52,6 @@ public class HeaderDisplayView extends AbstractHeaderView {
 	}
 
 	public void clean() {
-		this.display = null;
 		createButton.enable();
 		cancelButton.disable();
 		removeButton.disable();
@@ -69,12 +71,18 @@ public class HeaderDisplayView extends AbstractHeaderView {
 
 	@Override
 	protected void doRemove() {
-		presenter.removeDisplay(display);
-		Client.goTo(new DisplayPlace(Action.CLEAN));
+		SC.ask("Remove Display", "Display will be removed. Are you sure?", new BooleanCallback() {
+
+			@Override
+			public void execute(Boolean value) {
+				if (value) {
+					eventBus.fireEvent(new DisplayChangedEvent(DisplayAction.REMOVE));
+				}
+			}
+		});
 	}
 
 	public void setDisplay(final DisplayDto display) {
-		this.display = display;
 		createButton.disable();
 		cancelButton.enable();
 		removeButton.enable();

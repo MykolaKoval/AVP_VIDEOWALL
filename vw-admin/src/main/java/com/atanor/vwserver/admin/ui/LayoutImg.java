@@ -16,24 +16,27 @@ public class LayoutImg extends HLayout {
 	private static final String DEFAULT_BORDER = "5px solid lightgrey";
 
 	private final Img img;
-
-	public LayoutImg(final LayoutDto layout) {
+	private final LayoutDto dto;
+	
+	public LayoutImg(final LayoutDto dto) {
+		this.dto = dto;
+		
 		setHeight(30);
 		setAlign(Alignment.CENTER);
 
 		img = new Img();
-		final String source = "data:image/png;base64," + layout.getImage();
+		final String source = "data:image/png;base64," + dto.getImage();
 		img.setSrc(source);
 		img.setBorder(DEFAULT_BORDER);
 
-		fitImageSize(img, layout);
+		fitImageSize(img, dto);
 		addMember(img);
 
 		addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				Client.goTo(new LayoutPlace(layout.getId()));
+				Client.goTo(new LayoutPlace(dto.getId()));
 			}
 		});
 	}
@@ -48,6 +51,10 @@ public class LayoutImg extends HLayout {
 
 	public boolean selected() {
 		return img.getBorder().equals(SELECTED_BORDER);
+	}
+
+	public LayoutDto getDto() {
+		return dto;
 	}
 
 	private void fitImageSize(final Img img, final LayoutDto layout) {

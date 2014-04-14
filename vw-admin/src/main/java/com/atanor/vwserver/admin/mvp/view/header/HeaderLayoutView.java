@@ -4,8 +4,10 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import com.atanor.vwserver.admin.Client;
-import com.atanor.vwserver.admin.mvp.event.LayoutWindowChangedEvent;
-import com.atanor.vwserver.admin.mvp.event.WindowAction;
+import com.atanor.vwserver.admin.mvp.event.layout.LayoutAction;
+import com.atanor.vwserver.admin.mvp.event.layout.LayoutChangedEvent;
+import com.atanor.vwserver.admin.mvp.event.layout.LayoutWindowChangedEvent;
+import com.atanor.vwserver.admin.mvp.event.layout.WindowAction;
 import com.atanor.vwserver.admin.mvp.place.Action;
 import com.atanor.vwserver.admin.mvp.place.LayoutPlace;
 import com.atanor.vwserver.admin.ui.modal.NewLayoutWindow;
@@ -111,6 +113,19 @@ public class HeaderLayoutView extends AbstractHeaderView {
 		window.show();
 	}
 
+	@Override
+	protected void doRemove() {
+		SC.ask("Remove Layout", "Layout will be removed. Are you sure?", new BooleanCallback() {
+
+			@Override
+			public void execute(Boolean value) {
+				if(value){
+					eventBus.fireEvent(new LayoutChangedEvent(LayoutAction.REMOVE));
+				}
+			}
+		});
+	}
+	
 	protected void doNewWindow() {
 		final Window window = newWinProvider.get();
 		window.show();

@@ -3,8 +3,8 @@ package com.atanor.vwserver.admin.mvp.view.header;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import com.atanor.vwserver.admin.mvp.event.SourceAction;
-import com.atanor.vwserver.admin.mvp.event.SourceChangedEvent;
+import com.atanor.vwserver.admin.mvp.event.source.SourceAction;
+import com.atanor.vwserver.admin.mvp.event.source.SourceChangedEvent;
 import com.atanor.vwserver.admin.ui.modal.NewSourceWindow;
 import com.google.web.bindery.event.shared.EventBus;
 import com.smartgwt.client.widgets.Window;

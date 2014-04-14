@@ -2,8 +2,8 @@ package com.atanor.vwserver.admin.ui.modal;
 
 import javax.inject.Inject;
 
-import com.atanor.vwserver.admin.mvp.event.LayoutWindowChangedEvent;
-import com.atanor.vwserver.admin.mvp.event.WindowAction;
+import com.atanor.vwserver.admin.mvp.event.layout.LayoutWindowChangedEvent;
+import com.atanor.vwserver.admin.mvp.event.layout.WindowAction;
 import com.atanor.vwserver.common.rpc.dto.LayoutWindowDto;
 import com.google.web.bindery.event.shared.EventBus;
 import com.smartgwt.client.types.VerticalAlignment;

@@ -33,6 +33,7 @@ public class EditLayoutActivity extends ActionActivity {
 		panel.setWidget(view);
 
 		execute(action);
+		
 		final LayoutDto layout = storage.get(layoutId);
 		if (layout != null) {
 			view.setLayout(layout);
@@ -41,6 +42,11 @@ public class EditLayoutActivity extends ActionActivity {
 
 	@Override
 	protected void doClean() {
+		view.clean();
+	}
+	
+	@Override
+	protected void doUpdate() {
 		view.clean();
 	}
 }

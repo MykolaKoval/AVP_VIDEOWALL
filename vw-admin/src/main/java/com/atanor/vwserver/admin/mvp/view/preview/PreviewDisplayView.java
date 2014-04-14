@@ -63,4 +63,14 @@ public class PreviewDisplayView extends HLayout {
 	public void clean() {
 		unselect();
 	}
+
+	public DisplayDto getSelectedDisplay() {
+		DisplayDto result = null;
+		for (final Map.Entry<Long, DisplayImg> entry : content.entrySet()) {
+			if (entry.getValue().selected()) {
+				result = entry.getValue().getDto();
+			}
+		}
+		return result;
+	}
 }

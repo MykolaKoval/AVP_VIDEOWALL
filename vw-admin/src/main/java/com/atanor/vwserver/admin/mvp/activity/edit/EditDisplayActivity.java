@@ -33,6 +33,7 @@ public class EditDisplayActivity extends ActionActivity {
 		panel.setWidget(view);
 
 		execute(action);
+		
 		final DisplayDto display = storage.get(displayId);
 		if (display != null) {
 			view.setDisplay(display);
@@ -41,6 +42,11 @@ public class EditDisplayActivity extends ActionActivity {
 
 	@Override
 	protected void doClean() {
+		view.clean();
+	}
+	
+	@Override
+	protected void doUpdate() {
 		view.clean();
 	}
 }

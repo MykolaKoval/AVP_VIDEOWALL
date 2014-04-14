@@ -46,4 +46,9 @@ public class HeaderDisplayActivity extends ActionActivity {
 	protected void doClean() {
 		view.clean();
 	}
+	
+	@Override
+	protected void doUpdate() {
+		view.clean();
+	}
 }

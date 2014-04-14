@@ -5,8 +5,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.atanor.vwserver.admin.Client;
-import com.atanor.vwserver.admin.mvp.event.SourceAction;
-import com.atanor.vwserver.admin.mvp.event.SourceChangedEvent;
+import com.atanor.vwserver.admin.mvp.event.source.SourceAction;
+import com.atanor.vwserver.admin.mvp.event.source.SourceChangedEvent;
 import com.atanor.vwserver.admin.mvp.model.DisplayStorage;
 import com.atanor.vwserver.admin.mvp.model.SourceStorage;
 import com.atanor.vwserver.admin.mvp.place.Action;

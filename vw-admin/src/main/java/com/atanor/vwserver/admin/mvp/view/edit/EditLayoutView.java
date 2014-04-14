@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.atanor.vwserver.admin.mvp.event.LayoutWindowChangedEvent;
-import com.atanor.vwserver.admin.mvp.event.WindowAction;
+import com.atanor.vwserver.admin.mvp.event.layout.LayoutWindowChangedEvent;
+import com.atanor.vwserver.admin.mvp.event.layout.WindowAction;
 import com.atanor.vwserver.admin.ui.Utils;
 import com.atanor.vwserver.admin.ui.layout.LayoutWindow;
 import com.atanor.vwserver.admin.ui.layout.LayoutWindowChanged;

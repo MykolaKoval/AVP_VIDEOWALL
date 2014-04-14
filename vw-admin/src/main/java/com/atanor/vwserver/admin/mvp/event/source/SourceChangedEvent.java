@@ -1,4 +1,4 @@
-package com.atanor.vwserver.admin.mvp.event;
+package com.atanor.vwserver.admin.mvp.event.source;
 
 import com.google.gwt.event.shared.GwtEvent;
 

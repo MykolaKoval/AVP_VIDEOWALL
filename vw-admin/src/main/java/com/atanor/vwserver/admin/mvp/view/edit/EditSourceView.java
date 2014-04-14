@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.atanor.vwserver.admin.mvp.event.SourceAction;
-import com.atanor.vwserver.admin.mvp.event.SourceChangedEvent;
+import com.atanor.vwserver.admin.mvp.event.source.SourceAction;
+import com.atanor.vwserver.admin.mvp.event.source.SourceChangedEvent;
 import com.atanor.vwserver.admin.ui.Utils;
 import com.atanor.vwserver.common.rpc.dto.SourceDto;
 import com.google.common.collect.Lists;

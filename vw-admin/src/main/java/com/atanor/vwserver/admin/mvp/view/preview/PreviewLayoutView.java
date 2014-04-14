@@ -63,4 +63,14 @@ public class PreviewLayoutView extends HLayout {
 			content.get(id).select();
 		}
 	}
+	
+	public LayoutDto getSelectedLayout(){
+		LayoutDto result = null;
+		for (final Map.Entry<Long, LayoutImg> entry : content.entrySet()) {
+			if(entry.getValue().selected()){
+				result = entry.getValue().getDto();
+			}
+		}
+		return result;
+	}
 }

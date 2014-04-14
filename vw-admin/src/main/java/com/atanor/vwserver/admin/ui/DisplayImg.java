@@ -15,26 +15,29 @@ public class DisplayImg extends HLayout {
 
 	private static final String SELECTED_BORDER = "5px solid yellow";
 	private static final String DEFAULT_BORDER = "5px solid lightgrey";
-	
+
 	private final Img img;
-	
-	public DisplayImg(final DisplayDto display) {
+	private final DisplayDto dto;
+
+	public DisplayImg(final DisplayDto dto) {
+		this.dto = dto;
+
 		setHeight(30);
 		setAlign(Alignment.CENTER);
-		
+
 		img = new Img();
-		final String source = "data:image/png;base64," + display.getImage();
+		final String source = "data:image/png;base64," + dto.getImage();
 		img.setSrc(source);
 		img.setBorder(DEFAULT_BORDER);
-		
-		fitImageSize(img, display);
+
+		fitImageSize(img, dto);
 		addMember(img);
-		
+
 		addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				Client.goTo(new DisplayPlace(display.getId()));
+				Client.goTo(new DisplayPlace(dto.getId()));
 			}
 		});
 	}
@@ -56,7 +59,7 @@ public class DisplayImg extends HLayout {
 		Integer displayHeight = AppUtils.getDisplayHeight(display);
 
 		if (displayWidth > displayHeight) {
-			final Double scaleFactor = Utils.PREVIEW_AREA_ELEMENT_WIDTH/ displayWidth.doubleValue();
+			final Double scaleFactor = Utils.PREVIEW_AREA_ELEMENT_WIDTH / displayWidth.doubleValue();
 			displayWidth = Utils.PREVIEW_AREA_ELEMENT_WIDTH;
 			displayHeight = Ints.checkedCast(Math.round(scaleFactor * displayHeight.doubleValue()));
 		} else {
@@ -67,4 +70,9 @@ public class DisplayImg extends HLayout {
 		img.setWidth(displayWidth);
 		img.setHeight(displayHeight);
 	}
+
+	public DisplayDto getDto() {
+		return dto;
+	}
+
 }
