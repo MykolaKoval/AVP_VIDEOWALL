@@ -10,9 +10,11 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 public class HeaderPresetActivity extends AbstractActivity {
 
-	private Long presetId;
+	@Inject
 	private final HeaderPresetView view;
-
+	
+	private Long presetId;
+	
 	@Inject
 	public HeaderPresetActivity(final HeaderPresetView view) {
 		this.view = view;

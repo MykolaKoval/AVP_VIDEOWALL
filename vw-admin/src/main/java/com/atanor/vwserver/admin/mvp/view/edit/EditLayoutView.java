@@ -48,7 +48,6 @@ public class EditLayoutView extends Canvas implements LayoutWindowChanged {
 		final Long displayHeight = Math.round(AppConstants.FULL_HD_SCALE_FACTOR * displayWidth);
 		canvas.setWidth(displayWidth.intValue());
 		canvas.setHeight(displayHeight.intValue());
-		canvas.setBackgroundColor("grey");
 		canvas.setOverflow(Overflow.HIDDEN);
 		return canvas;
 	}
@@ -70,6 +69,7 @@ public class EditLayoutView extends Canvas implements LayoutWindowChanged {
 	}
 
 	public void clean() {
+		display.setBackgroundColor("white");
 		for (LayoutWindow window : windows) {
 			display.removeChild(window);
 		}
@@ -188,5 +188,9 @@ public class EditLayoutView extends Canvas implements LayoutWindowChanged {
 			result.add(toPercentDimensions(window.getDto()));
 		}
 		return result;
+	}
+
+	public void onNewLayout() {
+		display.setBackgroundColor("grey");
 	}
 }

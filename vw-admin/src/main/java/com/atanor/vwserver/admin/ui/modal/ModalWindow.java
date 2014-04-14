@@ -8,6 +8,7 @@ import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.events.CloseClickEvent;
 import com.smartgwt.client.widgets.events.CloseClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.CheckboxItem;
 import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.IntegerItem;
 import com.smartgwt.client.widgets.form.fields.SelectItem;
@@ -115,10 +116,14 @@ public abstract class ModalWindow extends Window {
 				&& item.getAttributeAsBoolean(Utils.ITEM_SKIPVALIDATION);
 	}
 
-	private static boolean isValid(final FormItem item) {
+	protected static boolean isValid(final FormItem item) {
 		return item.getValue() != null;
 	}
 
+	protected static boolean isChecked(final CheckboxItem item){
+		return item != null && item.getValueAsBoolean();
+	}
+	
 	public DynamicForm getForm() {
 		return form;
 	}

@@ -87,6 +87,7 @@ public class HeaderLayoutView extends AbstractHeaderView {
 		cancelButton.enable();
 		newWindowButton.enable();
 		createButton.disable();
+		eventBus.fireEvent(new LayoutChangedEvent(LayoutAction.CREATE));
 	}
 
 	@Override

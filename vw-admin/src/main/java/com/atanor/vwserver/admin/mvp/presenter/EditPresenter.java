@@ -72,6 +72,9 @@ public class EditPresenter implements LayoutChangedHandler, LayoutWindowChangedH
 	@Override
 	public void onLayoutChanged(final LayoutChangedEvent event) {
 		switch (event.getAction()) {
+		case CREATE:
+			editLayoutView.onNewLayout();
+			break;
 		case REMOVE:
 			final LayoutDto dto = previewLayoutView.getSelectedLayout();
 			removeAndRefreshLayouts(dto);

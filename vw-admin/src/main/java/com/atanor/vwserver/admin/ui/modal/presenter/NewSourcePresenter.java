@@ -4,18 +4,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.atanor.vwserver.admin.Client;
 import com.atanor.vwserver.admin.mvp.event.source.SourceAction;
 import com.atanor.vwserver.admin.mvp.event.source.SourceChangedEvent;
-import com.atanor.vwserver.admin.mvp.model.DisplayStorage;
 import com.atanor.vwserver.admin.mvp.model.SourceStorage;
-import com.atanor.vwserver.admin.mvp.place.Action;
-import com.atanor.vwserver.admin.mvp.place.DisplayPlace;
 import com.atanor.vwserver.admin.ui.modal.ModalCallbacks.NewSourceCallback;
-import com.atanor.vwserver.common.rpc.dto.DisplayDto;
 import com.atanor.vwserver.common.rpc.dto.SourceDto;
 import com.atanor.vwserver.common.rpc.exception.DuplicateEntityException;
-import com.atanor.vwserver.common.rpc.services.DisplayServiceAsync;
 import com.atanor.vwserver.common.rpc.services.SourceServiceAsync;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
