@@ -80,7 +80,7 @@ public class NewPresetWindow extends ModalWindow implements NewPresetCallback {
 
 	@Override
 	protected HLayout createControlLayout() {
-		final HLayout layout = createModalControlsLayout();
+		final HLayout hLayout = createModalControlsLayout();
 
 		final IButton cancelButton = createModalButton("Cancel");
 		cancelButton.addClickHandler(new ClickHandler() {
@@ -96,7 +96,8 @@ public class NewPresetWindow extends ModalWindow implements NewPresetCallback {
 
 			@Override
 			public void onClick(ClickEvent event) {
-
+				presenter.createTemplate((Long) layout.getValue(), (Long) display.getValue());
+				destroy();
 			}
 		});
 
@@ -114,44 +115,40 @@ public class NewPresetWindow extends ModalWindow implements NewPresetCallback {
 			}
 		});
 
-		layout.addMembers(cancelButton, createButton);
-		return layout;
+		hLayout.addMembers(cancelButton, createButton);
+		return hLayout;
 	}
 
 	@Override
 	public void show() {
-		presenter.prepopulate(getCallback());
+		presenter.prepopulate(this);
 		super.show();
-	}
-
-	private NewPresetCallback getCallback() {
-		return this;
 	}
 
 	@Override
 	public void initDisplays(final Collection<DisplayDto> displays) {
-		final LinkedHashMap<String, String> values = createDisplayValues(displays);
+		final LinkedHashMap<Long, String> values = createDisplayValues(displays);
 		display.setValueMap(values);
 	}
 
 	@Override
 	public void initLayouts(final Collection<LayoutDto> layouts) {
-		final LinkedHashMap<String, String> values = createLayoutValues(layouts);
+		final LinkedHashMap<Long, String> values = createLayoutValues(layouts);
 		layout.setValueMap(values);
 	}
 
-	private static LinkedHashMap<String, String> createDisplayValues(final Collection<DisplayDto> displays) {
-		final LinkedHashMap<String, String> result = Maps.newLinkedHashMap();
+	private static LinkedHashMap<Long, String> createDisplayValues(final Collection<DisplayDto> displays) {
+		final LinkedHashMap<Long, String> result = Maps.newLinkedHashMap();
 		for (final DisplayDto dto : displays) {
-			result.put(dto.getName(), dto.getName());
+			result.put(dto.getId(), dto.getName());
 		}
 		return result;
 	}
 
-	private static LinkedHashMap<String, String> createLayoutValues(final Collection<LayoutDto> layouts) {
-		final LinkedHashMap<String, String> result = Maps.newLinkedHashMap();
+	private static LinkedHashMap<Long, String> createLayoutValues(final Collection<LayoutDto> layouts) {
+		final LinkedHashMap<Long, String> result = Maps.newLinkedHashMap();
 		for (final LayoutDto dto : layouts) {
-			result.put(dto.getName(), dto.getName());
+			result.put(dto.getId(), dto.getName());
 		}
 		return result;
 	}

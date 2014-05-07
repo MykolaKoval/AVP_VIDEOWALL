@@ -11,6 +11,8 @@ import com.atanor.vwserver.admin.mvp.event.layout.LayoutChangedEvent;
 import com.atanor.vwserver.admin.mvp.event.layout.LayoutChangedHandler;
 import com.atanor.vwserver.admin.mvp.event.layout.LayoutWindowChangedEvent;
 import com.atanor.vwserver.admin.mvp.event.layout.LayoutWindowChangedHandler;
+import com.atanor.vwserver.admin.mvp.event.preset.PresetChangedEvent;
+import com.atanor.vwserver.admin.mvp.event.preset.PresetChangedHandler;
 import com.atanor.vwserver.admin.mvp.event.source.SourceChangedEvent;
 import com.atanor.vwserver.admin.mvp.event.source.SourceChangedHandler;
 import com.atanor.vwserver.admin.mvp.model.DisplayStorage;
@@ -20,7 +22,9 @@ import com.atanor.vwserver.admin.mvp.place.Action;
 import com.atanor.vwserver.admin.mvp.place.DisplayPlace;
 import com.atanor.vwserver.admin.mvp.place.LayoutPlace;
 import com.atanor.vwserver.admin.mvp.view.edit.EditLayoutView;
+import com.atanor.vwserver.admin.mvp.view.edit.EditPresetView;
 import com.atanor.vwserver.admin.mvp.view.edit.EditSourceView;
+import com.atanor.vwserver.admin.mvp.view.header.HeaderPresetView;
 import com.atanor.vwserver.admin.mvp.view.preview.PreviewDisplayView;
 import com.atanor.vwserver.admin.mvp.view.preview.PreviewLayoutView;
 import com.atanor.vwserver.admin.ui.modal.ModalCallbacks.SaveLayoutCallback;
@@ -35,8 +39,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.web.bindery.event.shared.EventBus;
 import com.smartgwt.client.util.SC;
 
-public class EditPresenter implements LayoutChangedHandler, LayoutWindowChangedHandler, DisplayChangedHandler,
-		SourceChangedHandler {
+public class EditPresenter implements PresetChangedHandler, LayoutChangedHandler, LayoutWindowChangedHandler,
+		DisplayChangedHandler, SourceChangedHandler {
 
 	@Inject
 	private LayoutStorage layoutStorage;
@@ -45,6 +49,10 @@ public class EditPresenter implements LayoutChangedHandler, LayoutWindowChangedH
 	@Inject
 	private SourceStorage sourceStorage;
 
+	@Inject
+	public HeaderPresetView headerPresetView;
+	@Inject
+	public EditPresetView editPresetView;
 	@Inject
 	public EditLayoutView editLayoutView;
 	@Inject
@@ -63,10 +71,25 @@ public class EditPresenter implements LayoutChangedHandler, LayoutWindowChangedH
 
 	@Inject
 	public EditPresenter(final EventBus eventBus) {
+		eventBus.addHandler(PresetChangedEvent.getType(), this);
 		eventBus.addHandler(LayoutChangedEvent.getType(), this);
 		eventBus.addHandler(LayoutWindowChangedEvent.getType(), this);
 		eventBus.addHandler(DisplayChangedEvent.getType(), this);
 		eventBus.addHandler(SourceChangedEvent.getType(), this);
+	}
+
+	@Override
+	public void onPresetChanged(final PresetChangedEvent event) {
+		switch (event.getAction()) {
+		case CREATE:
+			final LayoutDto layout = layoutStorage.get(event.getLayoutId());
+			final DisplayDto display = displayStorage.get(event.getDisplayId()); 
+			headerPresetView.onNewPreset();
+			editPresetView.onNewPreset(layout, display);
+			break;
+		default:
+			break;
+		}
 	}
 
 	@Override

@@ -1,18 +1,26 @@
 package com.atanor.vwserver.admin.mvp.place;
 
 import com.atanor.vwserver.admin.ui.Utils;
-import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;
 
-public class PresetPlace extends Place {
+public class PresetPlace extends ActionPlace {
 
 	private final Long presetId;
 
 	public PresetPlace() {
-		this(null);
+		this(null, Action.NOTHING);
+	}
+
+	public PresetPlace(final Action action) {
+		this(null, action);
 	}
 
 	public PresetPlace(Long presetId) {
+		this(presetId, Action.NOTHING);
+	}
+
+	public PresetPlace(final Long presetId, final Action action) {
+		super(action);
 		this.presetId = presetId;
 	}
 
