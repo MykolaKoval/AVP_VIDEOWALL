@@ -148,7 +148,7 @@ public class ImgGenerator {
 
 	private static void paintText(Graphics2D g2d, WndRectangle panel) {
 		g2d.setPaint(Color.BLACK);
-		g2d.setFont(new Font("TimesRoman", Font.PLAIN, 100));
+		g2d.setFont(new Font("Arial", Font.PLAIN, 100));
 
 		int sW = (int) g2d.getFontMetrics().getStringBounds(panel.getText(), g2d).getWidth();
 		g2d.drawString(panel.getText(), panel.getTextX() - sW / 2, panel.getTextY());

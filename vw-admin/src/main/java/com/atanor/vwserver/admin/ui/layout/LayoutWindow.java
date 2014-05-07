@@ -24,12 +24,12 @@ public class LayoutWindow extends Label {
 		setBorder("1px inset black");
 		setAlign(Alignment.CENTER);
 		setValign(VerticalAlignment.CENTER);
-
+		
 		setCanDragResize(true);
 		setCanDragReposition(true);
 		setDragAppearance(DragAppearance.TARGET);
 
-		setContents(dto.getName());
+		setName(dto.getName());
 		bringToFront();
 
 		addClickHandler(new ClickHandler() {
@@ -50,15 +50,15 @@ public class LayoutWindow extends Label {
 		dto.setTop(getTop());
 		dto.setHeight(getHeight());
 		dto.setWidth(getWidth());
-		dto.setName(getName());
 	}
 
 	public String getName() {
-		return getContents();
+		return dto.getName();
 	}
 
 	public void setName(final String name) {
-		setContents(name);
+		dto.setName(name);
+		setContents("<font size=\"30\" face=\"Arial\">" + name + "</font>");
 	}
 
 	public void select() {

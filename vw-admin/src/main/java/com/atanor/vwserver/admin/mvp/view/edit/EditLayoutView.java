@@ -168,7 +168,7 @@ public class EditLayoutView extends Canvas implements LayoutWindowChanged {
 	}
 
 	private String generateWinName(int winCount) {
-		return "Window " + (++winCount);
+		return String.valueOf(++winCount);
 	}
 
 	@Override
